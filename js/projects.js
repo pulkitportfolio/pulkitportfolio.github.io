@@ -81,7 +81,7 @@ const SITE = {
   },
   "linkedin": "",
   "availableText": "",
-  "linkedinLabel": "",
+  "linkedinLabel": "Linked in",
   "resumeUrl": "",
   "resumeLabel": ""
 };
