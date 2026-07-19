@@ -19,7 +19,8 @@ const SITE = {
   "companies": [
     "ThinkTech",
     "EduGorilla",
-    "TechDock Labs"
+    "TechDock Labs",
+    "WebIndia"
   ],
   "about": {
     "heading": "Designing with research, shipping with systems.",
