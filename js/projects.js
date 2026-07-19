@@ -17,7 +17,6 @@ const SITE = {
     "bio": "I specialise in end-to-end experience design across SaaS, AI-powered, EdTech and enterprise products. My focus areas are UX research, interaction design, prototyping and scalable design systems, powered by AI-assisted workflows in Figma, Claude Code and Relume."
   },
   "companies": [
-    "WebIndia Inc",
     "ThinkTech",
     "EduGorilla",
     "TechDock Labs"
