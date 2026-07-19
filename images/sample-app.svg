@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" role="img" aria-label="App mockup placeholder">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#E8F0FE"/>
+      <stop offset="1" stop-color="#EFF4FE"/>
+    </linearGradient>
+    <linearGradient id="scr" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2563EB"/>
+      <stop offset="1" stop-color="#60A5FA"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="500" fill="url(#bg)"/>
+  <rect x="320" y="70" width="160" height="330" rx="26" fill="#101828"/>
+  <rect x="330" y="80" width="140" height="310" rx="18" fill="#fff"/>
+  <rect x="330" y="80" width="140" height="90" rx="18" fill="url(#scr)"/>
+  <rect x="345" y="185" width="110" height="14" rx="7" fill="#E8F0FE"/>
+  <rect x="345" y="209" width="80" height="10" rx="5" fill="#EAECF0"/>
+  <rect x="345" y="240" width="110" height="42" rx="10" fill="#EFF4FE"/>
+  <rect x="345" y="292" width="110" height="42" rx="10" fill="#EFF4FE"/>
+  <circle cx="400" cy="98" r="4" fill="#fff" opacity=".8"/>
+  <text x="400" y="450" text-anchor="middle" font-family="Inter, sans-serif" font-size="22" font-weight="700" fill="#2563EB" opacity=".7">App mockup</text>
+</svg>

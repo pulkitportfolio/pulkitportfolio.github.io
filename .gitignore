@@ -1,0 +1,18 @@
+# --- Never upload these to the public site ---
+# The editor/CMS: keeping these off GitHub means no one online can edit your site.
+admin.html
+js/admin.js
+server.py
+
+# macOS junk
+.DS_Store
+
+# Local backups / scratch
+*.bak
+*~
+js/projects.backup-*.js
+
+# Internal dev/helper files (not part of the public site)
+CLAUDE.md
+Go Live.command
+portfolio.html

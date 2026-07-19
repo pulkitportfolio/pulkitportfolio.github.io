@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" role="img" aria-label="Website mockup placeholder">
+  <defs>
+    <linearGradient id="bg2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#E8F0FE"/>
+      <stop offset="1" stop-color="#EFF4FE"/>
+    </linearGradient>
+    <linearGradient id="hero" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#2563EB"/>
+      <stop offset="1" stop-color="#60A5FA"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="500" fill="url(#bg2)"/>
+  <rect x="140" y="70" width="520" height="340" rx="16" fill="#101828"/>
+  <rect x="140" y="70" width="520" height="34" rx="16" fill="#101828"/>
+  <circle cx="164" cy="87" r="5" fill="#ff5f57"/>
+  <circle cx="182" cy="87" r="5" fill="#febc2e"/>
+  <circle cx="200" cy="87" r="5" fill="#28c840"/>
+  <rect x="152" y="104" width="496" height="294" fill="#fff"/>
+  <rect x="152" y="104" width="496" height="120" fill="url(#hero)"/>
+  <rect x="180" y="140" width="200" height="16" rx="8" fill="#fff" opacity=".9"/>
+  <rect x="180" y="166" width="140" height="10" rx="5" fill="#fff" opacity=".6"/>
+  <rect x="180" y="250" width="130" height="90" rx="10" fill="#EFF4FE"/>
+  <rect x="335" y="250" width="130" height="90" rx="10" fill="#EFF4FE"/>
+  <rect x="490" y="250" width="130" height="90" rx="10" fill="#EFF4FE"/>
+  <text x="400" y="450" text-anchor="middle" font-family="Inter, sans-serif" font-size="22" font-weight="700" fill="#2563EB" opacity=".7">Website mockup</text>
+</svg>
