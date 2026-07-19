@@ -86,10 +86,10 @@
       : '<div class="container"><div class="cs-cover">' + cover(p.cover || p.thumbnail) + "</div></div>") +
 
     '<div class="container"><div class="cs-body">' +
-      block("Overview", p.overview ? "<p>" + esc(p.overview) + "</p>" : "") +
-      block("The problem", p.problem ? "<p>" + esc(p.problem) + "</p>" : "") +
-      block("Process", processList(p.process)) +
-      block("Outcome", p.outcome ? "<p>" + esc(p.outcome) + "</p>" : "") +
+      block(p.overviewHeading || "Overview", p.overview ? "<p>" + esc(p.overview) + "</p>" : "") +
+      block(p.problemHeading || "The problem", p.problem ? "<p>" + esc(p.problem) + "</p>" : "") +
+      block(p.processHeading || "Process", processList(p.process)) +
+      block(p.outcomeHeading || "Outcome", p.outcome ? "<p>" + esc(p.outcome) + "</p>" : "") +
     "</div></div>" +
 
     (p.gallery && p.gallery.length
