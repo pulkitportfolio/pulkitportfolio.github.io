@@ -171,7 +171,7 @@ const PROJECTS = [
     "problemHeading": "",
     "processHeading": "Solution",
     "outcomeHeading": "",
-    "screensHeading": "",
+    "screensHeading": "Visual Design",
     "gallery": []
   },
   {
