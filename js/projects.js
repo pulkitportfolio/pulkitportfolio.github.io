@@ -161,7 +161,7 @@ const PROJECTS = [
     "overview": "Chipt is a conceptual mobile app designed to encourage reusable cup adoption in coffee shops. The idea explores how loyalty rewards and simple interactions can motivate users to return reusable cups instead of using disposable ones.\n\nThe project focuses on designing a seamless mobile experience that connects coffee purchasing with sustainability-driven rewards.",
     "problem": "Disposable coffee cups are widely used because they are convenient.\nEven when sustainable alternatives exist, users often avoid them because:",
     "process": [],
-    "outcome": "Discover\nDefine\nIdeate\nDesign",
+    "outcome": "",
     "gallery": []
   },
   {
