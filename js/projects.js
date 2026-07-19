@@ -88,34 +88,6 @@ const SITE = {
 
 const PROJECTS = [
   {
-    "id": "finflow-app",
-    "title": "FinFlow Personal Finance App",
-    "category": "app",
-    "year": "2025",
-    "role": "Product Designer",
-    "summary": "A mobile budgeting app that turns messy spending into clear, calm insights.",
-    "liveUrl": "",
-    "embed": "",
-    "embedPortrait": false,
-    "tags": [
-      "Mobile",
-      "Fintech",
-      "UX Research"
-    ],
-    "thumbnail": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MDAgNTAwIiByb2xlPSJpbWciIGFyaWEtbGFiZWw9IldlYnNpdGUgbW9ja3VwIHBsYWNlaG9sZGVyIj4KICA8ZGVmcz4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iYmcyIiB4MT0iMCIgeTE9IjAiIHgyPSIxIiB5Mj0iMSI+CiAgICAgIDxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iI0U4RjBGRSIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNFRkY0RkUiLz4KICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9Imhlcm8iIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIwIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjMjU2M0VCIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzYwQTVGQSIvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICA8L2RlZnM+CiAgPHJlY3Qgd2lkdGg9IjgwMCIgaGVpZ2h0PSI1MDAiIGZpbGw9InVybCgjYmcyKSIvPgogIDxyZWN0IHg9IjE0MCIgeT0iNzAiIHdpZHRoPSI1MjAiIGhlaWdodD0iMzQwIiByeD0iMTYiIGZpbGw9IiMxMDE4MjgiLz4KICA8cmVjdCB4PSIxNDAiIHk9IjcwIiB3aWR0aD0iNTIwIiBoZWlnaHQ9IjM0IiByeD0iMTYiIGZpbGw9IiMxMDE4MjgiLz4KICA8Y2lyY2xlIGN4PSIxNjQiIGN5PSI4NyIgcj0iNSIgZmlsbD0iI2ZmNWY1NyIvPgogIDxjaXJjbGUgY3g9IjE4MiIgY3k9Ijg3IiByPSI1IiBmaWxsPSIjZmViYzJlIi8+CiAgPGNpcmNsZSBjeD0iMjAwIiBjeT0iODciIHI9IjUiIGZpbGw9IiMyOGM4NDAiLz4KICA8cmVjdCB4PSIxNTIiIHk9IjEwNCIgd2lkdGg9IjQ5NiIgaGVpZ2h0PSIyOTQiIGZpbGw9IiNmZmYiLz4KICA8cmVjdCB4PSIxNTIiIHk9IjEwNCIgd2lkdGg9IjQ5NiIgaGVpZ2h0PSIxMjAiIGZpbGw9InVybCgjaGVybykiLz4KICA8cmVjdCB4PSIxODAiIHk9IjE0MCIgd2lkdGg9IjIwMCIgaGVpZ2h0PSIxNiIgcng9IjgiIGZpbGw9IiNmZmYiIG9wYWNpdHk9Ii45Ii8+CiAgPHJlY3QgeD0iMTgwIiB5PSIxNjYiIHdpZHRoPSIxNDAiIGhlaWdodD0iMTAiIHJ4PSI1IiBmaWxsPSIjZmZmIiBvcGFjaXR5PSIuNiIvPgogIDxyZWN0IHg9IjE4MCIgeT0iMjUwIiB3aWR0aD0iMTMwIiBoZWlnaHQ9IjkwIiByeD0iMTAiIGZpbGw9IiNFRkY0RkUiLz4KICA8cmVjdCB4PSIzMzUiIHk9IjI1MCIgd2lkdGg9IjEzMCIgaGVpZ2h0PSI5MCIgcng9IjEwIiBmaWxsPSIjRUZGNEZFIi8+CiAgPHJlY3QgeD0iNDkwIiB5PSIyNTAiIHdpZHRoPSIxMzAiIGhlaWdodD0iOTAiIHJ4PSIxMCIgZmlsbD0iI0VGRjRGRSIvPgogIDx0ZXh0IHg9IjQwMCIgeT0iNDUwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iSW50ZXIsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMjIiIGZvbnQtd2VpZ2h0PSI3MDAiIGZpbGw9IiMyNTYzRUIiIG9wYWNpdHk9Ii43Ij5XZWJzaXRlIG1vY2t1cDwvdGV4dD4KPC9zdmc+Cg==",
-    "cover": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MDAgNTAwIiByb2xlPSJpbWciIGFyaWEtbGFiZWw9IldlYnNpdGUgbW9ja3VwIHBsYWNlaG9sZGVyIj4KICA8ZGVmcz4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iYmcyIiB4MT0iMCIgeTE9IjAiIHgyPSIxIiB5Mj0iMSI+CiAgICAgIDxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iI0U4RjBGRSIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNFRkY0RkUiLz4KICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9Imhlcm8iIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIwIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjMjU2M0VCIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzYwQTVGQSIvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICA8L2RlZnM+CiAgPHJlY3Qgd2lkdGg9IjgwMCIgaGVpZ2h0PSI1MDAiIGZpbGw9InVybCgjYmcyKSIvPgogIDxyZWN0IHg9IjE0MCIgeT0iNzAiIHdpZHRoPSI1MjAiIGhlaWdodD0iMzQwIiByeD0iMTYiIGZpbGw9IiMxMDE4MjgiLz4KICA8cmVjdCB4PSIxNDAiIHk9IjcwIiB3aWR0aD0iNTIwIiBoZWlnaHQ9IjM0IiByeD0iMTYiIGZpbGw9IiMxMDE4MjgiLz4KICA8Y2lyY2xlIGN4PSIxNjQiIGN5PSI4NyIgcj0iNSIgZmlsbD0iI2ZmNWY1NyIvPgogIDxjaXJjbGUgY3g9IjE4MiIgY3k9Ijg3IiByPSI1IiBmaWxsPSIjZmViYzJlIi8+CiAgPGNpcmNsZSBjeD0iMjAwIiBjeT0iODciIHI9IjUiIGZpbGw9IiMyOGM4NDAiLz4KICA8cmVjdCB4PSIxNTIiIHk9IjEwNCIgd2lkdGg9IjQ5NiIgaGVpZ2h0PSIyOTQiIGZpbGw9IiNmZmYiLz4KICA8cmVjdCB4PSIxNTIiIHk9IjEwNCIgd2lkdGg9IjQ5NiIgaGVpZ2h0PSIxMjAiIGZpbGw9InVybCgjaGVybykiLz4KICA8cmVjdCB4PSIxODAiIHk9IjE0MCIgd2lkdGg9IjIwMCIgaGVpZ2h0PSIxNiIgcng9IjgiIGZpbGw9IiNmZmYiIG9wYWNpdHk9Ii45Ii8+CiAgPHJlY3QgeD0iMTgwIiB5PSIxNjYiIHdpZHRoPSIxNDAiIGhlaWdodD0iMTAiIHJ4PSI1IiBmaWxsPSIjZmZmIiBvcGFjaXR5PSIuNiIvPgogIDxyZWN0IHg9IjE4MCIgeT0iMjUwIiB3aWR0aD0iMTMwIiBoZWlnaHQ9IjkwIiByeD0iMTAiIGZpbGw9IiNFRkY0RkUiLz4KICA8cmVjdCB4PSIzMzUiIHk9IjI1MCIgd2lkdGg9IjEzMCIgaGVpZ2h0PSI5MCIgcng9IjEwIiBmaWxsPSIjRUZGNEZFIi8+CiAgPHJlY3QgeD0iNDkwIiB5PSIyNTAiIHdpZHRoPSIxMzAiIGhlaWdodD0iOTAiIHJ4PSIxMCIgZmlsbD0iI0VGRjRGRSIvPgogIDx0ZXh0IHg9IjQwMCIgeT0iNDUwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iSW50ZXIsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMjIiIGZvbnQtd2VpZ2h0PSI3MDAiIGZpbGw9IiMyNTYzRUIiIG9wYWNpdHk9Ii43Ij5XZWJzaXRlIG1vY2t1cDwvdGV4dD4KPC9zdmc+Cg==",
-    "overview": "FinFlow helps young professionals understand where their money goes without spreadsheets. I led end-to-end design from research to a high-fidelity prototype.",
-    "problem": "Users felt anxious about money because existing apps buried insights under charts and jargon. The goal was a friendly, glanceable experience that builds financial confidence.",
-    "process": [
-      "Ran 8 user interviews and a competitive audit of 5 finance apps.",
-      "Mapped the core spending-review journey and simplified it to 3 steps.",
-      "Built a design system with reusable components in Figma.",
-      "Tested two prototypes with 6 users and iterated on the onboarding."
-    ],
-    "outcome": "The redesigned flow cut the time to review weekly spending by 40% in usability tests and scored 4.6/5 on perceived ease of use.",
-    "gallery": []
-  },
-  {
     "id": "learnhub-web",
     "title": "LearnHub EdTech Web Platform",
     "category": "website",
