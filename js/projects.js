@@ -79,7 +79,7 @@ const SITE = {
     "email": "pulkitawasthi5678@gmail.com",
     "phone": "+91 87070 03804"
   },
-  "linkedin": "",
+  "linkedin": "https://www.linkedin.com/in/paux-ui/",
   "availableText": "",
   "linkedinLabel": "Linked in",
   "resumeUrl": "",
