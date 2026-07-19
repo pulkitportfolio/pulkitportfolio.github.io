@@ -446,6 +446,9 @@ h1,h2,h3,h4 { line-height: 1.15; letter-spacing: -.02em; font-weight: 700; }
 .tl-item:last-child { padding-bottom: 0; }
 .tl-item::before { content: ""; position: absolute; left: -7px; top: 4px; width: 12px; height: 12px; border-radius: 50%; background: var(--accent); }
 .tl-item .role { font-weight: 700; font-size: 17px; }
+.timeline .tl-item .role { padding-right: 96px; }
+.timeline .tl-item .exp-loc { position: absolute; top: 26px; right: 28px; display: inline-flex; align-items: center; gap: 5px; max-width: 42%; font-size: 13px; font-weight: 700; color: var(--text); text-align: right; line-height: 1.2; }
+.timeline .tl-item .exp-loc .pin { flex: none; color: var(--accent); }
 .tl-item .co { color: var(--accent); font-weight: 600; font-size: 14px; }
 .tl-item .when { color: var(--muted); font-size: 13px; margin: 2px 0 8px; }
 .tl-item p { color: var(--muted); font-size: 14px; }

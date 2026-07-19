@@ -239,7 +239,11 @@
   txt("site-about-desc", about.description);
   if (Array.isArray(about.experience)) {
     html("site-timeline", about.experience.map(function (x) {
+      var loc = x.location
+        ? '<div class="exp-loc"><svg class="pin" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-6-5.3-6-10a6 6 0 1 1 12 0c0 4.7-6 10-6 10Z"/><circle cx="12" cy="11" r="2.2"/></svg>' + esc(x.location) + "</div>"
+        : "";
       return '<div class="tl-item">' +
+        loc +
         '<div class="role">' + esc(x.role || "") + "</div>" +
         '<div class="co">' + esc(x.company || "") + "</div>" +
         '<div class="when">' + esc(x.when || "") + "</div>" +

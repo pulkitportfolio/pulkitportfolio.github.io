@@ -30,6 +30,7 @@ const SITE = {
         "role": "Product Designer",
         "company": "WebIndia Inc",
         "when": "Apr 2026 to Present",
+        "location": "Ahmedabad, India",
         "detail": "Accelerating product discovery and interface design with AI-assisted workflows. Generated 30+ wireframes, cut handoff cycles by around 30%, and shipped 10+ responsive web experiences."
       },
       {
