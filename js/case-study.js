@@ -93,7 +93,7 @@
     "</div></div>" +
 
     (p.gallery && p.gallery.length
-      ? '<div class="container" style="margin:20px auto 0"><div class="cs-body"><div class="cs-block" style="border:none;padding-bottom:10px"><h2>Screens</h2></div></div>' + gallery(p.gallery) + "</div>"
+      ? '<div class="container" style="margin:20px auto 0"><div class="cs-body"><div class="cs-block" style="border:none;padding-bottom:10px"><h2>' + esc(p.screensHeading || "Screens") + '</h2></div></div>' + gallery(p.gallery) + "</div>"
       : "") +
 
     // prototype preview goes last, below the whole case study
@@ -123,7 +123,7 @@
       inner = '<iframe src="' + attr(src) + '" allowfullscreen loading="lazy"></iframe>';
     }
     return '<section class="cs-embed">' +
-      '<div class="inner"><h2>Screens</h2></div>' +
+      '<div class="inner"><h2>' + esc(p.screensHeading || "Screens") + '</h2></div>' +
       '<div class="frame' + (portrait ? " portrait" : "") + '">' + inner + "</div></section>";
   }
   function esc(s) {
