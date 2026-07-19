@@ -30,25 +30,28 @@ const SITE = {
         "role": "Product Designer",
         "company": "WebIndia Inc",
         "when": "Apr 2026 to Present",
-        "location": "Ahmedabad, India",
+        "location": "Ahemdabad, Remote",
         "detail": "Accelerating product discovery and interface design with AI-assisted workflows. Generated 30+ wireframes, cut handoff cycles by around 30%, and shipped 10+ responsive web experiences."
       },
       {
         "role": "UX/UI Designer",
         "company": "ThinkTech",
         "when": "Feb 2025 to Apr 2026",
+        "location": "Lucknow, on site",
         "detail": "Crafted responsive websites for international clients, ran UX audits, and produced high-fidelity interfaces and prototypes that reduced iteration cycles by 30%."
       },
       {
         "role": "Product Designer",
         "company": "EduGorilla (InfoBay.AI)",
         "when": "Jun 2024 to Feb 2025",
+        "location": "Lucknow, on site",
         "detail": "Delivered 50+ wireframes, prototypes and high-fidelity screens across web and mobile, and simplified complex flows based on user feedback."
       },
       {
         "role": "UX/UI Designer",
         "company": "TechDock Labs",
         "when": "May 2023 to Jun 2024",
+        "location": "Lucknow, on site",
         "detail": "Designed experiences for 10+ mobile and web apps, running user research, competitive analysis and usability testing to sharpen workflows."
       }
     ],
