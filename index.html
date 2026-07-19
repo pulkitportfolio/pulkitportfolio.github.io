@@ -268,7 +268,8 @@
   </div>
 
   <script>document.getElementById("yr").textContent = new Date().getFullYear();</script>
-  <script src="js/projects.js"></script>
+  <!-- Load content fresh on every visit so published changes always show (no hard-refresh needed). -->
+  <script>document.write('<scr' + 'ipt src="js/projects.js?v=' + Date.now() + '"><\/scr' + 'ipt>');</script>
   <script src="js/store.js"></script>
   <script src="js/main.js"></script>
 </body>
