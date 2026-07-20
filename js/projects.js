@@ -13,7 +13,7 @@ const SITE = {
   "location": "India",
   "experienceBadge": "3+ years experience",
   "intro": {
-    "headline": "Hi, I'm Pulkit. I turn complex flows into experiences that feel obvious.",
+    "headline": "Hi, I'm Pulkit. I turn complex flows into experiences that feels obvious.",
     "bio": "I specialise in end-to-end experience design across SaaS, AI-powered, EdTech and enterprise products. My focus areas are UX research, interaction design, prototyping and scalable design systems, powered by AI-assisted workflows in Figma, Claude Code and Relume."
   },
   "companies": [
