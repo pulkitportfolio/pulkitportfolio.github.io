@@ -199,7 +199,8 @@ const PROJECTS = [
     "problem": "",
     "process": [],
     "outcome": "",
-    "gallery": []
+    "gallery": [],
+    "featured": true
   }
 ];
 
