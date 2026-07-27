@@ -148,7 +148,8 @@ const PROJECTS = [
     "outcome": "The prototype reduced simulated product-find time and made checkout feel effortless for testers.",
     "gallery": [
       "images/sample-app.svg"
-    ]
+    ],
+    "featured": true
   },
   {
     "id": "chipt",
