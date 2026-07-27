@@ -93,7 +93,9 @@ h1,h2,h3,h4 { line-height: 1.12; letter-spacing: -.02em; font-weight: 600; }
 .nav.on-dark .logo span { color: var(--dark-muted); }
 .nav.on-dark .nav-links a { color: var(--dark-muted); }
 .nav.on-dark .nav-links a:hover { color: var(--dark-text); }
-.nav.on-dark .nav-links .btn-primary { background: var(--dark-text); color: var(--dark); }
+/* Download CV: ghost pill, same treatment as the hero LinkedIn CTA */
+.nav.on-dark .nav-links .btn-ghost { background: transparent; color: var(--dark-text); border-color: var(--dark-text); }
+.nav.on-dark .nav-links .btn-ghost:hover { background: var(--dark-text); color: var(--dark); }
 .nav.on-dark .nav-toggle { color: var(--dark-text); }
 
 /* =========================================================
