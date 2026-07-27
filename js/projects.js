@@ -191,7 +191,7 @@ const PROJECTS = [
     "gallery": [
       "images/sample-app.svg"
     ],
-    "featured": true
+    "featured": false
   },
   {
     "id": "chipt",
