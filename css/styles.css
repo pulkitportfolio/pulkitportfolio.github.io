@@ -230,6 +230,8 @@ html.has-cursor a, html.has-cursor button, html.has-cursor .work-row { cursor: n
 }
 .cursor-dot.is-view { width: 106px; height: 106px; mix-blend-mode: normal; background: #fff; box-shadow: 0 10px 34px rgba(0,0,0,.28); }
 .cursor-dot.is-view .cursor-label { opacity: 1; }
+/* over any link or button the dot grows — a "clickable" cue (inverts via blend) */
+.cursor-dot.is-link { width: 46px; height: 46px; }
 /* hero-only state: white outlined smiley saying "Hi" */
 .cursor-dot .cursor-hi { display: none; align-items: center; gap: 7px; color: #fff; font-weight: 600; font-size: 13px; white-space: nowrap; }
 .cursor-dot .cursor-hi svg { width: 18px; height: 18px; flex: none; }

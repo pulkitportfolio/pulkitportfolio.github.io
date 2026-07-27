@@ -497,9 +497,12 @@ var observeReveals = (function () {
   document.addEventListener("mouseover", function (e) {
     var v = e.target.closest && e.target.closest('[data-cursor="view"]');
     dot.classList.toggle("is-view", !!v);
-    // hero only: the dot becomes a white outlined smiley saying "Hi"
+    // over any link or button the dot grows (works everywhere, incl. hero CTAs)
+    var link = e.target.closest && e.target.closest("a, button");
+    dot.classList.toggle("is-link", !!link && !v);
+    // hero only: the dot becomes a white outlined smiley saying "Hi" (unless on a CTA)
     var hero = e.target.closest && e.target.closest(".namehero");
-    dot.classList.toggle("is-hi", !!hero && !v);
+    dot.classList.toggle("is-hi", !!hero && !v && !link);
   });
 
   function loop() {
