@@ -700,6 +700,11 @@ html.has-cursor a, html.has-cursor button, html.has-cursor .work-row { cursor: n
 .row .rinfo { flex: 1; min-width: 0; }
 .row .rinfo b { font-size: 16px; }
 .row .rinfo span { display: block; color: var(--muted); font-size: 13px; }
+.row .feat-check {
+  display: inline-flex; align-items: center; gap: 6px; flex: none; white-space: nowrap;
+  font-size: 12px; font-weight: 600; color: var(--muted); cursor: pointer; margin-right: 6px;
+}
+.row .feat-check input { width: 15px; height: 15px; accent-color: var(--text); cursor: pointer; }
 .row .ractions { display: flex; gap: 8px; }
 .row .ractions button { border: 1px solid var(--border); background: var(--bg-soft); border-radius: 8px; padding: 7px 12px; font-size: 13px; font-weight: 600; cursor: pointer; color: var(--text); font-family: var(--font); transition: var(--transition); }
 .row .ractions button:hover { border-color: var(--text); color: var(--text); }

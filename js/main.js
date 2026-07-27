@@ -63,7 +63,13 @@ var observeReveals = (function () {
     var list = projects.filter(function (p) {
       return current === "all" || p.category === current;
     });
-    if (limit > 0) list = list.slice(0, limit);
+    if (limit > 0) {
+      // home page: projects ticked "Selected" in admin come first; if fewer than
+      // the minimum (4), the newest others fill the remaining slots
+      var feat = list.filter(function (p) { return p.featured; });
+      var rest = list.filter(function (p) { return !p.featured; });
+      list = feat.concat(rest).slice(0, Math.max(limit, feat.length));
+    }
 
     if (!list.length) {
       grid.innerHTML = '<div class="empty">No projects here yet. Open <b>admin.html</b> to add your work.</div>';
