@@ -407,9 +407,9 @@ var observeReveals = (function () {
   });
 })();
 
-/* Intro headline + bio — words brighten smoothly from faint to white as you scroll.
-   Each word fades in gradually (fractional progress), so the sweep reads as one
-   continuous wave instead of words snapping on. */
+/* Intro headline + bio — words brighten ONE BY ONE, slowly, as you scroll.
+   The scrub range spans almost the whole viewport travel of each block, so the
+   reveal keeps pace with reading speed and pulls the eye through every word. */
 (function () {
   var blocks = [document.getElementById("site-headline"), document.getElementById("site-bio")].filter(Boolean);
   if (!blocks.length) return;
@@ -417,7 +417,7 @@ var observeReveals = (function () {
   if (reduce) return;   // CSS forces full opacity for reduced motion
 
   var MIN = 0.16;       // resting opacity (matches the CSS default)
-  var TAIL = 6;         // how many words are mid-fade at once (bigger = softer wave)
+  var TAIL = 2;         // words mid-fade at once — small, so it reads word by word
 
   function update() {
     var vh = window.innerHeight;
@@ -425,11 +425,11 @@ var observeReveals = (function () {
       var list = b.querySelectorAll(".word");
       if (!list.length) return;
       var r = b.getBoundingClientRect();
-      // 0 when the block enters at 92% of the viewport, 1 once it passes 30%
-      var start = vh * 0.92, end = vh * 0.30;
+      // long scrub: starts when the block enters at 96% and finishes only near the top (6%)
+      var start = vh * 0.96, end = vh * 0.06;
       var p = (start - r.top) / (start - end);
       p = Math.max(0, Math.min(1, p));
-      var f = p * (list.length + TAIL);   // fractional word index of the wave front
+      var f = p * (list.length + TAIL);   // fractional word index of the front
       list.forEach(function (w, i) {
         var t = Math.max(0, Math.min(1, (f - i) / TAIL));
         w.style.opacity = (MIN + (1 - MIN) * t).toFixed(3);
@@ -497,6 +497,9 @@ var observeReveals = (function () {
   document.addEventListener("mouseover", function (e) {
     var v = e.target.closest && e.target.closest('[data-cursor="view"]');
     dot.classList.toggle("is-view", !!v);
+    // hero only: the dot becomes a white outlined smiley saying "Hi"
+    var hero = e.target.closest && e.target.closest(".namehero");
+    dot.classList.toggle("is-hi", !!hero && !v);
   });
 
   function loop() {
@@ -506,6 +509,19 @@ var observeReveals = (function () {
     requestAnimationFrame(loop);
   }
   requestAnimationFrame(loop);
+})();
+
+/* Experience cards — zoom in one after another while scrolling through them
+   (the card in the middle of the viewport scales up; hover does the same) */
+(function () {
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (reduce || !("IntersectionObserver" in window)) return;
+  var items = document.querySelectorAll("#site-timeline .tl-item");
+  if (!items.length) return;
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) { e.target.classList.toggle("zoom", e.isIntersecting); });
+  }, { rootMargin: "-45% 0px -45% 0px", threshold: 0 });
+  items.forEach(function (el) { io.observe(el); });
 })();
 
 /* Footer copy-to-clipboard buttons (email / phone) */

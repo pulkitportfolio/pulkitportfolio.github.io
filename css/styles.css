@@ -154,7 +154,7 @@ h1,h2,h3,h4 { line-height: 1.12; letter-spacing: -.02em; font-weight: 600; }
 /* floating chips — dark glass */
 .float {
   position: absolute; width: 60px; height: 60px; border-radius: 18px;
-  background: var(--dark-2); border: 1px solid var(--dark-border);
+  background: #1D1D1D; border: 1px solid #363636;
   box-shadow: 0 14px 34px rgba(0,0,0,.45);
   display: flex; align-items: center; justify-content: center;
   z-index: 0; will-change: transform;
@@ -225,6 +225,15 @@ html.has-cursor a, html.has-cursor button, html.has-cursor .work-row { cursor: n
 }
 .cursor-dot.is-view { width: 106px; height: 106px; mix-blend-mode: normal; background: #fff; box-shadow: 0 10px 34px rgba(0,0,0,.28); }
 .cursor-dot.is-view .cursor-label { opacity: 1; }
+/* hero-only state: white outlined smiley saying "Hi" */
+.cursor-dot .cursor-hi { display: none; align-items: center; gap: 7px; color: #fff; font-weight: 600; font-size: 13px; white-space: nowrap; }
+.cursor-dot .cursor-hi svg { width: 18px; height: 18px; flex: none; }
+.cursor-dot.is-hi {
+  width: 78px; height: 42px; mix-blend-mode: difference;   /* white on dark, flips to black over white */
+  background: transparent; border: 1px solid rgba(255,255,255,.85);
+}
+.cursor-dot.is-hi .cursor-label { display: none; }
+.cursor-dot.is-hi .cursor-hi { display: inline-flex; }
 @media (hover: none), (prefers-reduced-motion: reduce) { .cursor-dot { display: none; } }
 
 /* ---------- Scroll reveal ---------- */
@@ -483,8 +492,11 @@ html.has-cursor a, html.has-cursor button, html.has-cursor .work-row { cursor: n
 .about-grid { display: grid; grid-template-columns: 1.25fr .75fr; gap: 70px; align-items: start; }
 .timeline { }
 /* experience rows — white with hairlines, like the reference site */
-.tl-item { padding: 36px 0; border-top: 1px solid var(--border); position: relative; }
+.tl-item { padding: 36px 0; border-top: 1px solid var(--border); position: relative; transform-origin: left center; }
 .tl-item:last-child { border-bottom: 1px solid var(--border); }
+/* zoom in while a card is in the middle of the viewport (scroll focus) or hovered */
+.tl-item.in:hover, .tl-item.in.zoom { transform: scale(1.035); }
+@media (prefers-reduced-motion: reduce) { .tl-item.in:hover, .tl-item.in.zoom { transform: none; } }
 .tl-head { display: flex; justify-content: space-between; align-items: baseline; gap: 18px; flex-wrap: wrap; }
 .tl-item .role { font-weight: 600; font-size: 22px; letter-spacing: -.01em; }
 .tl-item .co { color: var(--muted); font-weight: 500; font-size: 15px; }
