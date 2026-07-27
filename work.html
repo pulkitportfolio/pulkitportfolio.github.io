@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Case study | Pulkit Awasthi</title>
-  <meta name="description" content="Case study by Pulkit Awasthi, Product & UX/UI Designer." />
+  <title>Work | Pulkit Awasthi</title>
+  <meta name="description" content="Selected projects and case studies by Pulkit Awasthi, Product & UX/UI Designer." />
   <link rel="icon" type="image/svg+xml" href="images/favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -21,13 +21,45 @@
       <nav class="nav-links">
         <a href="index.html#work">Work</a>
         <a href="index.html#about">About</a>
-        <a href="index.html#contact">Contact</a>
+        <a href="#contact">Contact</a>
         <a class="btn btn-primary" href="Pulkit_Awasthi_CV.pdf" download>Download CV</a>
       </nav>
     </div>
   </header>
 
-  <main id="cs-root"></main>
+  <!-- PAGE HERO -->
+  <section class="page-hero reveal">
+    <div class="container">
+      <h1>Designing meaningful experiences, one pixel at a time.</h1>
+      <p class="lead">A mix of mobile apps and websites. Click any project to open its full case study.</p>
+    </div>
+  </section>
+
+  <!-- ALL PROJECTS -->
+  <section class="section reveal" id="work" style="padding-top:30px">
+    <div class="container">
+      <div class="filters">
+        <button class="filter active" data-filter="all">All</button>
+        <button class="filter" data-filter="app">Apps</button>
+        <button class="filter" data-filter="website">Websites</button>
+      </div>
+      <div class="grid" id="grid"></div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="section contact reveal" id="contact">
+    <div class="container contact-band">
+      <div class="cb-left">
+        <h2 class="cb-cycle js-cycle">Have a project?</h2>
+        <a class="cb-btn" id="site-email-btn" href="mailto:pulkitawasthi5678@gmail.com">Book a free call</a>
+      </div>
+      <div class="cb-right">
+        <div class="cb-avail">Available for new projects</div>
+        <div class="cb-big" id="site-contact-heading">Let's build something great.</div>
+      </div>
+    </div>
+  </section>
 
   <!-- FOOTER -->
   <footer class="footer">
@@ -40,7 +72,7 @@
       <div class="fcol fcol-links" id="footer-links2">
         <a href="index.html#work">Work</a>
         <a href="index.html#about">About</a>
-        <a href="index.html#contact">Contact</a>
+        <a href="#contact">Contact</a>
         <a href="Pulkit_Awasthi_CV.pdf" download>Resum&eacute;</a>
       </div>
     </div>
@@ -60,7 +92,6 @@
   <!-- Load content fresh on every visit so published changes always show (no hard-refresh needed). -->
   <script>document.write('<scr' + 'ipt src="js/projects.js?v=' + Date.now() + '"><\/scr' + 'ipt>');</script>
   <script src="js/store.js"></script>
-  <script src="js/case-study.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>

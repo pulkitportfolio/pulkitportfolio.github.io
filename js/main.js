@@ -1,4 +1,36 @@
-/* Home page — render project grid + filters + mobile nav */
+/* Per-item scroll reveal helper (project rows, experience rows, How I Work blocks).
+   Renderers add .item-reveal and call observeReveals() after inserting markup. */
+var observeReveals = (function () {
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var io = null;
+  if (!reduce && "IntersectionObserver" in window) {
+    io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.1, rootMargin: "0px 0px -6% 0px" });
+  }
+  return function () {
+    document.querySelectorAll(".item-reveal:not(.in)").forEach(function (el) {
+      if (io) io.observe(el);
+      else el.classList.add("in");
+    });
+  };
+})();
+
+/* Mobile nav toggle (runs on every page) */
+(function () {
+  var toggle = document.querySelector(".nav-toggle");
+  var links = document.querySelector(".nav-links");
+  if (toggle && links) {
+    toggle.addEventListener("click", function () { links.classList.toggle("open"); });
+    links.addEventListener("click", function (e) {
+      if (e.target.tagName === "A") links.classList.remove("open");
+    });
+  }
+})();
+
+/* Project list — rows with filters; data-limit caps the count on the home page */
 (function () {
   var grid = document.getElementById("grid");
   if (!grid) return;
@@ -25,10 +57,13 @@
     }).join("");
   }
 
+  var limit = parseInt(grid.getAttribute("data-limit") || "0", 10);
+
   function render() {
     var list = projects.filter(function (p) {
       return current === "all" || p.category === current;
     });
+    if (limit > 0) list = list.slice(0, limit);
 
     if (!list.length) {
       grid.innerHTML = '<div class="empty">No projects here yet. Open <b>admin.html</b> to add your work.</div>';
@@ -38,38 +73,28 @@
     grid.innerHTML = list.map(function (p) {
       var label = p.category === "app" ? "App" : "Website";
       var csHref = "case-study.html?id=" + encodeURIComponent(p.id) + previewQS;
-      var live = p.liveUrl && String(p.liveUrl).trim();
-      var liveLabel = p.category === "app" ? "View live app" : "View live site";
-      var liveLink = live
-        ? '<a class="live-link" href="' + escapeAttr(live) + '" target="_blank" rel="noopener noreferrer">' +
-            escapeHtml(liveLabel) + ' <span aria-hidden="true">&#8599;</span></a>'
-        : "";
+      var kicker = [label, p.year].filter(Boolean).join(" · ");
       return '' +
-        '<div class="card" tabindex="0" data-href="' + escapeAttr(csHref) + '">' +
-          '<div class="card-media">' +
-            '<span class="card-tag">' + label + "</span>" +
-            media(p) +
-          "</div>" +
-          '<div class="card-body">' +
+        '<div class="work-row item-reveal" tabindex="0" data-cursor="view" data-href="' + escapeAttr(csHref) + '">' +
+          '<div class="row-info">' +
+            '<div class="row-kicker">' + escapeHtml(kicker) + "</div>" +
             "<h3>" + escapeHtml(p.title) + "</h3>" +
-            "<p>" + escapeHtml(p.summary || "") + "</p>" +
-            '<div class="card-foot">' +
-              '<div class="card-chips">' + chips(p.tags) + "</div>" +
-              '<div class="card-links">' +
-                '<a class="view-link" href="' + escapeAttr(csHref) + '">View project <span class="arw">&rarr;</span></a>' +
-                liveLink +
-              "</div>" +
+            '<p class="row-summary">' + escapeHtml(p.summary || "") + "</p>" +
+            '<div class="row-links">' +
+              '<a class="view-link" href="' + escapeAttr(csHref) + '">View project <span class="arw">&rarr;</span></a>' +
             "</div>" +
           "</div>" +
+          '<div class="row-thumb">' + media(p) + "</div>" +
         "</div>";
     }).join("");
 
-    // whole card is clickable (except real links inside it)
-    grid.querySelectorAll(".card").forEach(function (card) {
+    // whole row is clickable (except real links inside it)
+    grid.querySelectorAll(".work-row").forEach(function (card) {
       var go = function () { var h = card.getAttribute("data-href"); if (h) location.href = h; };
       card.addEventListener("click", function (e) { if (!e.target.closest("a")) go(); });
       card.addEventListener("keydown", function (e) { if (e.key === "Enter") go(); });
     });
+    observeReveals();
   }
 
   // filters
@@ -88,16 +113,6 @@
   // count stats
   var el = document.getElementById("stat-projects");
   if (el) el.textContent = projects.length + "+";
-
-  // mobile nav toggle
-  var toggle = document.querySelector(".nav-toggle");
-  var links = document.querySelector(".nav-links");
-  if (toggle && links) {
-    toggle.addEventListener("click", function () { links.classList.toggle("open"); });
-    links.addEventListener("click", function (e) {
-      if (e.target.tagName === "A") links.classList.remove("open");
-    });
-  }
 
   function escapeHtml(s) {
     return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) {
@@ -175,13 +190,23 @@
   function txt(id, v) { var e = document.getElementById(id); if (e && v != null && v !== "") e.textContent = v; }
   function html(id, v) { var e = document.getElementById(id); if (e && v != null) e.innerHTML = v; }
 
-  // small circular profile image
-  var av = document.getElementById("avatar-img");
-  if (av && s.avatar) av.src = s.avatar;
+  // (profile photo is no longer shown on the site; SITE.avatar is kept for the admin only)
 
-  // hero
+  // hero — name splits across two giant lines (top-left / bottom-right)
   txt("site-kicker", s.kicker);
-  txt("site-name", s.name);
+  var nameFirst = (s.name || "").trim();
+  var nameLast = (s.nameLast || "").trim();
+  if (!nameLast && /\s/.test(nameFirst)) {
+    var parts = nameFirst.split(/\s+/);
+    nameFirst = parts.shift();
+    nameLast = parts.join(" ");
+  }
+  txt("site-name", nameFirst);
+  var lastEl = document.getElementById("site-name-last");
+  if (lastEl) {
+    if (nameLast) lastEl.textContent = nameLast;
+    else lastEl.style.display = "none";
+  }
   txt("site-tagline", s.tagline);
 
   // CTA buttons: set the editable label + link (the arrow stays)
@@ -219,11 +244,19 @@
   var hd = document.getElementById("site-headline");
   if (hd) {
     var headline = (intro.headline != null && intro.headline !== "") ? intro.headline : hd.textContent;
-    hd.innerHTML = headline.split(/\s+/).map(function (w, i) {
-      return '<span class="word" style="transition-delay:' + (i * 45) + 'ms">' + esc(w) + "</span>";
+    hd.innerHTML = headline.split(/\s+/).map(function (w) {
+      return '<span class="word">' + esc(w) + "</span>";
     }).join(" ");
   }
-  txt("site-bio", intro.bio);
+  // bio gets the same word-split scroll-brightening treatment as the headline
+  var bioEl = document.getElementById("site-bio");
+  if (bioEl) {
+    var bioText = (intro.bio != null && intro.bio !== "") ? intro.bio : bioEl.textContent.replace(/\s+/g, " ").trim();
+    bioEl.innerHTML = bioText.split(/\s+/).map(function (w) {
+      return '<span class="word">' + esc(w) + "</span>";
+    }).join(" ");
+  }
+
 
   // companies (mono = first letter)
   if (Array.isArray(s.companies)) {
@@ -240,13 +273,16 @@
   if (Array.isArray(about.experience)) {
     html("site-timeline", about.experience.map(function (x) {
       var loc = x.location
-        ? '<div class="exp-loc"><svg class="pin" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-6-5.3-6-10a6 6 0 1 1 12 0c0 4.7-6 10-6 10Z"/><circle cx="12" cy="11" r="2.2"/></svg>' + esc(x.location) + "</div>"
+        ? ' <span class="exp-loc"><svg class="pin" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-6-5.3-6-10a6 6 0 1 1 12 0c0 4.7-6 10-6 10Z"/><circle cx="12" cy="11" r="2.2"/></svg>' + esc(x.location) + "</span>"
         : "";
-      return '<div class="tl-item">' +
-        loc +
-        '<div class="role">' + esc(x.role || "") + "</div>" +
-        '<div class="co">' + esc(x.company || "") + "</div>" +
-        '<div class="when">' + esc(x.when || "") + "</div>" +
+      return '<div class="tl-item item-reveal">' +
+        '<div class="tl-head">' +
+          "<div>" +
+            '<div class="role">' + esc(x.role || "") + "</div>" +
+            '<div class="co">' + esc(x.company || "") + loc + "</div>" +
+          "</div>" +
+          '<div class="when">' + esc(x.when || "") + "</div>" +
+        "</div>" +
         "<p>" + esc(x.detail || "") + "</p></div>";
     }).join(""));
   }
@@ -262,19 +298,30 @@
     skTrack.innerHTML = h + h;   // duplicated for a seamless left-scrolling loop
   }
 
-  // "Explorations & mockups" strips: a separate image set (NOT the case studies)
-  var moreImgs = Array.isArray(s.otherWorks) ? s.otherWorks.filter(Boolean) : [];
-  var moreSection = document.getElementById("more");
-  if (moreImgs.length) {
-    var thumb = function (src) { return '<div class="more-thumb"><img src="' + esc(src) + '" alt="" loading="lazy"></div>'; };
-    var r1 = moreImgs.map(thumb).join("");
-    var r2 = moreImgs.slice().reverse().map(thumb).join("");
-    var e1 = document.getElementById("more-row1"); if (e1) e1.innerHTML = r1 + r1;
-    var e2 = document.getElementById("more-row2"); if (e2) e2.innerHTML = r2 + r2;
-    if (moreSection) moreSection.style.display = "";
-  } else if (moreSection) {
-    moreSection.style.display = "none";   // nothing to show yet
+  // How I Work — numbered blocks with mono checklists (hidden when empty)
+  var hiwSection = document.getElementById("how");
+  var hiwWrap = document.getElementById("site-hiw");
+  var hiwList = Array.isArray(s.howIWork) ? s.howIWork.filter(function (x) { return x && (x.title || "").trim(); }) : [];
+  if (hiwWrap && hiwList.length) {
+    hiwWrap.innerHTML = hiwList.map(function (step, i) {
+      var num = (i + 1 < 10 ? "0" : "") + (i + 1);
+      var points = (Array.isArray(step.points) ? step.points : []).filter(Boolean).map(function (pt) {
+        return "<li>" + esc(pt) + "</li>";
+      }).join("");
+      return '<div class="hiw-item item-reveal">' +
+        "<div>" +
+          '<div class="hiw-num">' + num + "</div>" +
+          "<h3>" + esc(step.title) + "</h3>" +
+          (step.desc ? '<p class="hiw-desc">' + esc(step.desc) + "</p>" : "") +
+        "</div>" +
+        (points ? '<ul class="hiw-points">' + points + "</ul>" : "") +
+      "</div>";
+    }).join("");
+    if (hiwSection) hiwSection.style.display = "";
+  } else if (hiwSection) {
+    hiwSection.style.display = "none";
   }
+
   if (about.education) {
     var ed = about.education;
     html("site-education",
@@ -282,13 +329,13 @@
       '<div class="when">' + esc([ed.school, ed.year].filter(Boolean).join(" · ")) + "</div>");
   }
 
-  // contact
+  // contact band (heading is the big right-hand line; the button keeps its own label)
   var c = s.contact || {};
   txt("site-contact-heading", c.heading);
   txt("site-contact-text", c.text);
   if (c.email) {
     var eb = document.getElementById("site-email-btn");
-    if (eb) { eb.textContent = c.email; eb.href = "mailto:" + c.email; }
+    if (eb) eb.href = "mailto:" + c.email;
   }
   var cl = document.getElementById("site-contact-links");
   if (cl) {
@@ -297,6 +344,107 @@
     if (c.phone) links.push('<a href="tel:' + esc(String(c.phone).replace(/\s+/g, "")) + '">' + esc(c.phone) + "</a>");
     if (links.length) cl.innerHTML = links.join("");
   }
+
+  // big footer: giant name + detail columns (email/phone with copy, location, links)
+  var fn = document.getElementById("footer-name");
+  if (fn) fn.textContent = ((nameFirst || "") + " " + (nameLast || "")).trim().toUpperCase();
+  if (c.email) {
+    var fe = document.getElementById("footer-email");
+    if (fe) { fe.textContent = c.email; fe.href = "mailto:" + c.email; }
+    var feBtn = fe && fe.parentNode.querySelector(".copy-btn");
+    if (feBtn) feBtn.setAttribute("data-copy", c.email);
+  }
+  if (c.phone) {
+    var fp = document.getElementById("footer-phone");
+    if (fp) { fp.textContent = c.phone; fp.href = "tel:" + String(c.phone).replace(/\s+/g, ""); }
+    var fpBtn = fp && fp.parentNode.querySelector(".copy-btn");
+    if (fpBtn) fpBtn.setAttribute("data-copy", c.phone);
+  }
+  var fl2 = document.getElementById("footer-links2");
+  if (fl2) {
+    // anchors scroll on the home page; other pages link back to the home sections
+    var isHome = !!document.querySelector(".namehero");
+    var pre = isHome ? "" : "index.html";
+    var contactHref = document.getElementById("contact") ? "#contact" : "index.html#contact";
+    var fLinks = [
+      '<a href="' + pre + '#work">Work</a>',
+      '<a href="' + pre + '#about">About</a>',
+      '<a href="' + contactHref + '">Contact</a>'
+    ];
+    var resume = (s.resumeUrl || "").trim() || "Pulkit_Awasthi_CV.pdf";
+    fLinks.push('<a href="' + esc(resume) + '" ' + (/^https?:/i.test(resume) ? 'target="_blank" rel="noopener noreferrer"' : "download") + ">Resumé</a>");
+    if (ln) fLinks.push('<a href="' + esc(ln) + '" target="_blank" rel="noopener noreferrer">LinkedIn</a>');
+    fl2.innerHTML = fLinks.join("");
+  }
+
+  observeReveals();
+})();
+
+/* Contact band — cycling headline ("Have a project?" → "Let's chat!" → …) */
+(function () {
+  var el = document.querySelector(".js-cycle");
+  if (!el) return;
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (reduce) return;   // keep the first phrase static
+  var phrases = ["Have a project?", "Let's chat!", "Schedule a call?"];
+  var i = 0;
+  setInterval(function () {
+    el.classList.add("out");
+    setTimeout(function () {
+      i = (i + 1) % phrases.length;
+      el.textContent = phrases[i];
+      el.classList.remove("out");
+    }, 360);
+  }, 3000);
+})();
+
+/* Footer back-to-top */
+(function () {
+  var btn = document.querySelector(".to-top");
+  if (!btn) return;
+  btn.addEventListener("click", function () {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+})();
+
+/* Intro headline + bio — words brighten smoothly from faint to white as you scroll.
+   Each word fades in gradually (fractional progress), so the sweep reads as one
+   continuous wave instead of words snapping on. */
+(function () {
+  var blocks = [document.getElementById("site-headline"), document.getElementById("site-bio")].filter(Boolean);
+  if (!blocks.length) return;
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (reduce) return;   // CSS forces full opacity for reduced motion
+
+  var MIN = 0.16;       // resting opacity (matches the CSS default)
+  var TAIL = 6;         // how many words are mid-fade at once (bigger = softer wave)
+
+  function update() {
+    var vh = window.innerHeight;
+    blocks.forEach(function (b) {
+      var list = b.querySelectorAll(".word");
+      if (!list.length) return;
+      var r = b.getBoundingClientRect();
+      // 0 when the block enters at 92% of the viewport, 1 once it passes 30%
+      var start = vh * 0.92, end = vh * 0.30;
+      var p = (start - r.top) / (start - end);
+      p = Math.max(0, Math.min(1, p));
+      var f = p * (list.length + TAIL);   // fractional word index of the wave front
+      list.forEach(function (w, i) {
+        var t = Math.max(0, Math.min(1, (f - i) / TAIL));
+        w.style.opacity = (MIN + (1 - MIN) * t).toFixed(3);
+      });
+    });
+  }
+  var ticking = false;
+  function onScroll() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(function () { update(); ticking = false; });
+  }
+  window.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("resize", onScroll, { passive: true });
+  update();
 })();
 
 /* Scroll reveal — sections slide up as they enter the viewport */
@@ -329,65 +477,47 @@
   document.body.appendChild(bar);
 })();
 
-/* Smiling cursor buddy — trails the mouse, fades out when idle */
+/* Custom cursor — white dot that follows the mouse (inverts over light sections)
+   and grows into a "View Project" badge over elements with data-cursor="view" */
 (function () {
+  var dot = document.querySelector(".cursor-dot");
+  if (!dot) return;
+  var fine = window.matchMedia && window.matchMedia("(hover: hover) and (pointer: fine)").matches;
   var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  var noHover = window.matchMedia && window.matchMedia("(hover: none)").matches;
-  if (reduce || noHover) return;
-  var buddy = document.querySelector(".cursor-buddy");
-  var hero = document.querySelector(".namehero");
-  if (!buddy || !hero) return;
+  if (!fine || reduce) return;
+  document.documentElement.classList.add("has-cursor");
 
-  var x = -100, y = -100, tx = -100, ty = -100, idle;
-  // only trails the cursor while it's over the hero section
-  hero.addEventListener("mousemove", function (e) {
+  var x = -100, y = -100, tx = -100, ty = -100, seen = false;
+  document.addEventListener("mousemove", function (e) {
     tx = e.clientX; ty = e.clientY;
-    if (x < 0) { x = tx; y = ty; }        // avoid a fly-in from the corner
-    buddy.classList.add("show");
-    clearTimeout(idle);
-    idle = setTimeout(function () { buddy.classList.remove("show"); }, 1500);
+    if (!seen) { x = tx; y = ty; seen = true; dot.classList.add("on"); }
   }, { passive: true });
-  hero.addEventListener("mouseleave", function () {
-    clearTimeout(idle);
-    buddy.classList.remove("show");
+  document.addEventListener("mouseleave", function () { dot.classList.remove("on"); });
+  document.addEventListener("mouseenter", function () { if (seen) dot.classList.add("on"); });
+  document.addEventListener("mouseover", function (e) {
+    var v = e.target.closest && e.target.closest('[data-cursor="view"]');
+    dot.classList.toggle("is-view", !!v);
   });
 
   function loop() {
-    x += (tx - x) * 0.18;
-    y += (ty - y) * 0.18;
-    buddy.style.transform = "translate(" + x.toFixed(1) + "px," + y.toFixed(1) + "px) translate(18px, 18px)";
+    x += (tx - x) * 0.22;
+    y += (ty - y) * 0.22;
+    dot.style.transform = "translate(" + x.toFixed(1) + "px," + y.toFixed(1) + "px) translate(-50%, -50%)";
     requestAnimationFrame(loop);
   }
   requestAnimationFrame(loop);
 })();
 
-/* Full-page preview: click any Explorations image to open it large */
+/* Footer copy-to-clipboard buttons (email / phone) */
 (function () {
-  var lb = document.getElementById("lightbox");
-  if (!lb) return;
-  var img = document.getElementById("lightbox-img");
-
-  function open(src) {
-    if (!src) return;
-    img.src = src;
-    lb.classList.add("open");
-    lb.setAttribute("aria-hidden", "false");
-    document.body.style.overflow = "hidden";
-  }
-  function close() {
-    lb.classList.remove("open");
-    lb.setAttribute("aria-hidden", "true");
-    img.src = "";
-    document.body.style.overflow = "";
-  }
-
-  document.addEventListener("click", function (e) {
-    var thumb = e.target.closest && e.target.closest(".more-thumb");
-    if (thumb) {
-      var im = thumb.querySelector("img");
-      if (im) open(im.getAttribute("src"));
-    }
+  document.querySelectorAll(".copy-btn").forEach(function (b) {
+    b.addEventListener("click", function () {
+      var t = b.getAttribute("data-copy") || "";
+      if (!t || !navigator.clipboard) return;
+      navigator.clipboard.writeText(t).then(function () {
+        b.classList.add("copied");
+        setTimeout(function () { b.classList.remove("copied"); }, 1200);
+      }).catch(function () {});
+    });
   });
-  lb.addEventListener("click", close);              // click anywhere in the overlay to close
-  document.addEventListener("keydown", function (e) { if (e.key === "Escape") close(); });
 })();
