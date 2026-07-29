@@ -413,9 +413,9 @@ var observeReveals = (function () {
   });
 })();
 
-/* Intro headline + bio — words brighten ONE BY ONE, slowly, as you scroll.
-   The scrub range spans almost the whole viewport travel of each block, so the
-   reveal keeps pace with reading speed and pulls the eye through every word. */
+/* Intro headline + bio — ONE continuous word-by-word reveal, top to bottom.
+   Headline and bio are treated as a single sequence: the bio's first word only
+   starts after the headline's last word, so the eye never jumps between lines. */
 (function () {
   var blocks = [document.getElementById("site-headline"), document.getElementById("site-bio")].filter(Boolean);
   if (!blocks.length) return;
@@ -423,23 +423,27 @@ var observeReveals = (function () {
   if (reduce) return;   // CSS forces full opacity for reduced motion
 
   var MIN = 0.16;       // resting opacity (matches the CSS default)
-  var TAIL = 2;         // words mid-fade at once — small, so it reads word by word
+  var TAIL = 3;         // words mid-fade at once — small, so it reads word by word
 
   function update() {
     var vh = window.innerHeight;
+    var words = [];
     blocks.forEach(function (b) {
-      var list = b.querySelectorAll(".word");
-      if (!list.length) return;
-      var r = b.getBoundingClientRect();
-      // long scrub: starts when the block enters at 96% and finishes only near the top (6%)
-      var start = vh * 0.96, end = vh * 0.06;
-      var p = (start - r.top) / (start - end);
-      p = Math.max(0, Math.min(1, p));
-      var f = p * (list.length + TAIL);   // fractional word index of the front
-      list.forEach(function (w, i) {
-        var t = Math.max(0, Math.min(1, (f - i) / TAIL));
-        w.style.opacity = (MIN + (1 - MIN) * t).toFixed(3);
-      });
+      words.push.apply(words, b.querySelectorAll(".word"));
+    });
+    if (!words.length) return;
+    var top = blocks[0].getBoundingClientRect().top;
+    var bottom = blocks[blocks.length - 1].getBoundingClientRect().bottom;
+    // one scrub across both blocks: starts as the text enters at 94%,
+    // ends when its bottom edge passes ~78% of the viewport (still readable)
+    var start = vh * 0.94;
+    var end = Math.min(vh * 0.30, vh * 0.78 - (bottom - top));
+    var p = (start - top) / (start - end);
+    p = Math.max(0, Math.min(1, p));
+    var f = p * (words.length + TAIL);   // fractional word index of the front
+    words.forEach(function (w, i) {
+      var t = Math.max(0, Math.min(1, (f - i) / TAIL));
+      w.style.opacity = (MIN + (1 - MIN) * t).toFixed(3);
     });
   }
   var ticking = false;
