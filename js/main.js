@@ -46,7 +46,7 @@ var observeReveals = (function () {
   function media(p) {
     if (p.thumbnail) {
       return '<img src="' + escapeAttr(p.thumbnail) + '" alt="' + escapeAttr(p.title) +
-        '" onerror="this.parentNode.innerHTML=\'' +
+        '" loading="lazy" decoding="async" onerror="this.parentNode.innerHTML=\'' +
         '<div class=&quot;ph&quot;>' + escapeAttr(p.title) + '</div>\'">';
     }
     return ph(p.title);

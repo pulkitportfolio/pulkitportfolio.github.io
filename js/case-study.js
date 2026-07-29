@@ -31,7 +31,7 @@
   function cover(src, big) {
     if (src) {
       return '<img src="' + attr(src) + '" alt="' + attr(p.title) +
-        '" onerror="this.parentNode.innerHTML=\'<div class=&quot;ph&quot;>' + attr(p.title) + '</div>\'">';
+        '" decoding="async" onerror="this.parentNode.innerHTML=\'<div class=&quot;ph&quot;>' + attr(p.title) + '</div>\'">';
     }
     return '<div class="ph">' + esc(p.title) + "</div>";
   }
@@ -53,6 +53,7 @@
     return '<div class="' + cls + '">' + arr.map(function (src) {
       return "<figure>" +
         '<img src="' + attr(src) + '" alt="' + attr(p.title) + ' mockup" ' +
+        'loading="lazy" decoding="async" ' +
         'onerror="this.parentNode.innerHTML=\'<div class=&quot;ph&quot;>Mockup</div>\'">' +
         "</figure>";
     }).join("") + "</div>";

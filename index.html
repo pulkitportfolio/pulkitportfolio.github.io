@@ -228,8 +228,8 @@
   <div class="cursor-dot" aria-hidden="true"><span class="cursor-label">View Project</span><span class="cursor-hi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8.5 14a4.5 4.5 0 0 0 7 0"/><line x1="9" y1="9.3" x2="9" y2="9.4"/><line x1="15" y1="9.3" x2="15" y2="9.4"/></svg>Hi</span></div>
 
   <script>document.getElementById("yr").textContent = new Date().getFullYear();</script>
-  <!-- Load content fresh on every visit so published changes always show (no hard-refresh needed). -->
-  <script>document.write('<scr' + 'ipt src="js/projects.js?v=' + Date.now() + '"><\/scr' + 'ipt>');</script>
+  <!-- The ?v= stamp is bumped automatically on each publish, so browsers cache this file until it actually changes. -->
+  <script src="js/projects.js?v=1785326029"></script>
   <script src="js/store.js"></script>
   <script src="js/main.js"></script>
 </body>
