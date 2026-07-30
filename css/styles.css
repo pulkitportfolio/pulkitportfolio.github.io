@@ -521,6 +521,37 @@ a:hover > .arw { transform: translate(2px, -2px); }
   .nav-links a { width: 100%; }
   .nav-toggle { display: block; }
 }
+/* ---------- Mobile: tighter vertical rhythm ---------- */
+@media (max-width: 700px) {
+  .hero { padding: 46px 0 54px; }
+  .hero h1 { margin: 20px 0 22px; }
+  .hero-actions { margin-top: 26px; }
+  .hero-meta { margin-top: 18px; }
+  .approach { padding: 54px 0; }
+  .approach .statement { margin-top: 18px; }
+  .section { padding: 44px 0; }
+  .section-head { margin-bottom: 24px; }
+  .page-head { padding: 46px 0 6px; }
+  .page-head .lead { margin-top: 12px; }
+  .filters { margin: 24px 0 4px; }
+  .about-hero { padding: 46px 0 22px; }
+  .about-hero .about-text { margin-top: 18px; }
+  .contact-wrap { padding: 44px 0 64px; }
+  .contact-ctas { margin-top: 24px; }
+  .work-link-row { padding-bottom: 60px; }
+  .work-link-row a { padding: 20px 4px; }
+  .xp-grid { gap: 28px; }
+  .xp-left .xp-desc { margin-top: 12px; }
+  .xp-left .xp-sub { margin: 24px 0 10px; }
+  .xp-stack { gap: 14px; }
+  /* on phones the company cards flow normally instead of pin-stacking */
+  .xp-card { position: relative; top: auto !important; padding: 22px 20px; }
+  .footer { padding: 52px 0 24px; margin-top: 24px; }
+  .foot-cols { margin-top: 34px; gap: 26px; }
+  .foot-rule { margin-top: 30px; }
+  .cs-hero { padding: 40px 0 26px; }
+  .cs-block { padding: 28px 0; }
+}
 @media (max-width: 520px) {
   .cs-meta { gap: 24px; }
   .hero-actions .btn { width: 100%; justify-content: center; }
