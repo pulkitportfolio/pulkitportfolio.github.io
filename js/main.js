@@ -389,7 +389,7 @@ function toolIcon(name) {
       for (var i = 0; i < steps; i++) {
         parts.push({
           x: last.x + dx * i / steps, y: last.y + dy * i / steps,
-          r: 22 + Math.random() * 14, a: 0.18,
+          r: 26 + Math.random() * 16, a: 0.10,
           vx: dx * 0.05, vy: dy * 0.05
         });
       }
@@ -407,8 +407,9 @@ function toolIcon(name) {
       p.r *= 1.016; p.a *= 0.95;
       if (p.a < 0.004) { parts.splice(i, 1); continue; }
       var g = ctx.createRadialGradient(p.x * dpr, p.y * dpr, 0, p.x * dpr, p.y * dpr, p.r * dpr);
-      g.addColorStop(0, "rgba(37,99,235," + p.a.toFixed(3) + ")");
-      g.addColorStop(1, "rgba(37,99,235,0)");
+      // soft light periwinkle — a whisper on the white background
+      g.addColorStop(0, "rgba(173,188,240," + p.a.toFixed(3) + ")");
+      g.addColorStop(1, "rgba(173,188,240,0)");
       ctx.fillStyle = g;
       ctx.beginPath();
       ctx.arc(p.x * dpr, p.y * dpr, p.r * dpr, 0, Math.PI * 2);
