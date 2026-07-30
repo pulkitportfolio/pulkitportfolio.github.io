@@ -131,7 +131,20 @@ const SITE = {
         "QA the final implementation"
       ]
     }
-  ]
+  ],
+  "heroTitleA": "Product Designer,",
+  "heroTitleB": "UX/UI Designer",
+  "heroLeadStrong": "3+ years designing high-impact product experiences",
+  "heroLead": "across SaaS, EdTech, AI and enterprise products at WebIndia, ThinkTech, EduGorilla and TechDock Labs. I turn complex problems into interfaces people actually enjoy using.",
+  "approach": {
+    "kicker": "How I treat a project",
+    "text": "Every project I take on, I treat as my own business. When it is a service, I work like an owner, looking for how it can stand out and grow faster. When it is a product, I flip to being its simplest user, someone with no idea of anything, and if that person can still use it with ease, the design has done its job."
+  },
+  "aboutPage": {
+    "heading": "Hi, I am Pulkit.",
+    "text": "Before a product designer, I am an artist. I love sketching, I love creating things with my pencil strokes, and that habit shapes the way I design. Thinking on paper first helps me explore ideas more freely and bring that same craft into every screen I make."
+  },
+  "whatsapp": "+91 87070 03804"
 };
 
 const PROJECTS = [
