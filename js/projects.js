@@ -135,7 +135,7 @@ const SITE = {
   "heroTitleA": "Product Designer,",
   "heroTitleB": "UX/UI Designer",
   "heroLeadStrong": "3+ years designing high-impact product experiences",
-  "heroLead": "Designing intuitive digital experiences across SaaS, EdTech, AI, and enterprise products. I turn complex problems into interfaces people actually enjoy using.",
+  "heroLead": "Creating intuitive digital products that solve complex problems with simple, user-centered design.",
   "approach": {
     "kicker": "How I treat a project",
     "text": "Every project I take on, I treat as my own business. When it is a service, I work like an owner, looking for how it can stand out and grow faster. When it is a product, I flip to being its simplest user, someone with no idea of anything, and if that person can still use it with ease, the design has done its job."
