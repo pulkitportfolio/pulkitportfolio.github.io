@@ -90,7 +90,7 @@ function escapeAttr(s) { return escapeHtml(s); }
             '<div class="pkicker">' + escapeHtml(kicker) + "</div>" +
             "<h3>" + escapeHtml(p.title) + "</h3>" +
             '<p class="psummary">' + escapeHtml(p.summary || "") + "</p>" +
-            '<a class="plink" href="' + escapeAttr(csHref) + '">View project <span class="arw">&rarr;</span></a>' +
+            '<a class="plink" href="' + escapeAttr(csHref) + '">' + escapeHtml(p.ctaText || "View project") + ' <span class="arw">&rarr;</span></a>' +
           "</div>" +
         "</article>";
     }).join("");
