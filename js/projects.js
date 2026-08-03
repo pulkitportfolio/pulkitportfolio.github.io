@@ -178,7 +178,8 @@ const PROJECTS = [
     "processHeading": "",
     "outcomeHeading": "",
     "screensHeading": "",
-    "gallery": []
+    "gallery": [],
+    "customUrl": "eventzar.html"
   },
   {
     "id": "chipt",
