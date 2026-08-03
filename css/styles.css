@@ -448,6 +448,10 @@ a:hover > .arw { transform: translate(2px, -2px); }
   display: flex; align-items: center; gap: 14px; padding: 14px; background: var(--surface);
   border: 1px solid var(--border); border-radius: var(--radius-sm); margin-bottom: 12px;
 }
+.row .rhandle { cursor: grab; color: var(--faint); font-size: 15px; padding: 0 2px; flex-shrink: 0; user-select: none; -webkit-user-select: none; }
+.row .rhandle:hover { color: var(--text); }
+.row.dragging { opacity: .45; border-style: dashed; }
+.row.dragging * { pointer-events: none; }
 .row .rmedia { width: 74px; height: 54px; border-radius: 8px; overflow: hidden; flex-shrink: 0; background: var(--bg-soft); display:flex;align-items:center;justify-content:center; }
 .row .rmedia img { width: 100%; height: 100%; object-fit: cover; }
 .row .rmedia .ph { color: var(--muted); font-weight: 700; font-size: 12px; }

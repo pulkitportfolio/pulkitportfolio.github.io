@@ -158,7 +158,14 @@ const PROJECTS = [
     "summary": "A community events platform where people discover events, buy tickets and shop merchandise, and businesses host, promote and earn. Designed across four platforms from one design system.",
     "customUrl": "eventzar.html",
     "liveUrl": "",
-    "tags": ["Product design", "UX research", "Design system", "Mobile app", "Web app", "Admin panel"],
+    "tags": [
+      "Product design",
+      "UX research",
+      "Design system",
+      "Mobile app",
+      "Web app",
+      "Admin panel"
+    ],
     "thumbnail": "images/eventzar/thumb-hero.webp",
     "cover": "",
     "gallery": [],
