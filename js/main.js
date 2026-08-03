@@ -81,7 +81,7 @@ function escapeAttr(s) { return escapeHtml(s); }
 
     grid.innerHTML = list.map(function (p) {
       var label = p.category === "app" ? "App" : "Website";
-      var csHref = "case-study.html?id=" + encodeURIComponent(p.id) + previewQS;
+      var csHref = p.customUrl || ("case-study.html?id=" + encodeURIComponent(p.id) + previewQS);
       var kicker = [label, p.year].filter(Boolean).join(" · ");
       return '' +
         '<article class="pcard item-reveal" tabindex="0" data-href="' + escapeAttr(csHref) + '">' +

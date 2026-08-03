@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>EventsZAR | Pulkit Awasthi</title>
+<meta name="description" content="EventsZAR case study by Pulkit Awasthi. A community events platform designed across mobile app, web app and admin panel." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fragment+Mono&display=swap" rel="stylesheet" />
+<link rel="icon" type="image/svg+xml" href="images/favicon.svg" />
+<link rel="stylesheet" href="css/styles.css" />
+<style>
+:root{
+  --bg:#FFFFFF; --bg-soft:#F2F2F0; --text:#0F0F0F; --muted:#6E6E6E; --faint:#B9B9B4;
+  --border:#E4E4E0; --radius:20px; --radius-sm:12px; --maxw:1120px;
+  --shadow:0 1px 2px rgba(0,0,0,.04), 0 12px 30px rgba(0,0,0,.06);
+  --font:"Plus Jakarta Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --mono:"Fragment Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  --plum:#3F0D36; --plum-2:#5A1450; --orange:#F7941D;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+.container{width:100%;max-width:var(--maxw);margin:0 auto;padding:0 24px}
+h1,h2,h3,h4{line-height:1.1;letter-spacing:-.025em;font-weight:700}
+.eyebrow{font-family:var(--mono);font-size:12px;font-weight:400;letter-spacing:.3em;text-transform:uppercase;color:var(--muted)}
+
+/* ---------- HERO BANNER: full width, light, premium ---------- */
+.hero-band{position:relative;overflow:hidden;border-bottom:1px solid var(--border);
+  background:
+    radial-gradient(900px 520px at 78% 18%, rgba(63,13,54,.075), transparent 62%),
+    radial-gradient(700px 460px at 62% 92%, rgba(247,148,29,.10), transparent 60%),
+    linear-gradient(180deg,#FBFBFC 0%,#F1F2F4 100%)}
+.hero-band::before{content:"";position:absolute;inset:0;pointer-events:none;
+  background-image:radial-gradient(rgba(15,15,15,.055) 1px, transparent 1px);
+  background-size:26px 26px;
+  -webkit-mask-image:radial-gradient(720px 480px at 72% 45%, #000 30%, transparent 75%);
+  mask-image:radial-gradient(720px 480px at 72% 45%, #000 30%, transparent 75%)}
+.hero-grid{position:relative;max-width:1440px;margin:0 auto;display:grid;grid-template-columns:1fr 1.15fr;gap:clamp(28px,4vw,64px);align-items:center;padding:clamp(52px,6vw,104px) clamp(24px,4vw,72px)}
+.banner-copy .bk{display:inline-flex;align-items:center;gap:12px;font-family:var(--mono);font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--muted)}
+.banner-copy .bk::before{content:"";width:34px;height:1px;background:var(--orange)}
+.banner-copy h1{font-size:clamp(48px,5.8vw,84px);margin:20px 0 18px;color:var(--text);letter-spacing:-.035em}
+.banner-copy h1 span{background:linear-gradient(115deg,var(--orange) 20%,#E2601B 58%,var(--plum) 130%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.banner-copy .tagline{font-size:clamp(16px,1.6vw,19px);color:var(--muted);max-width:480px;margin-bottom:32px}
+.bchips{display:flex;gap:9px;flex-wrap:wrap}
+.bchips span{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;padding:8px 16px;border:1px solid rgba(15,15,15,.08);border-radius:100px;color:var(--text);background:rgba(255,255,255,.85);box-shadow:0 1px 2px rgba(0,0,0,.04), 0 8px 22px rgba(20,16,28,.05)}
+.bchips span::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--orange);margin-right:8px;vertical-align:1px}
+/* device stage: podium ring + glows behind the cutout */
+.hero-shot{position:relative}
+.hero-shot .ring{position:absolute;left:50%;top:54%;transform:translate(-50%,-50%);width:118%;aspect-ratio:1;border-radius:50%;border:1.5px solid rgba(63,13,54,.10);pointer-events:none}
+.hero-shot .ring::before{content:"";position:absolute;inset:7%;border-radius:50%;border:1px solid rgba(63,13,54,.07)}
+.hero-shot .ring::after{content:"";position:absolute;inset:16%;border-radius:50%;background:radial-gradient(closest-side,rgba(255,255,255,.9),rgba(255,255,255,0) 72%)}
+.hero-shot .orb{position:absolute;width:14px;height:14px;border-radius:50%;background:var(--orange);top:12%;right:8%;box-shadow:0 6px 14px rgba(247,148,29,.45)}
+.hero-shot .orb.o2{width:9px;height:9px;background:var(--plum);top:auto;bottom:16%;right:auto;left:4%;box-shadow:0 6px 14px rgba(63,13,54,.35)}
+.hero-shot img{position:relative;width:100%;animation:heroFloat 7s ease-in-out infinite;
+  filter:drop-shadow(0 12px 14px rgba(28,10,25,.10)) drop-shadow(0 42px 55px rgba(63,13,54,.20)) drop-shadow(0 90px 110px rgba(63,13,54,.10))}
+@keyframes heroFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+@media(prefers-reduced-motion:reduce){.hero-shot img{animation:none}}
+@media(max-width:900px){.hero-grid{grid-template-columns:1fr}.hero-shot .ring{width:96%}}
+
+/* meta strip */
+.meta{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:18px;margin:34px 0 0;padding:32px 0;border-bottom:1px solid var(--border)}
+.meta .k{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+.meta .v{font-weight:600;font-size:15px}
+
+/* right progress rail: dots fill as you go, label shows for active section */
+#rail{position:fixed;right:28px;top:50%;transform:translateY(-50%);z-index:60;display:none}
+@media(min-width:1360px){#rail{display:block}}
+#rail a{display:flex;flex-direction:row-reverse;align-items:center;gap:12px;padding:6px 0;font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--text);transition:.2s}
+#rail a .rd{width:9px;height:9px;border-radius:50%;border:1.5px solid #C6C6C1;background:transparent;flex:none;transition:.25s}
+#rail a .rl{opacity:0;transform:translateX(6px);transition:.25s;pointer-events:none}
+#rail a:hover .rl{opacity:.6;transform:none}
+#rail a.done .rd{background:var(--orange);border-color:var(--orange)}
+#rail a.active .rd{background:var(--orange);border-color:var(--orange);transform:scale(1.35);box-shadow:0 0 0 4px rgba(247,148,29,.18)}
+#rail a.active .rl{opacity:1;transform:none}
+
+/* ---------- generic ---------- */
+section.cs{padding:110px 0 6px}
+.cs-block{max-width:780px}
+.cs-block h2{font-size:clamp(26px,3.4vw,36px);margin-bottom:20px}
+.cs-block h2 .g{color:var(--faint)}
+.cs-block p{color:var(--muted);font-size:16.5px;margin-bottom:16px}
+.cs-block p b, .cs-block li b{color:var(--text)}
+.split{display:grid;grid-template-columns:240px 1fr;gap:56px;align-items:start}
+.split .sticky-k{position:sticky;top:60px}
+@media(max-width:860px){.split{grid-template-columns:1fr}.split .sticky-k{position:static}}
+
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin:38px 0 6px}
+.stat{border:1px solid var(--border);border-radius:var(--radius-sm);padding:20px 18px}
+.stat .n{font-size:30px;font-weight:800;letter-spacing:-.03em}
+.stat .l{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-top:6px}
+
+/* demand -> did rows */
+.dd{margin-top:36px;border-top:1px solid var(--border)}
+.dd-row{display:grid;grid-template-columns:1fr 1fr;gap:30px;padding:30px 0;border-bottom:1px solid var(--border)}
+@media(max-width:760px){.dd-row{grid-template-columns:1fr;gap:8px}}
+.dd-row .dk{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;margin-bottom:6px}
+.dd-row .demand .dk{color:var(--plum)}
+.dd-row .did .dk{color:#B36200}
+.dd-row h4{font-size:17px;margin-bottom:4px}
+.dd-row p{font-size:14.5px;color:var(--muted)}
+
+/* research pattern cards */
+.pats{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;margin-top:36px}
+.pat{border:1px solid var(--border);border-radius:var(--radius);padding:22px;box-shadow:var(--shadow)}
+.pat .pk{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+.pat h4{font-size:17px;margin:8px 0 6px}
+.pat p{font-size:14px;color:var(--muted)}
+.pat .arrow{color:var(--orange);font-weight:700}
+
+/* insight strip */
+.insight{margin-top:28px;border-radius:var(--radius);background:var(--bg-soft);padding:26px 30px;display:flex;gap:18px;align-items:flex-start}
+.insight .iq{font-size:34px;line-height:1;color:var(--orange);font-weight:800}
+.insight p{font-size:17px;color:var(--text);font-weight:600;max-width:640px}
+.insight span{display:block;font-size:13.5px;color:var(--muted);font-weight:400;margin-top:6px}
+
+/* scenario boxes, connected in a row */
+.scen{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:36px}
+@media(max-width:860px){.scen{grid-template-columns:1fr}}
+.sc{border:1px solid var(--border);border-radius:12px;padding:24px;background:var(--bg);position:relative}
+.sc .sn{width:26px;height:26px;border-radius:50%;background:var(--orange);color:#241102;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:11px;margin-bottom:12px}
+.sc::before{content:"";position:absolute;left:-23px;width:23px;top:36px;border-top:2px dashed rgba(247,148,29,.55)}
+.sc::after{content:"";position:absolute;left:-14px;top:32.5px;width:7px;height:7px;border-top:2px solid rgba(247,148,29,.85);border-right:2px solid rgba(247,148,29,.85);transform:rotate(45deg)}
+.sc:first-child::before,.sc:first-child::after{display:none}
+@media(max-width:860px){.sc::before,.sc::after{display:none}}
+.sc .sk{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:#B36200}
+.sc h4{font-size:17.5px;margin:8px 0 7px}
+.sc p{font-size:14px;color:var(--muted)}
+.sc .needs{margin-top:14px;padding-top:14px;border-top:1px solid var(--border);font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--muted);line-height:1.9}
+
+/* feeds */
+.feeds{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-top:36px}
+.feed{border-radius:var(--radius);padding:24px;border:1px solid var(--border)}
+.feed.f-public{background:var(--plum);color:#fff;border-color:var(--plum)}
+.feed.f-public p{color:rgba(255,255,255,.72)}
+.feed.f-business{background:var(--orange);color:#241102;border-color:var(--orange)}
+.feed.f-business p{color:rgba(36,17,2,.75)}
+.feed .fk{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;opacity:.7}
+.feed h3{font-size:19px;margin:9px 0 7px}
+.feed p{font-size:14.5px;color:var(--muted)}
+
+/* user journeys */
+.jgroup{margin-top:44px}
+.jgroup .jtag{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;padding:7px 15px;border-radius:100px;margin-bottom:16px}
+.jour-normal .jtag{background:#F7EDF5;color:var(--plum)}
+.jour-business .jtag{background:#FFF3E2;color:#9A5B00}
+.jflow{display:grid;grid-template-columns:repeat(6,1fr);gap:20px}
+.jstep{border:1px solid var(--border);border-radius:12px;padding:18px 16px;background:var(--bg);position:relative}
+/* connector: lives only in the gap between boxes, never crosses them */
+.jstep::before{content:"";position:absolute;left:-21px;width:21px;top:30px;border-top:2px dashed rgba(63,13,54,.30)}
+.jour-business .jstep::before{border-top-color:rgba(247,148,29,.55)}
+.jstep::after{content:"";position:absolute;left:-13px;top:26.5px;width:7px;height:7px;border-top:2px solid rgba(63,13,54,.40);border-right:2px solid rgba(63,13,54,.40);transform:rotate(45deg)}
+.jour-business .jstep::after{border-color:rgba(247,148,29,.85)}
+.jstep:first-child::before,.jstep:first-child::after{display:none}
+@media(max-width:980px){
+  .jflow{grid-template-columns:repeat(3,1fr)}
+  .jstep:nth-child(3n+1)::before,.jstep:nth-child(3n+1)::after{display:none}
+}
+@media(max-width:560px){
+  .jflow{grid-template-columns:1fr 1fr}
+  .jstep::before,.jstep::after{display:none}
+  .jstep:nth-child(2n)::before,.jstep:nth-child(2n)::after{display:block}
+}
+.jstep .jn{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:11px;margin-bottom:12px}
+.jour-normal .jn{background:var(--plum);color:#fff}
+.jour-business .jn{background:var(--orange);color:#241102}
+.jstep h4{font-size:14.5px;margin-bottom:5px}
+.jstep p{font-size:12.5px;color:var(--muted);line-height:1.55}
+
+/* galleries */
+.gal-head{display:flex;align-items:baseline;justify-content:space-between;gap:20px;margin:64px 0 6px;flex-wrap:wrap}
+.gal-head h3{font-size:21px}
+.gal-head .gk{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.phones{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:22px;margin-top:24px}
+.phone{border:1px solid var(--border);border-radius:24px;overflow:hidden;background:var(--bg-soft);box-shadow:var(--shadow)}
+.phone img{width:100%}
+figcaption{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);padding:9px 4px 0;text-align:center}
+.desk{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:24px}
+.desk figure.wide{grid-column:1/-1}
+@media(max-width:760px){.desk{grid-template-columns:1fr}}
+.desk figcaption{font-family:var(--font);text-transform:none;letter-spacing:0;font-size:13.5px;text-align:left;padding:12px 6px 0;color:var(--muted);line-height:1.55}
+.desk figcaption b{color:var(--text);font-weight:600}
+.browser{border:1px solid var(--border);border-radius:14px;overflow:hidden;background:var(--bg-soft);box-shadow:var(--shadow)}
+.browser .bar{display:flex;gap:6px;padding:10px 12px;background:#ECECEA;border-bottom:1px solid var(--border)}
+.browser .bar i{width:9px;height:9px;border-radius:50%;background:#D2D2CE;display:block}
+.browser img{width:100%}
+
+/* tokens */
+.tokens{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:12px;margin-top:24px}
+.tok{border:1px solid var(--border);border-radius:var(--radius-sm);overflow:hidden}
+.tok .sw{height:70px}
+.tok .tk{padding:12px 14px}
+.tok .tk b{display:block;font-size:13.5px}
+.tok .tk span{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.06em}
+
+/* learnings */
+.skillchips{display:flex;gap:8px;flex-wrap:wrap;margin-top:22px}
+.skillchips span{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;padding:8px 15px;border:1px solid var(--border);border-radius:100px;color:var(--muted)}
+
+/* note */
+.note{max-width:780px;margin:60px auto 0;border:1.5px dashed var(--orange);border-radius:var(--radius-sm);padding:18px 22px;background:#FFF8EF}
+.note .nk{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#B36200;margin-bottom:8px}
+.note p{font-size:14px;color:#6b4a1d;margin-bottom:6px}
+
+/* thanks */
+.thanks{margin:70px 0 64px}
+.thanks .band{border-radius:var(--radius);background:linear-gradient(135deg,var(--plum) 0%,var(--plum-2) 62%,#7A1B62 100%);color:#fff;padding:clamp(48px,7vw,90px) clamp(24px,6vw,80px);text-align:center;position:relative;overflow:hidden}
+.thanks .band .glow{position:absolute;width:560px;height:560px;border-radius:50%;background:radial-gradient(closest-side,rgba(247,148,29,.25),transparent);bottom:-260px;left:-160px;pointer-events:none}
+.thanks .tk-eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.65)}
+.thanks h2{font-size:clamp(40px,6vw,72px);margin:16px 0 14px}
+.thanks h2 span{color:var(--orange)}
+.thanks p{color:rgba(255,255,255,.75);max-width:560px;margin:0 auto 30px;font-size:16.5px}
+.thanks .cta-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.thanks .btn{display:inline-flex;align-items:center;gap:8px;padding:14px 30px;border-radius:100px;font-weight:600;font-size:15px;background:#fff;color:var(--plum);transition:.25s;border:1px solid transparent}
+.thanks .btn:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(0,0,0,.3)}
+.thanks .btn.ghost{background:transparent;color:#fff;border-color:rgba(255,255,255,.45)}
+.thanks .btn.ghost:hover{border-color:#fff;box-shadow:none}
+
+</style>
+</head>
+<body>
+
+  <header class="nav">
+    <div class="container nav-inner">
+      <a class="logo" href="index.html">PULKIT<span>.</span></a>
+      <button class="nav-toggle" aria-label="Menu">&#9776;</button>
+      <nav class="nav-links">
+        <a href="work.html" class="active">Work</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+        <a class="btn btn-primary" href="Pulkit_Awasthi_CV.pdf" download>Download CV</a>
+      </nav>
+    </div>
+  </header>
+
+<!-- left section rail -->
+<nav id="rail" aria-label="Sections">
+  <a href="#top"><span class="rd"></span><span class="rl">Intro</span></a>
+  <a href="#about"><span class="rd"></span><span class="rl">About</span></a>
+  <a href="#demands"><span class="rd"></span><span class="rl">The ask</span></a>
+  <a href="#research"><span class="rd"></span><span class="rl">Research</span></a>
+  <a href="#business"><span class="rd"></span><span class="rl">Business users</span></a>
+  <a href="#iteration"><span class="rd"></span><span class="rl">Iteration</span></a>
+  <a href="#concept"><span class="rd"></span><span class="rl">Concept</span></a>
+  <a href="#journeys"><span class="rd"></span><span class="rl">Journeys</span></a>
+  <a href="#mobile"><span class="rd"></span><span class="rl">Mobile app</span></a>
+  <a href="#web"><span class="rd"></span><span class="rl">Web app</span></a>
+  <a href="#admin"><span class="rd"></span><span class="rl">Admin</span></a>
+  <a href="#portal"><span class="rd"></span><span class="rl">Business portal</span></a>
+  <a href="#system"><span class="rd"></span><span class="rl">System</span></a>
+  <a href="#learnings"><span class="rd"></span><span class="rl">Learnings</span></a>
+  <a href="#thanks"><span class="rd"></span><span class="rl">Thanks</span></a>
+</nav>
+
+<!-- HERO BANNER -->
+<section class="hero-band" id="top">
+  <div class="hero-grid">
+    <div class="banner-copy">
+      <div class="bk">UX/UI case study</div>
+      <h1>Events<span>ZAR</span></h1>
+      <p class="tagline">One app for everything an event needs. Discover it, join it, buy the ticket, grab the merchandise. And for businesses, host it, promote it and earn from it.</p>
+      <div class="bchips"><span>Mobile app</span><span>Web app</span><span>Admin panel</span><span>Business portal</span></div>
+    </div>
+    <div class="hero-shot">
+      <div class="ring"></div>
+      <span class="orb"></span><span class="orb o2"></span>
+      <img src="images/eventzar/hero-cutout-clean.webp" alt="EventsZAR on a laptop and a phone" />
+    </div>
+  </div>
+</section>
+<section class="hero" style="padding:0"><div class="container">
+  <div class="meta">
+    <div><div class="k">Role</div><div class="v">UX/UI Designer</div></div>
+    <div><div class="k">Platforms</div><div class="v">Mobile app, Web app, Admin panel, Business portal</div></div>
+    <div><div class="k">Scope</div><div class="v">400+ screens, 45 flows</div></div>
+    <div><div class="k">Duration</div><div class="v">1 month</div></div>
+    <div><div class="k">Tools</div><div class="v">Figma</div></div>
+  </div>
+</div></section>
+
+<!-- GLANCE: second fold showcase -->
+<section class="cs" id="glance" style="padding-top:64px"><div class="container">
+  <div class="cs-block" style="max-width:780px">
+    <div class="eyebrow" style="margin-bottom:14px">The product at a glance</div>
+    <h2>Three feeds. One bottom bar. <span class="g">Everything an event needs.</span></h2>
+    <p>Private for your own circle, Public for discovery, Business for brands. Tickets, shop and cart live one tap away. These six screens are the spine of the whole product.</p>
+  </div>
+  <div class="phones strip" style="grid-template-columns:repeat(auto-fit,minmax(158px,1fr))">
+    <figure><div class="phone"><img src="images/eventzar/c-private-feed.webp" alt="Private feed" loading="lazy"></div><figcaption>Private feed</figcaption></figure>
+    <figure><div class="phone"><img src="images/eventzar/c-public-feed.webp" alt="Public feed" loading="lazy"></div><figcaption>Public feed</figcaption></figure>
+    <figure><div class="phone"><img src="images/eventzar/c-business-feed.webp" alt="Business feed" loading="lazy"></div><figcaption>Business feed</figcaption></figure>
+    <figure><div class="phone"><img src="images/eventzar/c-tickets.webp" alt="Tickets home" loading="lazy"></div><figcaption>Tickets</figcaption></figure>
+    <figure><div class="phone"><img src="images/eventzar/c-merch.webp" alt="Merchandise home" loading="lazy"></div><figcaption>Merchandise</figcaption></figure>
+    <figure><div class="phone"><img src="images/eventzar/c-cart.webp" alt="Cart" loading="lazy"></div><figcaption>Cart</figcaption></figure>
+  </div>
+</div></section>
+
+<!-- ABOUT -->
+<section class="cs" id="about"><div class="container"><div class="split">
+  <div class="sticky-k"><div class="eyebrow">01 &middot; About</div></div>
+  <div class="cs-block">
+    <h2>What is EventsZAR?</h2>
+    <p>Think about everything that surrounds one event. Finding out it exists. Deciding to go. Buying the ticket. Talking about it with friends. Buying the team jersey. And on the other side, someone organising all of it and hoping to make money from it.</p>
+    <p>Today each of those jobs lives in a different app. EventsZAR puts them in one place: a <b>social feed</b> to discover events, <b>event timelines</b> to talk about them, <b>ticketing</b> with QR entry, a <b>merchandise store</b>, <b>chat</b>, <b>polls</b>, and for businesses a complete toolkit to host events, run advertisements and sell.</p>
+    <p>I designed the entire product across four platforms: the mobile app, the web app, the admin panel that runs the platform and the business management portal that runs its commerce.</p>
+    <div class="stats">
+      <div class="stat"><div class="n">4</div><div class="l">Platforms</div></div>
+      <div class="stat"><div class="n">400+</div><div class="l">Screens</div></div>
+      <div class="stat"><div class="n">45</div><div class="l">User flows</div></div>
+      <div class="stat"><div class="n">2</div><div class="l">Audiences served</div></div>
+    </div>
+  </div>
+</div></div></section>
+
+<!-- WHAT THE PROJECT DEMANDED -->
+<section class="cs" id="demands"><div class="container"><div class="split">
+  <div class="sticky-k"><div class="eyebrow">02 &middot; The ask</div></div>
+  <div class="cs-block" style="max-width:100%">
+    <h2>What the project demanded, <span class="g">and what I did about it</span></h2>
+    <p style="max-width:780px">This was not a one feature app. It asked for a social network, an e-commerce store, a ticketing system and an advertising platform living together without confusing anyone. Here is how each demand translated into design work.</p>
+    <div class="dd">
+      <div class="dd-row">
+        <div class="demand"><div class="dk">The project demanded</div><h4>Serve two very different users in one app</h4><p>A person attending an event and a business hosting it need completely different things from the same screens.</p></div>
+        <div class="did"><div class="dk">What I did</div><p>Studied both audiences separately, wrote down what each needs from every feature, and drew a clear permission line between normal users and business users that runs through all four platforms.</p></div>
+      </div>
+      <div class="dd-row">
+        <div class="demand"><div class="dk">The project demanded</div><h4>Complex features that feel instantly familiar</h4><p>Feeds, checkout, ticket booking, ad campaigns. Each is a whole product category of its own.</p></div>
+        <div class="did"><div class="dk">What I did</div><p>Researched how users already behave on social media, e-commerce and ticket booking apps, and reused the patterns they already know instead of inventing new ones.</p></div>
+      </div>
+      <div class="dd-row">
+        <div class="demand"><div class="dk">The project demanded</div><h4>Monetisation that does not feel like spam</h4><p>The business runs on subscriptions, advertisements, ticket and merchandise sales. Users hate feeling sold to.</p></div>
+        <div class="did"><div class="dk">What I did</div><p>Designed ads as native, clearly marked feed cards, gave businesses their own explore tab instead of forcing them into personal space, and put commerce one tap away rather than in the way.</p></div>
+      </div>
+      <div class="dd-row">
+        <div class="demand"><div class="dk">The project demanded</div><h4>Operations at platform scale</h4><p>Someone has to moderate posts, verify businesses, settle transactions and manage regions.</p></div>
+        <div class="did"><div class="dk">What I did</div><p>Designed a 20 module admin console on one repeating pattern of KPI cards, filterable tables and preview drawers, with role based access for large teams.</p></div>
+      </div>
+    </div>
+  </div>
+</div></div></section>
+
+<!-- RESEARCH -->
+<section class="cs" id="research"><div class="container"><div class="split">
+  <div class="sticky-k"><div class="eyebrow">03 &middot; Research</div></div>
+  <div class="cs-block" style="max-width:100%">
+    <h2>Meet users where they already are</h2>
+    <p style="max-width:780px">Before drawing a single screen, I spent time understanding how people actually behave inside the three app categories EventsZAR combines. How they scroll a feed, how they trust a checkout, how they hold a ticket at a venue gate. The goal was simple: a first time user should never feel like they are learning a new app.</p>
+    <div class="pats">
+      <div class="pat"><div class="pk">From social media</div><h4>Feed, likes, comments, timelines</h4><p>People scroll, react and share without thinking. <span class="arrow">&rarr;</span> The home feed, event timelines and post interactions follow the exact grammar of social apps, so joining an event conversation feels like second nature.</p></div>
+      <div class="pat"><div class="pk">From e-commerce</div><h4>Cart, wishlist, tracking, returns</h4><p>Buyers trust a checkout that behaves like the stores they know. <span class="arrow">&rarr;</span> The merchandise store keeps the familiar cart, coupons, order tracking, returns and refunds journey, nothing clever, nothing surprising.</p></div>
+      <div class="pat"><div class="pk">From ticket booking</div><h4>Categories, seats, QR entry</h4><p>Ticket buyers fear two things: wrong ticket and gate trouble. <span class="arrow">&rarr;</span> Clear ticket types, availability states, a wallet of booked tickets in the bottom navigation and QR scanning at entry.</p></div>
+    </div>
+    <div class="insight"><div class="iq">&ldquo;</div><p>Borrowed familiarity is a feature.
+      <span>When one product combines three app categories, the kindest thing a designer can do is let each part behave the way users already expect it to.</span></p></div>
+  </div>
+</div></div></section>
+
+<!-- BUSINESS USERS -->
+<section class="cs" id="business"><div class="container"><div class="split">
+  <div class="sticky-k"><div class="eyebrow">04 &middot; Business users</div></div>
+  <div class="cs-block" style="max-width:100%">
+    <h2>Understanding the people who pay</h2>
+    <p style="max-width:780px">Business users fund the platform, so I could not design for them from guesswork. I worked through their world scenario by scenario: who they are, what a good week looks like for them, and what they would need from the app at each step. Each scenario was walked through the product end to end, and the flows were reworked over multiple attempts until they held up.</p>
+    <div class="scen">
+      <div class="sc"><div class="sn">1</div><div class="sk">Scenario</div><h4>The event organiser</h4><p>Runs a public tournament. Needs to create the event, sell tiered tickets, keep the event timeline alive and scan tickets at the gate.</p><div class="needs">Create event &middot; Ticket types &middot; Timeline &middot; QR scanning</div></div>
+      <div class="sc"><div class="sn">2</div><div class="sk">Scenario</div><h4>The brand</h4><p>Sells merchandise around events and wants reach. Needs a storefront, event exclusive products and ads targeted by area, radius or a specific event.</p><div class="needs">Storefront &middot; Exclusive merchandise &middot; Ad builder &middot; Targeting</div></div>
+      <div class="sc"><div class="sn">3</div><div class="sk">Scenario</div><h4>The community business</h4><p>Hosts private events for members. Posts privately by adding selected members, or by creating member categories and posting to a category. Runs polls and surveys to hear from the audience.</p><div class="needs">Private posts &middot; Member categories &middot; Polls and surveys</div></div>
+    </div>
+    <p style="max-width:780px;margin-top:26px">These scenarios shaped real decisions. The <b>advertisement builder</b> became a guided step by step flow with creative sizes, live previews and three targeting modes, because an organiser is not a media buyer. The <b>business profile</b> became a storefront with followers and a portfolio, because reach matters to them as much as sales. And the whole toolkit sits behind <b>tiered subscriptions</b>, so casual users are never charged for tools they do not need.</p>
+  </div>
+</div></div></section>
+
+<!-- ITERATION -->
+<section class="cs" id="iteration"><div class="container"><div class="split">
+  <div class="sticky-k"><div class="eyebrow">05 &middot; Iteration</div></div>
+  <div class="cs-block">
+    <h2>Explored, questioned, redrawn</h2>
+    <p>None of the key screens survived in their first form. For every important surface I explored more than one direction, questioned what a first time user would actually notice, and redrew until the screen read effortlessly.</p>
+    <p><b>The home feed is the clearest example.</b> The design file still carries both the original and the updated feed side by side. The rework tightened the visual hierarchy, made event cards scannable at a glance, and kept the create action reachable with a thumb.</p>
+    <p><b>The commerce flows went through the same treatment.</b> Ticket purchase and QR scanning exist in multiple refined variants, and the merchandise and cart screens were simplified until price, quantity and the next step are the only things asking for attention.</p>
+    <p>The goal of every pass was the same: a product this large has no room for screens that need explaining. Visual polish and ease of use were treated as one job, not two.</p>
+  </div>
+</div></div></section>
+
+<!-- CONCEPT -->
+<section class="cs" id="concept"><div class="container"><div class="split">
+  <div class="sticky-k"><div class="eyebrow">06 &middot; Core concept</div></div>
+  <div class="cs-block" style="max-width:100%">
+    <h2>Three feeds, one clear mental model</h2>
+    <p style="max-width:780px">All of that research landed in one structural decision: a single home with three switchable feeds. It separates personal life, public discovery and commerce without hiding any of them. Booked tickets, shop and cart stay one tap away in the bottom navigation.</p>
+    <div class="feeds">
+      <div class="feed"><div class="fk">Feed 01</div><h3>Private</h3><p>A personal space for posts and events shared with your own circle, organised into member categories like Family or Goa Trip. Business users use the same mechanic to post privately to selected members or a whole category.</p></div>
+      <div class="feed f-public"><div class="fk">Feed 02</div><h3>Public</h3><p>The discovery feed. Community events and posts with category filters. Business advertisements appear here as native, clearly marked cards.</p></div>
+      <div class="feed f-business"><div class="fk">Feed 03</div><h3>Business</h3><p>An explore tab dedicated to businesses. Browse brands, follow their profiles and see their events, offers and merchandise.</p></div>
+    </div>
+  </div>
+</div></div></section>
+
+<!-- USER JOURNEYS -->
+<section class="cs" id="journeys"><div class="container"><div class="split">
+  <div class="sticky-k"><div class="eyebrow">07 &middot; User journeys</div></div>
+  <div class="cs-block" style="max-width:100%">
+    <h2>Two journeys, <span class="g">mapped before any UI</span></h2>
+    <p style="max-width:780px">Before judging any screen, it helps to see the paths they serve. Both journeys were mapped end to end first, so every screen that follows had a defined job in a bigger story.</p>
+
+    <div class="jgroup jour-normal">
+      <span class="jtag">Normal user &middot; Attend, connect, shop</span>
+      <div class="jflow">
+        <div class="jstep"><div class="jn">1</div><h4>Discover</h4><p>Lands on the public feed, browses events as a guest with category filters.</p></div>
+        <div class="jstep"><div class="jn">2</div><h4>Sign up</h4><p>Creates a profile when ready. Gentle gates invite, they never block browsing.</p></div>
+        <div class="jstep"><div class="jn">3</div><h4>Join</h4><p>Joins an event and its timeline. Posts, comments and follows updates.</p></div>
+        <div class="jstep"><div class="jn">4</div><h4>Book</h4><p>Buys the ticket, physical or virtual. It waits in the bottom bar wallet.</p></div>
+        <div class="jstep"><div class="jn">5</div><h4>Attend</h4><p>Enters with a QR scan and posts photos to the live event timeline.</p></div>
+        <div class="jstep"><div class="jn">6</div><h4>Shop and stay</h4><p>Buys event merchandise, chats, answers polls, comes back for the next one.</p></div>
+      </div>
+    </div>
+
+    <div class="jgroup jour-business">
+      <span class="jtag">Business user &middot; Host, promote, earn</span>
+      <div class="jflow">
+        <div class="jstep"><div class="jn">1</div><h4>Set up</h4><p>Creates a business profile. A storefront with portfolio and social links.</p></div>
+        <div class="jstep"><div class="jn">2</div><h4>Subscribe</h4><p>Picks a plan that unlocks the business toolkit.</p></div>
+        <div class="jstep"><div class="jn">3</div><h4>Host</h4><p>Creates a public or private event with tickets and merchandise linked to it.</p></div>
+        <div class="jstep"><div class="jn">4</div><h4>Promote</h4><p>Builds an ad, targets by area, radius or event. It runs natively in the public feed.</p></div>
+        <div class="jstep"><div class="jn">5</div><h4>Engage</h4><p>Keeps the timeline alive, posts privately to member categories, runs polls.</p></div>
+        <div class="jstep"><div class="jn">6</div><h4>Earn and track</h4><p>Sales, orders and ad analytics tracked in the business portal.</p></div>
+      </div>
+    </div>
+  </div>
+</div></div></section>
+
+<!-- MOBILE APP -->
+<section class="cs" id="mobile"><div class="container">
+  <div class="split">
+    <div class="sticky-k"><div class="eyebrow">08 &middot; Mobile app</div></div>
+    <div class="cs-block">
+      <h2>The everyday companion</h2>
+      <p>The mobile app carries the full journey: onboarding, the three feeds, event timelines, tickets, the store, chat and the business toolkit. A guest mode lets people browse before signing up, with gentle gates nudging them to create an account.</p>
+    </div>
+  </div>
+
+  <div class="gal-head"><h3>Discover and join</h3><div class="gk">Normal user</div></div>
+  <div class="phones">
+    <figure><div class="phone"><img src="images/eventzar/m-onboarding.webp" alt="Onboarding" loading="lazy"></div><figcaption>Onboarding</figcaption></figure>
+    <figure><div class="phone"><img src="images/eventzar/m-login.webp" alt="Login" loading="lazy"></div><figcaption>Login</figcaption></figure>
+    <figure><div class="phone"><img src="images/eventzar/m-home-feed.webp" alt="Public feed" loading="lazy"></div><figcaption>Public feed, guest mode</figcaption></figure>
+    <figure><div class="phone"><img src="images/eventzar/m-event-timeline.webp" alt="Event timeline" loading="lazy"></div><figcaption>Event timeline</figcaption></figure>
+  </div>
+
+  <div class="gal-head"><h3>Buying and beyond</h3><div class="gk">Normal user</div></div>
+  <div class="phones">
+    <figure><div class="phone"><img src="images/eventzar/m-ticket-buy.webp" alt="Buy ticket" loading="lazy"></div><figcaption>Ticket purchase</figcaption></figure>
+    <figure><div class="phone"><img src="images/eventzar/m-payment-success.webp" alt="Payment success" loading="lazy"></div><figcaption>Payment success</figcaption></figure>
+    <figure><div class="phone"><img src="images/eventzar/m-chat.webp" alt="Chat" loading="lazy"></div><figcaption>Chat</figcaption></figure>
+    <figure><div class="phone"><img src="images/eventzar/m-poll-feed.webp" alt="Polls on feed" loading="lazy"></div><figcaption>Polls and surveys</figcaption></figure>
+  </div>
+
+  <div class="gal-head"><h3>The business toolkit</h3><div class="gk">Business user</div></div>
+  <div class="phones">
+    <figure><div class="phone"><img src="images/eventzar/m-business-setup.webp" alt="Business profile setup" loading="lazy"></div><figcaption>Business profile setup</figcaption></figure>
+    <figure><div class="phone"><img src="images/eventzar/m-business-profile.webp" alt="Business storefront" loading="lazy"></div><figcaption>Business storefront</figcaption></figure>
+    <figure><div class="phone"><img src="images/eventzar/m-create-ad.webp" alt="Create advertisement" loading="lazy"></div><figcaption>Advertisement builder</figcaption></figure>
+    <figure><div class="phone"><img src="images/eventzar/m-subscription.webp" alt="Subscription plans" loading="lazy"></div><figcaption>Subscription plans</figcaption></figure>
+  </div>
+</div></section>
+
+<!-- WEB APP -->
+<section class="cs" id="web"><div class="container">
+  <div class="split">
+    <div class="sticky-k"><div class="eyebrow">09 &middot; Web app</div></div>
+    <div class="cs-block">
+      <h2>The same product on a big screen</h2>
+      <p>The web app repeats the mobile mental model: the same three feeds, the same Home, Tickets, Shop and Cart navigation rearranged for desktop. Event timelines open as a side drawer so browsing never loses its place. Nothing to relearn when a user switches devices.</p>
+    </div>
+  </div>
+  <div class="desk">
+    <figure class="wide"><div class="browser"><div class="bar"><i></i><i></i><i></i></div><img src="images/eventzar/w-event-timeline.webp" alt="Web feed with event timeline drawer" loading="lazy"></div><figcaption>Public feed with the event timeline drawer</figcaption></figure>
+    <figure><div class="browser"><div class="bar"><i></i><i></i><i></i></div><img src="images/eventzar/w-tickets.webp" alt="Web tickets" loading="lazy"></div><figcaption>Tickets</figcaption></figure>
+    <figure><div class="browser"><div class="bar"><i></i><i></i><i></i></div><img src="images/eventzar/w-merch.webp" alt="Web merchandise" loading="lazy"></div><figcaption>Merchandise</figcaption></figure>
+  </div>
+</div></section>
+
+<!-- ADMIN -->
+<section class="cs" id="admin"><div class="container">
+  <div class="split">
+    <div class="sticky-k"><div class="eyebrow">10 &middot; Admin panel</div></div>
+    <div class="cs-block">
+      <h2>Designed to be run, <span class="g">not just used</span></h2>
+      <p>A product this size is not finished when users are happy. Someone has to moderate posts, verify businesses, settle money and keep the doors open in every region. So I designed the operations side with the same care as the consumer side: a 20 module console where the platform team can see everything, act on anything and trust the numbers.</p>
+      <p>Every module repeats one pattern: KPI cards on top, a filterable table below, exports and preview drawers on demand. Learn one module and you have learnt all twenty.</p>
+    </div>
+  </div>
+
+  <div class="gal-head"><h3>The whole platform on one screen</h3><div class="gk">Platform operations</div></div>
+  <div class="desk">
+    <figure class="wide"><div class="browser"><div class="bar"><i></i><i></i><i></i></div><img src="images/eventzar/a-events-mgmt.webp" alt="Admin events management" loading="lazy"></div><figcaption><b>Events management.</b> Every public and private event on the platform with live KPIs, weekly to yearly views, filters and one click exports.</figcaption></figure>
+    <figure><div class="browser"><div class="bar"><i></i><i></i><i></i></div><img src="images/eventzar/a-user-mgmt.webp" alt="User management" loading="lazy"></div><figcaption><b>User management.</b> Every account, its posts, events and reports, one click away from action.</figcaption></figure>
+    <figure><div class="browser"><div class="bar"><i></i><i></i><i></i></div><img src="images/eventzar/a-transactions.webp" alt="Transactions" loading="lazy"></div><figcaption><b>Transactions.</b> Tickets, merchandise, subscriptions and advertisements settled in one ledger, invoice by invoice.</figcaption></figure>
+  </div>
+
+  <div class="desk">
+    <figure><div class="browser"><div class="bar"><i></i><i></i><i></i></div><img src="images/eventzar/a-roles.webp" alt="Roles and permissions" loading="lazy"></div><figcaption><b>Roles and permissions.</b> Granular access per module, so a growing operations team never becomes a risk.</figcaption></figure>
+    <figure><div class="browser"><div class="bar"><i></i><i></i><i></i></div><img src="images/eventzar/a-subscription-mgmt.webp" alt="Subscription management" loading="lazy"></div><figcaption><b>Subscription management.</b> Plans and pricing edited by the team, no developer needed.</figcaption></figure>
+  </div>
+</div></section>
+
+<!-- BUSINESS PORTAL -->
+<section class="cs" id="portal"><div class="container">
+  <div class="split">
+    <div class="sticky-k"><div class="eyebrow">11 &middot; Business portal</div></div>
+    <div class="cs-block">
+      <h2>Where the business side <span class="g">does business</span></h2>
+      <p>The fourth platform is a dedicated business management portal, built for the commercial half of EventsZAR. Storefronts, ticket inventory, merchandise, advertisements and their analytics are managed here, business by business, away from day to day platform moderation.</p>
+      <p>Separating it from the admin panel was a deliberate call: the people who run money and the people who run moderation have different jobs, different risks and different daily screens. Each gets a home built for their work, on the same design system.</p>
+    </div>
+  </div>
+  <div class="desk">
+    <figure class="wide"><div class="browser"><div class="bar"><i></i><i></i><i></i></div><img src="images/eventzar/a-business-mgmt.webp" alt="Business management" loading="lazy"></div><figcaption><b>Businesses overview.</b> Every business on the platform with KYC status, subscription plan and activity at a glance.</figcaption></figure>
+    <figure><div class="browser"><div class="bar"><i></i><i></i><i></i></div><img src="images/eventzar/a-biz-tickets.webp" alt="Ticket management" loading="lazy"></div><figcaption><b>Ticket management.</b> Every ticket a business sells, tracked by event, type and buyer.</figcaption></figure>
+    <figure><div class="browser"><div class="bar"><i></i><i></i><i></i></div><img src="images/eventzar/a-biz-merch.webp" alt="Merchandise management" loading="lazy"></div><figcaption><b>Merchandise management.</b> Product listings, stock and orders per storefront.</figcaption></figure>
+    <figure class="wide"><div class="browser"><div class="bar"><i></i><i></i><i></i></div><img src="images/eventzar/a-ads-mgmt.webp" alt="Advertisement management" loading="lazy"></div><figcaption><b>Advertisement management.</b> Creatives, placements, budgets and analytics reviewed before anything reaches the public feed.</figcaption></figure>
+  </div>
+</div></section>
+
+<!-- DESIGN SYSTEM -->
+<section class="cs" id="system"><div class="container"><div class="split">
+  <div class="sticky-k"><div class="eyebrow">12 &middot; Design system</div></div>
+  <div class="cs-block" style="max-width:100%">
+    <h2>One system behind three products</h2>
+    <p style="max-width:780px">Everything runs on a shared design system: colour and effect tokens, typography, buttons, badges, dropdowns, loaders and table patterns as reusable component sets with variants. That is what makes 400+ screens across four platforms feel like one product, and what made developer handoff predictable.</p>
+    <div class="tokens">
+      <div class="tok"><div class="sw" style="background:#3F0D36"></div><div class="tk"><b>Plum</b><span>Primary brand</span></div></div>
+      <div class="tok"><div class="sw" style="background:#F7941D"></div><div class="tk"><b>Orange</b><span>Action and accent</span></div></div>
+      <div class="tok"><div class="sw" style="background:#263238"></div><div class="tk"><b>Ink</b><span>Headings and text</span></div></div>
+      <div class="tok"><div class="sw" style="background:#34A853"></div><div class="tk"><b>Green</b><span>Success states</span></div></div>
+      <div class="tok"><div class="sw" style="background:#EA4235"></div><div class="tk"><b>Red</b><span>Errors and alerts</span></div></div>
+      <div class="tok"><div class="sw" style="background:#FCFCFC;border-bottom:1px solid var(--border)"></div><div class="tk"><b>Surface</b><span>Cards and sheets</span></div></div>
+    </div>
+  </div>
+</div></div></section>
+
+<!-- LEARNINGS -->
+<section class="cs" id="learnings"><div class="container"><div class="split">
+  <div class="sticky-k"><div class="eyebrow">13 &middot; Learnings</div></div>
+  <div class="cs-block">
+    <h2>What this project proves about how I work</h2>
+    <p><b>I think in products, not screens.</b> Every layout here traces back to a question about people or money: who is this for, what do they already know, and how does the platform earn without annoying anyone.</p>
+    <p><b>I do the homework before the pixels.</b> Studying user behaviour across social, commerce and ticketing apps, and walking business scenarios end to end, is what kept a four-products-in-one app from becoming a maze.</p>
+    <p><b>I design for the whole lifecycle.</b> Not just the happy path: guest modes, empty states, errors, subscription limits, refunds, moderation and the admin tools that keep it all running.</p>
+    <p><b>I build systems, not one-offs.</b> One design system carried 400+ screens across four platforms and kept them consistent for developers.</p>
+    <div class="skillchips">
+      <span>Product thinking</span><span>User research</span><span>Information architecture</span>
+      <span>Interaction design</span><span>Design systems</span><span>Multi platform design</span>
+    </div>
+  </div>
+</div></div></section>
+
+  <p>1. Year and client or company name are still missing from the meta row. Tell me and I will add them.</p>
+  <p>2. Research and scenario sections are written from what you told me. If you did anything more specific (talked to real users or businesses, tested with anyone, referenced particular apps), give me one or two details and I will make those sections stronger and interview proof.</p>
+  <p>3. If you have outcome facts (delivered, developed, launched), the story can end even stronger.</p>
+</div>
+
+<!-- THANK YOU -->
+<section class="thanks" id="thanks"><div class="container">
+  <div class="band">
+    <div class="glow"></div>
+    <div class="tk-eyebrow">The end</div>
+    <h2>Thank <span>you</span> for viewing</h2>
+    <p>EventsZAR taught me how to design one product for two very different audiences at once. If you would like to talk about this project, or about work like it, I am happy to chat. The complete project with all 400+ screens is open to explore in Figma.</p>
+    <div class="cta-row">
+      <a class="btn" href="mailto:pulkitawasthi5678@gmail.com">Get in touch</a>
+      <a class="btn ghost" href="https://www.figma.com/design/eaKNv7fZH2IfjCgySbOokH/complete-Event-zar-project?node-id=0-1&amp;t=tvQ3divZNx3sQduw-1" target="_blank" rel="noopener noreferrer">View the full project in Figma &#8599;</a>
+    </div>
+  </div>
+</div></section>
+
+<footer class="footer">
+  <div class="container">
+    <h2 class="foot-big"><span class="w">Let's create</span><span class="g">incredible work together.</span></h2>
+    <div class="foot-cols">
+      <div class="fc">
+        <div class="flabel">Email</div>
+        <a class="fmail" href="mailto:pulkitawasthi5678@gmail.com">pulkitawasthi5678@gmail.com</a>
+        <a class="fphone" href="tel:+918707003804">+91 87070 03804</a>
+      </div>
+      <div class="fc">
+        <div class="flabel">Social</div>
+        <div class="socials">
+          <a href="https://www.linkedin.com/in/paux-ui" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z"/></svg>
+          </a>
+          <a href="https://wa.me/918707003804" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.96-.94 1.16-.17.2-.35.22-.64.08-.3-.15-1.26-.47-2.4-1.48-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.6.13-.14.3-.35.44-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.5 0 1.47 1.07 2.9 1.22 3.1.15.2 2.1 3.2 5.08 4.49.71.3 1.27.49 1.7.63.72.23 1.37.2 1.88.12.57-.09 1.76-.72 2.01-1.42.25-.7.25-1.3.17-1.42-.07-.12-.27-.2-.57-.35zM12.05 21.79h-.01a9.8 9.8 0 0 1-5-1.37l-.36-.21-3.72.97.99-3.62-.23-.37a9.77 9.77 0 0 1-1.5-5.21c0-5.4 4.4-9.79 9.81-9.79a9.73 9.73 0 0 1 6.93 2.87 9.73 9.73 0 0 1 2.87 6.94c0 5.4-4.4 9.79-9.78 9.79zm8.33-18.11A11.7 11.7 0 0 0 12.05.25C5.56.25.28 5.53.28 12.02c0 2.07.54 4.1 1.57 5.89L.18 23.75l5.98-1.57a11.76 11.76 0 0 0 5.88 1.5h.01c6.49 0 11.77-5.28 11.77-11.77 0-3.14-1.22-6.1-3.44-8.23z"/></svg>
+          </a>
+          <a href="mailto:pulkitawasthi5678@gmail.com" aria-label="Email">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="5" width="19" height="14" rx="2.5"/><path d="m3 7 9 6.5L21 7"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="foot-rule"></div>
+    <div class="foot-small">
+      <div>&copy; <span id="yr"></span> Pulkit Awasthi. Designed and built by me, pixel by pixel.</div>
+      <div>Made with Figma, coffee and stubbornness</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* left rail scrollspy */
+(function(){
+  var links = Array.prototype.slice.call(document.querySelectorAll("#rail a"));
+  var ids = links.map(function(a){ return a.getAttribute("href").slice(1); });
+  var sections = ids.map(function(id){ return document.getElementById(id); }).filter(Boolean);
+  function spy(){
+    var pos = window.scrollY + window.innerHeight * 0.35, current = ids[0];
+    sections.forEach(function(sec){ if (sec.offsetTop <= pos) current = sec.id; });
+    var idx = ids.indexOf(current);
+    links.forEach(function(a, i){
+      a.classList.toggle("active", i === idx);
+      a.classList.toggle("done", i < idx);
+    });
+  }
+  window.addEventListener("scroll", spy, {passive:true});
+  window.addEventListener("resize", spy);
+  spy();
+})();
+
+/* site nav bits */
+(function(){
+  var yr = document.getElementById("yr"); if (yr) yr.textContent = new Date().getFullYear();
+  var t = document.querySelector(".nav-toggle"), links = document.querySelector(".nav-links");
+  if (t && links) t.addEventListener("click", function(){ links.classList.toggle("open"); });
+})();
+</script>
+</body>
+</html>

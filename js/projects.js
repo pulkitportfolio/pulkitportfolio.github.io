@@ -149,6 +149,26 @@ const SITE = {
 
 const PROJECTS = [
   {
+    "id": "eventzar",
+    "featured": true,
+    "title": "EventsZAR",
+    "category": "app",
+    "year": "",
+    "role": "UX/UI Designer",
+    "summary": "A community events platform where people discover events, buy tickets and shop merchandise, and businesses host, promote and earn. Designed across four platforms from one design system.",
+    "customUrl": "eventzar.html",
+    "liveUrl": "",
+    "tags": ["Product design", "UX research", "Design system", "Mobile app", "Web app", "Admin panel"],
+    "thumbnail": "images/eventzar/thumb-hero.webp",
+    "cover": "",
+    "gallery": [],
+    "overview": "EventsZAR brings the full life of an event into one product: a social feed, event timelines, ticketing with QR entry, a merchandise store, chat, polls and a self serve advertisement engine, designed across a mobile app, web app, admin panel and business management portal.",
+    "problem": "",
+    "process": [],
+    "outcome": "",
+    "embed": ""
+  },
+  {
     "id": "learnhub-web",
     "title": "LearnHub EdTech Web Platform",
     "category": "website",
