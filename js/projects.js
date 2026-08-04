@@ -280,6 +280,38 @@ const PROJECTS = [
       "images/sample-app.svg"
     ],
     "featured": true
+  },
+  {
+    "id": "sample",
+    "featured": false,
+    "title": "sample",
+    "category": "app",
+    "year": "",
+    "role": "",
+    "summary": "",
+    "liveUrl": "file:///Users/pulkitawasthi/Downloads/sample-project.html",
+    "customUrl": "",
+    "ctaText": "",
+    "heroImage": "",
+    "cardCtaLabel": "",
+    "cardCtaUrl": "",
+    "takeawayCtaLabel": "",
+    "takeawayCtaUrl": "",
+    "embed": "",
+    "embedPortrait": false,
+    "tags": [],
+    "thumbnail": "",
+    "cover": "",
+    "overview": "",
+    "problem": "",
+    "process": [],
+    "outcome": "",
+    "overviewHeading": "",
+    "problemHeading": "",
+    "processHeading": "",
+    "outcomeHeading": "",
+    "screensHeading": "",
+    "gallery": []
   }
 ];
 
