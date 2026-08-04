@@ -84,9 +84,9 @@ section.cs{padding:110px 0 6px}
 .cs-block h2 .g{color:var(--faint)}
 .cs-block p{color:var(--muted);font-size:16.5px;margin-bottom:16px}
 .cs-block p b, .cs-block li b{color:var(--text)}
-.split{display:grid;grid-template-columns:240px 1fr;gap:56px;align-items:start}
-.split .sticky-k{position:sticky;top:60px}
-@media(max-width:860px){.split{grid-template-columns:1fr}.split .sticky-k{position:static}}
+.split{display:block}
+.split .sticky-k{display:none}
+
 
 .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin:38px 0 6px}
 .stat{border:1px solid var(--border);border-radius:var(--radius-sm);padding:20px 18px}
