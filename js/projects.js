@@ -279,7 +279,7 @@ const PROJECTS = [
     "gallery": [
       "images/sample-app.svg"
     ],
-    "featured": false
+    "featured": true
   }
 ];
 
