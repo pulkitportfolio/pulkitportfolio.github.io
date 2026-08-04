@@ -184,7 +184,8 @@ const PROJECTS = [
     "cardCtaLabel": "",
     "cardCtaUrl": "",
     "takeawayCtaLabel": "View the full project in Figma",
-    "takeawayCtaUrl": "https://www.figma.com/design/eaKNv7fZH2IfjCgySbOokH/complete-Event-zar-project?node-id=0-1&t=tvQ3divZNx3sQduw-1"
+    "takeawayCtaUrl": "https://www.figma.com/design/eaKNv7fZH2IfjCgySbOokH/complete-Event-zar-project?node-id=0-1&t=tvQ3divZNx3sQduw-1",
+    "ctaText": "View Project"
   },
   {
     "id": "chipt",
