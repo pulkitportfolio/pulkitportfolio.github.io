@@ -82,19 +82,19 @@ function escapeAttr(s) { return escapeHtml(s); }
     grid.innerHTML = list.map(function (p) {
       var label = p.category === "app" ? "App" : "Website";
       var csHref = p.customUrl || ("case-study.html?id=" + encodeURIComponent(p.id) + previewQS);
-      var kicker = [label, p.year].filter(Boolean).join(" · ");
       return '' +
         '<article class="pcard item-reveal" tabindex="0" data-href="' + escapeAttr(csHref) + '">' +
-          '<div class="pthumb">' + media(p) + "</div>" +
           '<div class="pbody">' +
-            '<div class="pkicker">' + escapeHtml(kicker) + "</div>" +
+            '<div class="plabels"><span class="pl-a">' + escapeHtml(label) + '</span><span class="pl-b">' + escapeHtml(p.year || "") + "</span></div>" +
             "<h3>" + escapeHtml(p.title) + "</h3>" +
             '<p class="psummary">' + escapeHtml(p.summary || "") + "</p>" +
-            '<a class="plink" href="' + escapeAttr(csHref) + '">' + escapeHtml(p.ctaText || "View project") + ' <span class="arw">&rarr;</span></a>' +
+            '<div class="prule"></div>' +
+            '<a class="plink" href="' + escapeAttr(csHref) + '">' + escapeHtml(p.ctaText || "Read case study") + ' <span class="arw">&rarr;</span></a>' +
             (p.cardCtaLabel && p.cardCtaUrl
               ? '<a class="plink sec" href="' + escapeAttr(p.cardCtaUrl) + '" target="_blank" rel="noopener noreferrer">' + escapeHtml(p.cardCtaLabel) + ' <span class="arw">&#8599;</span></a>'
               : "") +
           "</div>" +
+          '<div class="pthumb">' + media(p) + "</div>" +
         "</article>";
     }).join("");
 
@@ -126,7 +126,12 @@ var TOOL_ICONS = {
   "figma": '<span class="ticon"><svg viewBox="0 0 38 57" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="#1abcfe" d="M19 28.5a9.5 9.5 0 1 1 19 0 9.5 9.5 0 0 1-19 0z"/><path fill="#0acf83" d="M0 47.5A9.5 9.5 0 0 1 9.5 38H19v9.5a9.5 9.5 0 1 1-19 0z"/><path fill="#ff7262" d="M19 0v19h9.5a9.5 9.5 0 1 0 0-19H19z"/><path fill="#f24e1e" d="M0 9.5A9.5 9.5 0 0 0 9.5 19H19V0H9.5A9.5 9.5 0 0 0 0 9.5z"/><path fill="#a259ff" d="M0 28.5A9.5 9.5 0 0 0 9.5 38H19V19H9.5A9.5 9.5 0 0 0 0 28.5z"/></svg></span>',
   "adobe xd": '<span class="ticon badge" style="background:#470137;color:#FF61F6">Xd</span>',
   "claude code": '<span class="ticon"><svg viewBox="0 0 24 24" fill="none" stroke="#D97757" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M12 2.5v19M2.5 12h19M5.3 5.3l13.4 13.4M18.7 5.3 5.3 18.7"/></svg></span>',
-  "relume": '<span class="ticon badge" style="background:#0F0F0F">Re</span>'
+  "relume": '<span class="ticon badge" style="background:#0F0F0F">Re</span>',
+  "gemini": '<span class="ticon"><svg viewBox="0 0 24 24" aria-hidden="true"><defs><linearGradient id="gemg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4285F4"/><stop offset="1" stop-color="#9B72CB"/></linearGradient></defs><path fill="url(#gemg)" d="M12 1c.6 6 5 10.4 11 11-6 .6-10.4 5-11 11-.6-6-5-10.4-11-11 6-.6 10.4-5 11-11z"/></svg></span>',
+  "chatgpt": '<span class="ticon"><svg viewBox="0 0 24 24" fill="#0F0F0F" aria-hidden="true"><path d="M22.2819 9.8211a5.9847 5.9847 0 0 0-.5157-4.9108 6.0462 6.0462 0 0 0-6.5098-2.9A6.0651 6.0651 0 0 0 4.9807 4.1818a5.9847 5.9847 0 0 0-3.9977 2.9 6.0462 6.0462 0 0 0 .7427 7.0966 5.98 5.98 0 0 0 .511 4.9107 6.051 6.051 0 0 0 6.5146 2.9001A5.9847 5.9847 0 0 0 13.2599 24a6.0557 6.0557 0 0 0 5.7718-4.2058 5.9894 5.9894 0 0 0 3.9977-2.9001 6.0557 6.0557 0 0 0-.7475-7.073zM13.2599 22.4301a4.4755 4.4755 0 0 1-2.8764-1.0408l.1419-.0804 4.7783-2.7582a.7948.7948 0 0 0 .3927-.6813v-6.7369l2.02 1.1686a.071.071 0 0 1 .038.052v5.5826a4.504 4.504 0 0 1-4.4945 4.4944zm-9.6607-4.1254a4.4708 4.4708 0 0 1-.5346-3.0137l.142.0852 4.783 2.7582a.7712.7712 0 0 0 .7806 0l5.8428-3.3685v2.3324a.0804.0804 0 0 1-.0332.0615L9.74 19.9502a4.4992 4.4992 0 0 1-6.1408-1.6455zM2.3408 7.8956a4.485 4.485 0 0 1 2.3655-1.9728V11.6a.7664.7664 0 0 0 .3879.6765l5.8144 3.3543-2.0201 1.1685a.0757.0757 0 0 1-.071 0l-4.8303-2.7865A4.504 4.504 0 0 1 2.3408 7.8956zm16.5963 3.8558L13.1038 8.364 15.1192 7.2a.0757.0757 0 0 1 .071 0l4.8303 2.7913a4.4944 4.4944 0 0 1-.6765 8.1042v-5.6772a.79.79 0 0 0-.407-.667zm2.0107-3.0231l-.142-.0852-4.7735-2.7818a.7759.7759 0 0 0-.7854 0L9.409 9.2297V6.8974a.0662.0662 0 0 1 .0284-.0615l4.8303-2.7866a4.4992 4.4992 0 0 1 6.6802 4.66zM8.3065 12.863l-2.02-1.1638a.0804.0804 0 0 1-.038-.0567V6.0742a4.4992 4.4992 0 0 1 7.3757-3.4537l-.142.0805L8.704 5.459a.7948.7948 0 0 0-.3927.6813zm1.0976-2.3654l2.602-1.4998 2.6069 1.4998v2.9994l-2.5974 1.4997-2.6067-1.4997Z"/></svg></span>',
+  "gpt": '<span class="ticon"><svg viewBox="0 0 24 24" fill="#0F0F0F" aria-hidden="true"><path d="M22.2819 9.8211a5.9847 5.9847 0 0 0-.5157-4.9108 6.0462 6.0462 0 0 0-6.5098-2.9A6.0651 6.0651 0 0 0 4.9807 4.1818a5.9847 5.9847 0 0 0-3.9977 2.9 6.0462 6.0462 0 0 0 .7427 7.0966 5.98 5.98 0 0 0 .511 4.9107 6.051 6.051 0 0 0 6.5146 2.9001A5.9847 5.9847 0 0 0 13.2599 24a6.0557 6.0557 0 0 0 5.7718-4.2058 5.9894 5.9894 0 0 0 3.9977-2.9001 6.0557 6.0557 0 0 0-.7475-7.073zM13.2599 22.4301a4.4755 4.4755 0 0 1-2.8764-1.0408l.1419-.0804 4.7783-2.7582a.7948.7948 0 0 0 .3927-.6813v-6.7369l2.02 1.1686a.071.071 0 0 1 .038.052v5.5826a4.504 4.504 0 0 1-4.4945 4.4944zm-9.6607-4.1254a4.4708 4.4708 0 0 1-.5346-3.0137l.142.0852 4.783 2.7582a.7712.7712 0 0 0 .7806 0l5.8428-3.3685v2.3324a.0804.0804 0 0 1-.0332.0615L9.74 19.9502a4.4992 4.4992 0 0 1-6.1408-1.6455zM2.3408 7.8956a4.485 4.485 0 0 1 2.3655-1.9728V11.6a.7664.7664 0 0 0 .3879.6765l5.8144 3.3543-2.0201 1.1685a.0757.0757 0 0 1-.071 0l-4.8303-2.7865A4.504 4.504 0 0 1 2.3408 7.8956zm16.5963 3.8558L13.1038 8.364 15.1192 7.2a.0757.0757 0 0 1 .071 0l4.8303 2.7913a4.4944 4.4944 0 0 1-.6765 8.1042v-5.6772a.79.79 0 0 0-.407-.667zm2.0107-3.0231l-.142-.0852-4.7735-2.7818a.7759.7759 0 0 0-.7854 0L9.409 9.2297V6.8974a.0662.0662 0 0 1 .0284-.0615l4.8303-2.7866a4.4992 4.4992 0 0 1 6.6802 4.66zM8.3065 12.863l-2.02-1.1638a.0804.0804 0 0 1-.038-.0567V6.0742a4.4992 4.4992 0 0 1 7.3757-3.4537l-.142.0805L8.704 5.459a.7948.7948 0 0 0-.3927.6813zm1.0976-2.3654l2.602-1.4998 2.6069 1.4998v2.9994l-2.5974 1.4997-2.6067-1.4997Z"/></svg></span>',
+  "google stitch": '<span class="ticon"><img src="images/tools/stitch.png" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:5px"></span>',
+  "framer": '<span class="ticon"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#0F0F0F" d="M4 0h16v8h-8zM4 8h8l8 8H4zM4 16h8v8z"/></svg></span>'
 };
 function toolIcon(name) {
   var key = String(name || "").trim().toLowerCase();
@@ -145,10 +150,50 @@ function toolIcon(name) {
   function html(id, v) { var e = document.getElementById(id); if (e && v != null) e.innerHTML = v; }
 
   /* ---- hero ---- */
+  var heroName = [s.name, s.nameLast].filter(Boolean).join(" ").trim();
+  txt("site-hero-name", heroName);
   txt("site-hero-a", s.heroTitleA);
   txt("site-hero-b", s.heroTitleB);
   txt("site-hero-strong", s.heroLeadStrong);
   txt("site-hero-lead", s.heroLead);
+
+  /* ---- words of trust: one wide card, arrows switch recommendations ---- */
+  (function () {
+    var slide = document.getElementById("trust-slide");
+    if (!slide) return;
+    var items = Array.isArray(s.testimonials) ? s.testimonials : null;
+    if (items && !items.length) {
+      var ts = document.getElementById("trust");
+      if (ts) ts.style.display = "none";
+      return;
+    }
+    if (!items) {
+      items = [
+        { quote: "Recommendation text goes here. Open the admin panel, Site content tab, and replace these sample cards with real words from people you have worked with.", name: "Name Surname", role: "Role, Company" },
+        { quote: "A second sample recommendation. One or two sentences work best, spoken in the person's own voice.", name: "Name Surname", role: "Role, Company" },
+        { quote: "A third sample recommendation. The arrows below switch between however many you add.", name: "Name Surname", role: "Role, Company" }
+      ];
+    }
+    var idx = 0, count = document.getElementById("trust-count");
+    function show(i, instant) {
+      idx = (i + items.length) % items.length;
+      function paint() {
+        var t = items[idx];
+        slide.querySelector(".tq").textContent = t.quote || "";
+        slide.querySelector(".tn").textContent = t.name || "";
+        slide.querySelector(".tr").textContent = t.role || "";
+        if (count) count.textContent = (idx + 1) + " / " + items.length;
+        slide.classList.remove("swap");
+      }
+      if (instant) { paint(); return; }
+      slide.classList.add("swap");
+      setTimeout(paint, 220);
+    }
+    var prev = document.getElementById("trust-prev"), next = document.getElementById("trust-next");
+    if (prev) prev.addEventListener("click", function () { show(idx - 1); });
+    if (next) next.addEventListener("click", function () { show(idx + 1); });
+    show(0, true);
+  })();
 
   var pill = document.getElementById("site-avail-pill");
   if (pill && s.openToWork === false) pill.style.display = "none";
@@ -410,9 +455,9 @@ function toolIcon(name) {
       p.r *= 1.016; p.a *= 0.95;
       if (p.a < 0.004) { parts.splice(i, 1); continue; }
       var g = ctx.createRadialGradient(p.x * dpr, p.y * dpr, 0, p.x * dpr, p.y * dpr, p.r * dpr);
-      // soft light periwinkle — a whisper on the white background
-      g.addColorStop(0, "rgba(173,188,240," + p.a.toFixed(3) + ")");
-      g.addColorStop(1, "rgba(173,188,240,0)");
+      // warm sand gold — a soft watery ripple on the cream background
+      g.addColorStop(0, "rgba(196,150,58," + p.a.toFixed(3) + ")");
+      g.addColorStop(1, "rgba(196,150,58,0)");
       ctx.fillStyle = g;
       ctx.beginPath();
       ctx.arc(p.x * dpr, p.y * dpr, p.r * dpr, 0, Math.PI * 2);

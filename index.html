@@ -8,7 +8,7 @@
   <link rel="icon" type="image/svg+xml" href="images/favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fragment+Mono&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@1,6..72,400;1,6..72,500&family=Fragment+Mono&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
@@ -28,6 +28,7 @@
   </header>
 
   <!-- HERO -->
+  <div class="pin-wrap">
   <section class="hero">
     <!-- Figma -->
     <div class="float f1" title="Figma">
@@ -69,15 +70,15 @@
 
     <div class="container">
       <span class="avail-pill" id="site-avail-pill"><span class="dot"></span> Available for new opportunities</span>
-      <h1>
+      <h1 class="hero-name" id="site-hero-name">Pulkit Awasthi</h1>
+      <h2 class="hero-role">
         <span class="ln-a" id="site-hero-a">Product Designer,</span>
         <span class="ln-b" id="site-hero-b">UX/UI Designer</span>
-      </h1>
+      </h2>
       <p class="hero-lead"><b id="site-hero-strong">3+ years designing high-impact product experiences</b> <span id="site-hero-lead">across SaaS, EdTech, AI and enterprise products at WebIndia, ThinkTech, EduGorilla and TechDock Labs. I turn complex problems into interfaces people actually enjoy using.</span></p>
       <div class="hero-actions">
-        <a class="btn btn-primary" id="hero-linkedin" href="#" target="_blank" rel="noopener noreferrer">LinkedIn <span class="arw" aria-hidden="true">&#8599;</span></a>
+        <a class="btn btn-primary" id="hero-linkedin" href="#" target="_blank" rel="noopener noreferrer">LinkedIn <span class="cta-arw" aria-hidden="true">&#8599;</span></a>
       </div>
-      <div class="hero-meta" id="site-facts"></div>
     </div>
   </section>
 
@@ -88,6 +89,7 @@
       <p class="statement" id="site-approach">Every project I take on, I treat as my own business. When it is a service, I work like an owner, looking for how it can stand out and grow faster. When it is a product, I flip to being its simplest user, someone with no idea of anything, and if that person can still use it with ease, the design has done its job.</p>
     </div>
   </section>
+  </div><!-- /pin-wrap -->
 
   <!-- SELECTED PROJECTS -->
   <section class="section reveal" id="work">
@@ -112,6 +114,28 @@
         <div class="edu-card" id="site-education"></div>
       </div>
       <div class="xp-stack" id="site-timeline"></div>
+    </div>
+  </section>
+
+  <!-- WORDS OF TRUST -->
+  <section class="section reveal" id="trust">
+    <div class="container">
+      <div class="section-head">
+        <h2 class="split-head"><span class="g">Words of</span> trust.</h2>
+      </div>
+      <div class="trust-carousel">
+        <div class="tslide" id="trust-slide">
+          <div class="tq">Recommendation text goes here. Open the admin panel, Site content tab, and replace these sample cards with real words from people you have worked with.</div>
+          <div class="twho"><div class="tn" id="ts-name">Name Surname</div><div class="tr" id="ts-role">Role, Company</div></div>
+        </div>
+        <div class="trust-foot">
+          <span class="tcount" id="trust-count">1 / 3</span>
+          <div class="tnav">
+            <button class="tbtn" id="trust-prev" type="button" aria-label="Previous recommendation">&larr;</button>
+            <button class="tbtn" id="trust-next" type="button" aria-label="Next recommendation">&rarr;</button>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -154,7 +178,7 @@
 
   <script>document.getElementById("yr").textContent = new Date().getFullYear();</script>
   <!-- The ?v= stamp is bumped automatically on each publish, so browsers cache this file until it actually changes. -->
-  <script src="js/projects.js?v=1785867953"></script>
+  <script src="js/projects.js?v=1785873464"></script>
   <script src="js/store.js"></script>
   <script src="js/main.js"></script>
 </body>
