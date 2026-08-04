@@ -450,6 +450,19 @@ a:hover > .arw { transform: translate(2px, -2px); }
   display: flex; align-items: center; gap: 14px; padding: 14px; background: var(--surface);
   border: 1px solid var(--border); border-radius: var(--radius-sm); margin-bottom: 12px;
 }
+.list-head { display: flex; align-items: center; justify-content: space-between; gap: 14px; margin-bottom: 10px; }
+.list-head .btn { padding: 9px 18px; font-size: 13.5px; }
+.add-choice { border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 18px; margin: 4px 0 16px; background: var(--bg-soft); }
+.add-choice > b { font-size: 14px; }
+.add-choice .ac-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 12px 0 10px; }
+@media (max-width: 700px) { .add-choice .ac-row { grid-template-columns: 1fr; } }
+.add-choice .ac-row button { text-align: left; border: 1px solid var(--border); background: var(--surface); border-radius: 10px; padding: 14px 16px; cursor: pointer; font-family: var(--font); transition: var(--transition); }
+.add-choice .ac-row button:hover { border-color: var(--text); }
+.add-choice .ac-row button b { display: block; font-size: 14.5px; margin-bottom: 4px; color: var(--text); }
+.add-choice .ac-row button span { font-size: 12.5px; color: var(--muted); line-height: 1.5; }
+.add-choice .ac-cancel { border: none; background: none; color: var(--muted); font-size: 12.5px; cursor: pointer; text-decoration: underline; font-family: var(--font); }
+.rtag { display: inline-block; font-family: var(--mono); font-size: 9.5px; letter-spacing: .1em; text-transform: uppercase; padding: 2px 8px; border-radius: 100px; background: var(--bg-soft); color: var(--muted); border: 1px solid var(--border); vertical-align: 2px; margin-left: 6px; }
+.rtag-html { background: #FFF3E2; border-color: #F3D4A6; color: #9A5B00; }
 .row .rhandle { cursor: grab; color: var(--faint); font-size: 15px; padding: 0 2px; flex-shrink: 0; user-select: none; -webkit-user-select: none; }
 .row .rhandle:hover { color: var(--text); }
 .row.dragging { opacity: .45; border-style: dashed; }
