@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Chipt | Pulkit Awasthi</title>
+<meta name="description" content="Chipt case study by Pulkit Awasthi. An NFC-powered reusable cup ecosystem that rewards coffee lovers for sustainable choices." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fragment+Mono&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="icon" type="image/svg+xml" href="images/favicon.svg" />
+<link rel="stylesheet" href="css/styles.css" />
+<style>
+:root{
+  --bg:#FFFFFF; --bg-soft:#F2F2F0; --text:#0F0F0F; --muted:#6E6E6E; --faint:#B9B9B4;
+  --border:#E4E4E0; --radius:20px; --radius-sm:12px; --maxw:1120px;
+  --shadow:0 1px 2px rgba(0,0,0,.04), 0 12px 30px rgba(0,0,0,.06);
+  --font:"Plus Jakarta Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --mono:"Fragment Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  --acc:#C67C4E; --acc-deep:#9C5A32; --ink:#1C1C1C; --cream:#F8EFE9;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+.container{width:100%;max-width:var(--maxw);margin:0 auto;padding:0 24px}
+h1,h2,h3,h4{line-height:1.1;letter-spacing:-.025em;font-weight:700}
+.eyebrow{font-family:var(--mono);font-size:12px;font-weight:400;letter-spacing:.3em;text-transform:uppercase;color:var(--muted)}
+
+/* right progress rail */
+#rail{position:fixed;right:28px;top:50%;transform:translateY(-50%);z-index:60;display:none}
+@media(min-width:1360px){#rail{display:block}}
+#rail a{display:flex;flex-direction:row-reverse;align-items:center;gap:12px;padding:6px 0;font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--text);transition:.2s}
+#rail a .rd{width:9px;height:9px;border-radius:50%;border:1.5px solid #C6C6C1;background:transparent;flex:none;transition:.25s}
+#rail a .rl{opacity:0;transform:translateX(6px);transition:.25s;pointer-events:none}
+#rail a:hover .rl{opacity:.6;transform:none}
+#rail a.done .rd{background:var(--acc);border-color:var(--acc)}
+#rail a.active .rd{background:var(--acc);border-color:var(--acc);transform:scale(1.35);box-shadow:0 0 0 4px rgba(198,124,78,.18)}
+#rail a.active .rl{opacity:1;transform:none}
+
+/* hero band */
+.hero-band{position:relative;overflow:hidden;border-bottom:1px solid var(--border);
+  background:
+    radial-gradient(820px 500px at 80% 16%, rgba(198,124,78,.10), transparent 62%),
+    radial-gradient(680px 440px at 56% 96%, rgba(198,124,78,.08), transparent 60%),
+    linear-gradient(180deg,#FCFAF8 0%,#F5EDE7 100%)}
+/* lined coffee-bean illustrations */
+.bean{position:absolute;pointer-events:none;opacity:.18}
+.bean svg{display:block;width:100%;height:100%}
+.hero-grid{position:relative;max-width:1440px;margin:0 auto;display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(28px,4vw,64px);align-items:center;padding:clamp(48px,6vw,92px) clamp(24px,4vw,72px)}
+.banner-copy .bk{display:inline-flex;align-items:center;gap:12px;font-family:var(--mono);font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--muted)}
+.banner-copy .bk::before{content:"";width:34px;height:1px;background:var(--acc)}
+.banner-copy h1{font-size:clamp(48px,5.8vw,82px);margin:20px 0 16px;color:var(--ink);letter-spacing:-.035em}
+.banner-copy h1 span{color:var(--acc)}
+.banner-copy .tagline{font-size:clamp(16px,1.6vw,19px);color:var(--muted);max-width:470px;margin-bottom:30px}
+.bchips{display:flex;gap:9px;flex-wrap:wrap}
+.bchips span{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;padding:8px 16px;border:1px solid rgba(28,28,28,.08);border-radius:100px;color:var(--text);background:rgba(255,255,255,.85);box-shadow:0 1px 2px rgba(0,0,0,.04), 0 8px 22px rgba(40,24,12,.05)}
+.bchips span::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--acc);margin-right:8px;vertical-align:1px}
+.hero-shot{position:relative;display:flex;justify-content:center;align-items:flex-end;gap:clamp(8px,1.4vw,20px)}
+.hero-shot img{width:clamp(120px,13vw,190px);filter:drop-shadow(0 26px 34px rgba(60,32,14,.22));animation:heroFloat 7s ease-in-out infinite}
+.hero-shot img.mid{width:clamp(150px,16vw,230px);animation-delay:-2.4s}
+.hero-shot img:last-child{animation-delay:-4.8s}
+@keyframes heroFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+@media(prefers-reduced-motion:reduce){.hero-shot img{animation:none}}
+@media(max-width:900px){.hero-grid{grid-template-columns:1fr}}
+
+/* meta strip */
+.meta{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:18px;margin:34px 0 0;padding:32px 0;border-bottom:1px solid var(--border)}
+.meta .k{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+.meta .v{font-weight:600;font-size:15px}
+
+/* generic */
+section.cs{padding:104px 0 6px}
+.cs-block{max-width:780px}
+.cs-block h2{font-size:clamp(26px,3.4vw,36px);margin-bottom:20px}
+.cs-block h2 .g{color:var(--faint)}
+.cs-block h2 .a{color:var(--acc)}
+.cs-block p{color:var(--muted);font-size:16.5px;margin-bottom:16px}
+.cs-block p b, .cs-block li b{color:var(--text)}
+.split{display:grid;grid-template-columns:240px 1fr;gap:56px;align-items:start}
+.split .sticky-k{position:sticky;top:90px}
+@media(max-width:860px){.split{grid-template-columns:1fr}.split .sticky-k{position:static}}
+
+/* problem pills */
+.pills{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin:32px 0 10px}
+.pill-box{border:1px solid var(--border);border-radius:14px;padding:20px;background:var(--bg)}
+.pill-box .pn{font-family:var(--mono);font-size:10.5px;color:var(--acc);letter-spacing:.16em;margin-bottom:8px}
+.pill-box p{font-size:14.5px;color:var(--muted);margin:0}
+
+/* opportunity boxes (connected) */
+.opp{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:36px}
+@media(max-width:860px){.opp{grid-template-columns:1fr}}
+.ob{border:1px solid var(--border);border-radius:12px;padding:24px;background:var(--bg);position:relative}
+.ob .on{width:26px;height:26px;border-radius:50%;background:var(--acc);color:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:11px;margin-bottom:12px}
+.ob::before{content:"";position:absolute;left:-23px;width:23px;top:36px;border-top:2px dashed rgba(198,124,78,.55)}
+.ob::after{content:"";position:absolute;left:-14px;top:32.5px;width:7px;height:7px;border-top:2px solid rgba(198,124,78,.85);border-right:2px solid rgba(198,124,78,.85);transform:rotate(45deg)}
+.ob:first-child::before,.ob:first-child::after{display:none}
+@media(max-width:860px){.ob::before,.ob::after{display:none}}
+.ob .ok{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--acc-deep)}
+.ob h4{font-size:17.5px;margin:8px 0 7px}
+.ob p{font-size:14px;color:var(--muted)}
+.ob p b{color:var(--text)}
+
+/* solution checklist */
+.checks{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px;margin:28px 0 8px}
+.check{display:flex;gap:10px;align-items:flex-start;border:1px solid var(--border);border-radius:12px;padding:14px 16px;font-size:14.5px;color:var(--text);font-weight:600}
+.check::before{content:"✓";flex:none;width:22px;height:22px;border-radius:50%;background:var(--cream);color:var(--acc-deep);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700}
+
+/* journey-style steps */
+.jflow{display:grid;grid-template-columns:repeat(5,1fr);gap:20px;margin-top:30px}
+.jflow.four{grid-template-columns:repeat(4,1fr)}
+.jstep{border:1px solid var(--border);border-radius:12px;padding:18px 16px;background:var(--bg);position:relative}
+.jstep::before{content:"";position:absolute;left:-21px;width:21px;top:30px;border-top:2px dashed rgba(198,124,78,.5)}
+.jstep::after{content:"";position:absolute;left:-13px;top:26.5px;width:7px;height:7px;border-top:2px solid rgba(198,124,78,.85);border-right:2px solid rgba(198,124,78,.85);transform:rotate(45deg)}
+.jstep:first-child::before,.jstep:first-child::after{display:none}
+@media(max-width:900px){
+  .jflow,.jflow.four{grid-template-columns:1fr 1fr}
+  .jstep::before,.jstep::after{display:none}
+  .jstep:nth-child(2n)::before,.jstep:nth-child(2n)::after{display:block}
+}
+.jstep .jn{width:26px;height:26px;border-radius:50%;background:var(--acc);color:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:11px;margin-bottom:12px}
+.jstep h4{font-size:14.5px;margin-bottom:5px}
+.jstep p{font-size:12.5px;color:var(--muted);line-height:1.55}
+
+/* flow map chips */
+.fmap{display:flex;flex-wrap:wrap;gap:20px 26px;margin-top:30px}
+.fm{position:relative;border:1px solid var(--border);border-radius:12px;padding:12px 18px;font-size:13.5px;font-weight:600;background:var(--bg)}
+.fm.hot{border-color:var(--acc);background:var(--cream);color:var(--acc-deep)}
+.fm + .fm::before{content:"";position:absolute;left:-24px;top:50%;width:24px;border-top:2px dashed rgba(198,124,78,.5)}
+.fm + .fm::after{content:"";position:absolute;left:-13px;top:calc(50% - 3.5px);width:7px;height:7px;border-top:2px solid rgba(198,124,78,.85);border-right:2px solid rgba(198,124,78,.85);transform:rotate(45deg)}
+
+/* type & colour: compact */
+.stylegrid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:24px}
+@media(max-width:760px){.stylegrid{grid-template-columns:1fr}}
+.sg{border:1px solid var(--border);border-radius:14px;padding:20px 22px;background:var(--bg)}
+.sg .sk{font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+.poppins-demo{font-family:"Poppins",sans-serif;font-weight:600;font-size:clamp(30px,3.4vw,40px);letter-spacing:.02em;color:var(--ink);line-height:1.15}
+.sg .glyphs{font-family:"Poppins",sans-serif;font-size:14px;color:var(--muted);margin-top:4px}
+.sg .sline{display:flex;gap:14px;flex-wrap:wrap;margin-top:12px;font-size:13px;color:var(--muted)}
+.sg .sline b{color:var(--text)}
+.swatches{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.swatches .sw{height:96px;border-radius:10px;display:flex;align-items:flex-end;padding:9px 10px;font-family:var(--mono);font-size:10.5px;letter-spacing:.03em}
+.swatches .usage{grid-column:1/-1;font-size:12.5px;color:var(--muted);margin-top:2px}
+
+/* persona: one clean card */
+.persona-card{border:1px solid var(--border);border-radius:var(--radius);padding:clamp(24px,3vw,36px);margin-top:32px;background:var(--bg)}
+.p-head{display:flex;align-items:center;gap:18px;padding-bottom:22px;border-bottom:1px solid var(--border)}
+.p-head img{width:76px;height:76px;border-radius:50%;object-fit:cover;border:3px solid var(--cream)}
+.p-head .pn{font-size:19px;font-weight:700}
+.p-head .pm{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:3px}
+.p-body{display:grid;grid-template-columns:1fr 1fr;gap:32px;padding-top:24px}
+@media(max-width:760px){.p-body{grid-template-columns:1fr}}
+.bars .bar{margin-bottom:16px}
+.bars .bl{display:flex;justify-content:space-between;font-size:13px;font-weight:600;margin-bottom:6px}
+.bars .bl span{color:var(--muted);font-family:var(--mono);font-size:11.5px}
+.bars .track{height:6px;border-radius:100px;background:var(--bg-soft);overflow:hidden}
+.bars .fill{height:100%;border-radius:100px;background:linear-gradient(90deg,var(--acc),var(--acc-deep))}
+.p-body p{font-size:14.5px;color:var(--muted);margin:0}
+.quote{grid-column:1/-1;margin-top:6px;background:var(--cream);border-radius:12px;padding:18px 22px;font-size:15px;color:var(--text);font-weight:600}
+.quote span{display:block;font-weight:400;font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--acc-deep);margin-top:8px}
+
+/* screens: floating device PNGs */
+.gal-head{display:flex;align-items:baseline;justify-content:space-between;gap:20px;margin:64px 0 6px;flex-wrap:wrap}
+.gal-head h3{font-size:21px}
+.gal-head .gk{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.shots{display:flex;flex-wrap:wrap;justify-content:center;gap:30px 26px;margin-top:26px}
+.shots figure{text-align:center;margin:0;flex:0 0 auto}
+.shots img{height:clamp(320px,30vw,430px);width:auto;margin:0 auto;filter:drop-shadow(0 20px 26px rgba(60,32,14,.16))}
+.shots figcaption{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);padding-top:12px}
+
+/* thanks */
+.thanks{margin:70px 0 64px}
+.thanks .band{border-radius:var(--radius);background:linear-gradient(135deg,#8A4A24 0%,var(--acc-deep) 45%,var(--acc) 100%);color:#fff;padding:clamp(48px,7vw,90px) clamp(24px,6vw,80px);text-align:center;position:relative;overflow:hidden}
+.thanks .band .glow{position:absolute;width:560px;height:560px;border-radius:50%;background:radial-gradient(closest-side,rgba(255,255,255,.16),transparent);bottom:-260px;left:-160px;pointer-events:none}
+.thanks .tk-eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.7)}
+.thanks h2{font-size:clamp(40px,6vw,72px);margin:16px 0 14px}
+.thanks h2 span{color:#FFD9BC}
+.thanks p{color:rgba(255,255,255,.8);max-width:560px;margin:0 auto 30px;font-size:16.5px}
+.thanks .cta-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.thanks .btn{display:inline-flex;align-items:center;gap:8px;padding:14px 30px;border-radius:100px;font-weight:600;font-size:15px;background:#fff;color:var(--acc-deep);transition:.25s;border:1px solid transparent}
+.thanks .btn:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(0,0,0,.3)}
+.thanks .btn.ghost{background:transparent;color:#fff;border-color:rgba(255,255,255,.45)}
+.thanks .btn.ghost:hover{border-color:#fff;box-shadow:none}
+</style>
+</head>
+<body>
+
+  <header class="nav">
+    <div class="container nav-inner">
+      <a class="logo" href="index.html">PULKIT<span>.</span></a>
+      <button class="nav-toggle" aria-label="Menu">&#9776;</button>
+      <nav class="nav-links">
+        <a href="work.html" class="active">Work</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+        <a class="btn btn-primary" href="Pulkit_Awasthi_CV.pdf" download>Download CV</a>
+      </nav>
+    </div>
+  </header>
+
+<nav id="rail" aria-label="Sections">
+  <a href="#top"><span class="rd"></span><span class="rl">Intro</span></a>
+  <a href="#about"><span class="rd"></span><span class="rl">Introduction</span></a>
+  <a href="#problem"><span class="rd"></span><span class="rl">Problem</span></a>
+  <a href="#opportunity"><span class="rd"></span><span class="rl">Opportunity</span></a>
+  <a href="#solution"><span class="rd"></span><span class="rl">Solution</span></a>
+  <a href="#how"><span class="rd"></span><span class="rl">How it works</span></a>
+  <a href="#flow"><span class="rd"></span><span class="rl">Flow map</span></a>
+  <a href="#process"><span class="rd"></span><span class="rl">Process</span></a>
+  <a href="#style"><span class="rd"></span><span class="rl">Type and colour</span></a>
+  <a href="#persona"><span class="rd"></span><span class="rl">Persona</span></a>
+  <a href="#screens"><span class="rd"></span><span class="rl">Screens</span></a>
+  <a href="#thanks"><span class="rd"></span><span class="rl">Thanks</span></a>
+</nav>
+
+<!-- HERO -->
+<section class="hero-band" id="top">
+  <span class="bean" style="width:34px;top:12%;left:4%;transform:rotate(-24deg)"><svg viewBox="0 0 40 58" fill="none" stroke="#C67C4E" stroke-width="2" stroke-linecap="round"><ellipse cx="20" cy="29" rx="16.5" ry="26"/><path d="M20 4 C 9 21, 31 37, 20 54"/></svg></span>
+  <span class="bean" style="width:22px;top:70%;left:9%;transform:rotate(18deg);opacity:.13"><svg viewBox="0 0 40 58" fill="none" stroke="#C67C4E" stroke-width="2" stroke-linecap="round"><ellipse cx="20" cy="29" rx="16.5" ry="26"/><path d="M20 4 C 9 21, 31 37, 20 54"/></svg></span>
+  <span class="bean" style="width:28px;top:16%;right:6%;transform:rotate(32deg)"><svg viewBox="0 0 40 58" fill="none" stroke="#C67C4E" stroke-width="2" stroke-linecap="round"><ellipse cx="20" cy="29" rx="16.5" ry="26"/><path d="M20 4 C 9 21, 31 37, 20 54"/></svg></span>
+  <span class="bean" style="width:20px;top:78%;right:12%;transform:rotate(-40deg);opacity:.13"><svg viewBox="0 0 40 58" fill="none" stroke="#C67C4E" stroke-width="2" stroke-linecap="round"><ellipse cx="20" cy="29" rx="16.5" ry="26"/><path d="M20 4 C 9 21, 31 37, 20 54"/></svg></span>
+  <span class="bean" style="width:26px;top:44%;left:46%;transform:rotate(60deg);opacity:.10"><svg viewBox="0 0 40 58" fill="none" stroke="#C67C4E" stroke-width="2" stroke-linecap="round"><ellipse cx="20" cy="29" rx="16.5" ry="26"/><path d="M20 4 C 9 21, 31 37, 20 54"/></svg></span>
+  <div class="hero-grid">
+    <div class="banner-copy">
+      <div class="bk">UX/UI case study &middot; Concept app</div>
+      <h1>Chipt<span>.</span></h1>
+      <p class="tagline">Brewing sustainability, one smart cup. An NFC powered reusable cup ecosystem that rewards coffee lovers for making sustainable choices.</p>
+      <div class="bchips"><span>Mobile app</span><span>NFC ecosystem</span><span>B2C + B2B</span></div>
+    </div>
+    <div class="hero-shot">
+      <img src="images/chipt/s/home.webp" alt="Chipt home screen" loading="eager" />
+      <img class="mid" src="images/chipt/s/ob-welcome.webp" alt="Chipt welcome screen" loading="eager" />
+      <img src="images/chipt/s/congrats.webp" alt="Chipt reward screen" loading="eager" />
+    </div>
+  </div>
+</section>
+<section style="padding:0"><div class="container">
+  <div class="meta">
+    <div><div class="k">Role</div><div class="v">UX Research, UI Design</div></div>
+    <div><div class="k">Type</div><div class="v">Concept project</div></div>
+    <div><div class="k">Duration</div><div class="v">2 weeks</div></div>
+    <div><div class="k">Year</div><div class="v">2024</div></div>
+    <div><div class="k">Tools</div><div class="v">Figma</div></div>
+  </div>
+</div></section>
+
+<!-- INTRODUCTION -->
+<section class="cs" id="about"><div class="container"><div class="split">
+  <div class="sticky-k"><div class="eyebrow">01 &middot; Introduction</div></div>
+  <div class="cs-block">
+    <h2>A cup that pays you back</h2>
+    <p>Chipt is a conceptual mobile app designed to encourage reusable cup adoption in coffee shops. The idea explores how loyalty rewards and simple interactions can motivate people to return reusable cups instead of reaching for disposable ones.</p>
+    <p>The project focuses on one seamless mobile experience that connects <b>buying coffee</b> with <b>sustainability driven rewards</b>: order in a Chipt cup, tap it with your phone, earn points, return the cup, and redeem rewards on the next purchase.</p>
+    <p>Chipt is built for <b>both sides of the counter</b>. For customers (B2C) it turns the sustainable choice into rewards. For coffee shops (B2B) it is a retention engine: the cup must come back to the shop to unlock the discount on the next coffee, so every cup sent out is a customer coming back in.</p>
+  </div>
+</div></div></section>
+
+<!-- PROBLEM -->
+<section class="cs" id="problem"><div class="container"><div class="split">
+  <div class="sticky-k"><div class="eyebrow">02 &middot; The problem</div></div>
+  <div class="cs-block" style="max-width:100%">
+    <h2>Convenience beats conscience</h2>
+    <p style="max-width:780px">Disposable coffee cups are everywhere because they are effortless. Even when sustainable alternatives exist, people avoid them for three very human reasons:</p>
+    <div class="pills">
+      <div class="pill-box"><div class="pn">REASON 01</div><p>Reusable options require <b>extra effort</b> from the customer.</p></div>
+      <div class="pill-box"><div class="pn">REASON 02</div><p>There is <b>no immediate reward</b> for doing the right thing.</p></div>
+      <div class="pill-box"><div class="pn">REASON 03</div><p>The process <b>feels slower</b> than just grabbing a disposable cup.</p></div>
+    </div>
+    <p style="max-width:780px">So the challenge was clear: design a solution that benefits the environment and the coffee vendors at the same time, without asking the customer to work for it.</p>
+  </div>
+</div></div></section>
+
+<!-- OPPORTUNITY -->
+<section class="cs" id="opportunity"><div class="container"><div class="split">
+  <div class="sticky-k"><div class="eyebrow">03 &middot; Opportunity</div></div>
+  <div class="cs-block" style="max-width:100%">
+    <h2>Where sustainability <span class="a">meets retention</span></h2>
+    <p style="max-width:780px">The insight that shaped the product: the customer's problem and the business's problem can solve each other. A returned cup earns the customer a discount on the next coffee, and that discount is claimed <b>at the shop</b>. The cup itself pulls people back through the door.</p>
+    <div class="opp">
+      <div class="ob"><div class="on">1</div><div class="ok">Behavioural</div><h4>Customer needs</h4><p>Customers want to be sustainable but struggle with the inconvenience. They need <b>frictionless incentives</b> to change habits.</p></div>
+      <div class="ob"><div class="on">2</div><div class="ok">Economic</div><h4>Business needs</h4><p>Coffee shops operate on thin margins and need <b>repeat customers</b>. With Chipt, every cup returned to the shop is a guaranteed second visit and a discounted next purchase.</p></div>
+      <div class="ob"><div class="on">3</div><div class="ok">Strategic</div><h4>The product bridge</h4><p>Technology connects the two. By digitising the reusable cup, a good deed becomes a <b>measurable reward loop</b>.</p></div>
+    </div>
+  </div>
+</div></div></section>
+
+<!-- SOLUTION -->
+<section class="cs" id="solution"><div class="container"><div class="split">
+  <div class="sticky-k"><div class="eyebrow">04 &middot; Solution</div></div>
+  <div class="cs-block" style="max-width:100%">
+    <h2>A circular system, not just an app</h2>
+    <p style="max-width:780px">Chipt is a digitally enabled circular system that replaces single use cups with smart, trackable assets. It bridges the gap between sustainability and convenience.</p>
+    <div class="checks">
+      <div class="check">NFC embedded reusable cups</div>
+      <div class="check">Tap to register technology</div>
+      <div class="check">Loyalty points earned automatically</div>
+      <div class="check">Rewards redeemed on the next purchase</div>
+      <div class="check">Zero waste circular ecosystem</div>
+    </div>
+    <div class="jflow">
+      <div class="jstep"><div class="jn">1</div><h4>Use</h4><p>Order your coffee in a Chipt cup.</p></div>
+      <div class="jstep"><div class="jn">2</div><h4>Tap</h4><p>Tap the cup with your phone. NFC does the rest.</p></div>
+      <div class="jstep"><div class="jn">3</div><h4>Earn</h4><p>Points are added instantly, no forms, no codes.</p></div>
+      <div class="jstep"><div class="jn">4</div><h4>Return</h4><p>Drop the cup at any participating vendor.</p></div>
+      <div class="jstep"><div class="jn">5</div><h4>Reuse</h4><p>The cup is washed and recirculated.</p></div>
+    </div>
+  </div>
+</div></div></section>
+
+<!-- HOW IT WORKS -->
+<section class="cs" id="how"><div class="container"><div class="split">
+  <div class="sticky-k"><div class="eyebrow">05 &middot; User journey</div></div>
+  <div class="cs-block" style="max-width:100%">
+    <h2>How it works for the customer</h2>
+    <div class="jflow four">
+      <div class="jstep"><div class="jn">1</div><h4>Receive</h4><p>Get your coffee in an NFC cup at a participating vendor.</p></div>
+      <div class="jstep"><div class="jn">2</div><h4>Tap</h4><p>Tap the cup to register it with your phone.</p></div>
+      <div class="jstep"><div class="jn">3</div><h4>Earn</h4><p>Loyalty points land automatically with every reuse.</p></div>
+      <div class="jstep"><div class="jn">4</div><h4>Redeem</h4><p>Spend the rewards on your next purchase.</p></div>
+    </div>
+  </div>
+</div></div></section>
+
+<!-- FLOW MAP -->
+<section class="cs" id="flow"><div class="container"><div class="split">
+  <div class="sticky-k"><div class="eyebrow">06 &middot; Architecture</div></div>
+  <div class="cs-block" style="max-width:100%">
+    <h2>User flow map</h2>
+    <p style="max-width:780px">One straight line from first open to first reward. The NFC cup registration is the only new behaviour the product asks of a user, so everything around it stays deliberately familiar.</p>
+    <div class="fmap">
+      <span class="fm">Onboarding</span>
+      <span class="fm">Sign up</span>
+      <span class="fm">Browse vendors</span>
+      <span class="fm">Order coffee</span>
+      <span class="fm">Secure checkout</span>
+      <span class="fm hot">Register cup (NFC)</span>
+      <span class="fm">Receive points</span>
+    </div>
+  </div>
+</div></div></section>
+
+<!-- PROCESS -->
+<section class="cs" id="process"><div class="container"><div class="split">
+  <div class="sticky-k"><div class="eyebrow">07 &middot; Process</div></div>
+  <div class="cs-block" style="max-width:100%">
+    <h2>Design process</h2>
+    <div class="jflow four">
+      <div class="jstep"><div class="jn">1</div><h4>Discover</h4><p>Studied why disposable cups win: convenience, speed, zero friction.</p></div>
+      <div class="jstep"><div class="jn">2</div><h4>Define</h4><p>Framed the twin problem: customer inconvenience and vendor retention.</p></div>
+      <div class="jstep"><div class="jn">3</div><h4>Ideate</h4><p>Explored reward loops and landed on NFC tap as the zero effort trigger.</p></div>
+      <div class="jstep"><div class="jn">4</div><h4>Design</h4><p>Built the full flow from onboarding to reward redemption.</p></div>
+    </div>
+  </div>
+</div></div></section>
+
+<!-- TYPE AND COLOUR -->
+<section class="cs" id="style"><div class="container"><div class="split">
+  <div class="sticky-k"><div class="eyebrow">08 &middot; Visual language</div></div>
+  <div class="cs-block" style="max-width:100%">
+    <h2>Warm, calm and coffee coloured</h2>
+    <p style="max-width:780px">Typography sets the interface tone and the palette keeps it warm. Poppins was chosen for its clean, modern look and high readability across screen sizes. Its geometric structure keeps the interface approachable.</p>
+    <div class="stylegrid">
+      <div class="sg">
+        <div class="sk">Typography in the app</div>
+        <div class="poppins-demo">Poppins</div>
+        <div class="glyphs">AaBbCcDd 0123456789</div>
+        <div class="sline"><span><b>Heading</b> 32 / Semi bold</span><span><b>Title</b> 24 / Medium</span><span><b>Body</b> 16 / Regular</span></div>
+      </div>
+      <div class="sg">
+        <div class="sk">Colours in the app</div>
+        <div class="swatches">
+          <div class="sw" style="background:#C67C4E;color:#fff">#C67C4E</div>
+          <div class="sw" style="background:#1C1C1C;color:#fff">#1C1C1C</div>
+          <div class="sw" style="background:#A2A2A2;color:#fff">#A2A2A2</div>
+          <div class="sw" style="background:#F8EFE9;color:#9C5A32;border:1px solid var(--border)">#F8EFE9</div>
+          <div class="usage">Caramel for actions, ink for text, grey for secondary detail, cream for surfaces.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div></div></section>
+
+<!-- PERSONA -->
+<section class="cs" id="persona"><div class="container"><div class="split">
+  <div class="sticky-k"><div class="eyebrow">09 &middot; Persona</div></div>
+  <div class="cs-block" style="max-width:100%">
+    <h2>Designing with <span class="a">purpose</span></h2>
+    <div class="persona-card">
+      <div class="p-head">
+        <img src="images/chipt/persona-avatar.webp" alt="Aarav Sharma">
+        <div><div class="pn">Aarav Sharma</div><div class="pm">Office professional &middot; 26 &middot; Daily coffee buyer</div></div>
+      </div>
+      <div class="p-body">
+        <div class="bars">
+          <div class="bar"><div class="bl">Primary goals <span>72%</span></div><div class="track"><div class="fill" style="width:72%"></div></div></div>
+          <div class="bar"><div class="bl">Core needs <span>80%</span></div><div class="track"><div class="fill" style="width:80%"></div></div></div>
+          <div class="bar"><div class="bl">Common pain points <span>25%</span></div><div class="track"><div class="fill" style="width:25%"></div></div></div>
+        </div>
+        <p>As a regular coffee buyer, Aarav wants a quick and convenient way to purchase coffee while also earning rewards. He prefers simple systems that let him return reusable cups, collect loyalty points and redeem them easily, without disrupting his daily routine.</p>
+        <div class="quote">"I get coffee almost every day. If returning my cup earns rewards and helps reduce waste, it feels like a win for both me and the environment."<span>Aarav Sharma</span></div>
+      </div>
+    </div>
+  </div>
+</div></div></section>
+
+<!-- SCREENS -->
+<section class="cs" id="screens"><div class="container">
+  <div class="split">
+    <div class="sticky-k"><div class="eyebrow">10 &middot; The app</div></div>
+    <div class="cs-block">
+      <h2>Introducing the Chipt app</h2>
+      <p>The full journey, screen by screen: a warm onboarding that explains the cup, a light sign up, ordering coffee, and the moment that makes Chipt different, registering the cup with a tap and watching the rewards arrive.</p>
+    </div>
+  </div>
+
+  <div class="gal-head"><h3>Onboarding</h3><div class="gk">First open</div></div>
+  <div class="shots">
+    <figure><img src="images/chipt/s/ob-welcome.webp" alt="Welcome to Chipt" loading="lazy"><figcaption>Welcome</figcaption></figure>
+    <figure><img src="images/chipt/s/ob-mission.webp" alt="Our mission" loading="lazy"><figcaption>The mission</figcaption></figure>
+    <figure><img src="images/chipt/s/ob-scanme.webp" alt="Scan the cup" loading="lazy"><figcaption>Meet the cup</figcaption></figure>
+    <figure><img src="images/chipt/s/ob-tapcup.webp" alt="Tap your cup" loading="lazy"><figcaption>Tap to connect</figcaption></figure>
+    <figure><img src="images/chipt/s/ob-loyalty.webp" alt="Get loyalty points" loading="lazy"><figcaption>Loyalty points</figcaption></figure>
+  </div>
+
+  <div class="gal-head"><h3>Sign in or sign up</h3><div class="gk">Access</div></div>
+  <div class="shots">
+    <figure><img src="images/chipt/s/signin.webp" alt="Sign in" loading="lazy"><figcaption>Sign in</figcaption></figure>
+    <figure><img src="images/chipt/s/signup.webp" alt="Sign up" loading="lazy"><figcaption>Sign up</figcaption></figure>
+    <figure><img src="images/chipt/s/otp.webp" alt="OTP verification" loading="lazy"><figcaption>OTP verification</figcaption></figure>
+  </div>
+
+  <div class="gal-head"><h3>Let's have a coffee</h3><div class="gk">Order and checkout</div></div>
+  <div class="shots">
+    <figure><img src="images/chipt/s/home.webp" alt="Home" loading="lazy"><figcaption>Home</figcaption></figure>
+    <figure><img src="images/chipt/s/search.webp" alt="Search vendors" loading="lazy"><figcaption>Vendor search</figcaption></figure>
+    <figure><img src="images/chipt/s/product.webp" alt="Product page" loading="lazy"><figcaption>Product</figcaption></figure>
+    <figure><img src="images/chipt/s/order.webp" alt="Order with loyalty points" loading="lazy"><figcaption>Order, points applied</figcaption></figure>
+    <figure><img src="images/chipt/s/payment.webp" alt="Payment methods" loading="lazy"><figcaption>Payment</figcaption></figure>
+    <figure><img src="images/chipt/s/thankyou.webp" alt="Order placed" loading="lazy"><figcaption>Order placed</figcaption></figure>
+  </div>
+
+  <div class="gal-head"><h3>Cup registration and rewards</h3><div class="gk">The Chipt moment</div></div>
+  <div class="shots">
+    <figure><img src="images/chipt/s/my-cups.webp" alt="Registered cups" loading="lazy"><figcaption>My cups</figcaption></figure>
+    <figure><img src="images/chipt/s/tap-cup-full.webp" alt="Tap your cup" loading="lazy"><figcaption>Tap your cup</figcaption></figure>
+    <figure><img src="images/chipt/s/congrats.webp" alt="Cup added, points earned" loading="lazy"><figcaption>Points earned</figcaption></figure>
+  </div>
+</div></section>
+
+<!-- THANK YOU -->
+<section class="thanks" id="thanks"><div class="container">
+  <div class="band">
+    <div class="glow"></div>
+    <div class="tk-eyebrow">The end</div>
+    <h2>Thank <span>you</span> for viewing</h2>
+    <p>Chipt taught me how far a product can go when the sustainable choice is also the easiest one. The full project is on Behance, and I am happy to talk about it.</p>
+    <div class="cta-row">
+      <a class="btn" href="mailto:pulkitawasthi5678@gmail.com">Get in touch</a>
+      <a class="btn ghost" href="https://www.behance.net/gallery/245384457/Chipt-App" target="_blank" rel="noopener noreferrer">View on Behance &#8599;</a>
+    </div>
+  </div>
+</div></section>
+
+<footer class="footer">
+  <div class="container">
+    <h2 class="foot-big"><span class="w">Let's create</span><span class="g">incredible work together.</span></h2>
+    <div class="foot-cols">
+      <div class="fc">
+        <div class="flabel">Email</div>
+        <a class="fmail" href="mailto:pulkitawasthi5678@gmail.com">pulkitawasthi5678@gmail.com</a>
+        <a class="fphone" href="tel:+918707003804">+91 87070 03804</a>
+      </div>
+      <div class="fc">
+        <div class="flabel">Social</div>
+        <div class="socials">
+          <a href="https://www.linkedin.com/in/paux-ui" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z"/></svg>
+          </a>
+          <a href="https://wa.me/918707003804" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.96-.94 1.16-.17.2-.35.22-.64.08-.3-.15-1.26-.47-2.4-1.48-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.6.13-.14.3-.35.44-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.5 0 1.47 1.07 2.9 1.22 3.1.15.2 2.1 3.2 5.08 4.49.71.3 1.27.49 1.7.63.72.23 1.37.2 1.88.12.57-.09 1.76-.72 2.01-1.42.25-.7.25-1.3.17-1.42-.07-.12-.27-.2-.57-.35zM12.05 21.79h-.01a9.8 9.8 0 0 1-5-1.37l-.36-.21-3.72.97.99-3.62-.23-.37a9.77 9.77 0 0 1-1.5-5.21c0-5.4 4.4-9.79 9.81-9.79a9.73 9.73 0 0 1 6.93 2.87 9.73 9.73 0 0 1 2.87 6.94c0 5.4-4.4 9.79-9.78 9.79zm8.33-18.11A11.7 11.7 0 0 0 12.05.25C5.56.25.28 5.53.28 12.02c0 2.07.54 4.1 1.57 5.89L.18 23.75l5.98-1.57a11.76 11.76 0 0 0 5.88 1.5h.01c6.49 0 11.77-5.28 11.77-11.77 0-3.14-1.22-6.1-3.44-8.23z"/></svg>
+          </a>
+          <a href="mailto:pulkitawasthi5678@gmail.com" aria-label="Email">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="5" width="19" height="14" rx="2.5"/><path d="m3 7 9 6.5L21 7"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="foot-rule"></div>
+    <div class="foot-small">
+      <div>&copy; <span id="yr"></span> Pulkit Awasthi. Designed and built by me, pixel by pixel.</div>
+      <div>Made with Figma, coffee and stubbornness</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* rail scrollspy: dots fill as you pass, label shows on the active one */
+(function(){
+  var links = Array.prototype.slice.call(document.querySelectorAll("#rail a"));
+  var ids = links.map(function(a){ return a.getAttribute("href").slice(1); });
+  var sections = ids.map(function(id){ return document.getElementById(id); }).filter(Boolean);
+  function spy(){
+    var pos = window.scrollY + window.innerHeight * 0.35, current = ids[0];
+    sections.forEach(function(sec){ if (sec.offsetTop <= pos) current = sec.id; });
+    var idx = ids.indexOf(current);
+    links.forEach(function(a, i){
+      a.classList.toggle("active", i === idx);
+      a.classList.toggle("done", i < idx);
+    });
+  }
+  window.addEventListener("scroll", spy, {passive:true});
+  window.addEventListener("resize", spy);
+  spy();
+})();
+/* site nav bits */
+(function(){
+  var yr = document.getElementById("yr"); if (yr) yr.textContent = new Date().getFullYear();
+  var t = document.querySelector(".nav-toggle"), links = document.querySelector(".nav-links");
+  if (t && links) t.addEventListener("click", function(){ links.classList.toggle("open"); });
+})();
+</script>
+</body>
+</html>
