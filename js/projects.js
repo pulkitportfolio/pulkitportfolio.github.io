@@ -253,33 +253,6 @@ const PROJECTS = [
       "images/sample-web.svg"
     ],
     "featured": true
-  },
-  {
-    "id": "shopwise-app",
-    "title": "ShopWise Retail Companion App",
-    "category": "app",
-    "year": "2024",
-    "role": "UX/UI Designer",
-    "summary": "An in-store companion app that helps shoppers find, compare and check out faster.",
-    "tags": [
-      "Mobile",
-      "Retail",
-      "Prototyping"
-    ],
-    "thumbnail": "images/sample-app.svg",
-    "cover": "images/sample-app.svg",
-    "overview": "ShopWise guides shoppers through large stores with search, aisle maps and a quick self-checkout.",
-    "problem": "Shoppers wasted time locating products and abandoned carts at slow checkout counters.",
-    "process": [
-      "Shadowed shoppers to map real in-store friction points.",
-      "Prototyped an aisle-finder and scan-to-cart flow.",
-      "Ran quick guerrilla tests and refined the navigation."
-    ],
-    "outcome": "The prototype reduced simulated product-find time and made checkout feel effortless for testers.",
-    "gallery": [
-      "images/sample-app.svg"
-    ],
-    "featured": true
   }
 ];
 
