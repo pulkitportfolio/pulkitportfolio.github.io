@@ -221,8 +221,9 @@ const PROJECTS = [
     "heroImage": "",
     "cardCtaLabel": "",
     "cardCtaUrl": "",
-    "takeawayCtaLabel": "View on Behance",
-    "takeawayCtaUrl": "https://www.behance.net/gallery/245384457/Chipt-App"
+    "takeawayCtaLabel": "",
+    "takeawayCtaUrl": "",
+    "ctaText": ""
   },
   {
     "id": "learnhub-web",
