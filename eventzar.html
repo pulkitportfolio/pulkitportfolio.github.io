@@ -267,7 +267,7 @@ figcaption{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-tra
     <div class="hero-shot">
       <div class="ring"></div>
       <span class="orb"></span><span class="orb o2"></span>
-      <img src="images/eventzar/hero-cutout-clean.webp" alt="EventsZAR on a laptop and a phone" />
+      <img id="hero-swap" src="images/eventzar/hero-cutout-clean.webp" alt="EventsZAR on a laptop and a phone" />
     </div>
   </div>
 </section>
@@ -572,7 +572,7 @@ figcaption{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-tra
     <p>EventsZAR taught me how to design one product for two very different audiences at once. If you would like to talk about this project, or about work like it, I am happy to chat. The complete project with all 400+ screens is open to explore in Figma.</p>
     <div class="cta-row">
       <a class="btn" href="mailto:pulkitawasthi5678@gmail.com">Get in touch</a>
-      <a class="btn ghost" href="https://www.figma.com/design/eaKNv7fZH2IfjCgySbOokH/complete-Event-zar-project?node-id=0-1&amp;t=tvQ3divZNx3sQduw-1" target="_blank" rel="noopener noreferrer">View the full project in Figma &#8599;</a>
+      <a id="takeaway-cta" class="btn ghost" href="https://www.figma.com/design/eaKNv7fZH2IfjCgySbOokH/complete-Event-zar-project?node-id=0-1&amp;t=tvQ3divZNx3sQduw-1" target="_blank" rel="noopener noreferrer">View the full project in Figma &#8599;</a>
     </div>
   </div>
 </div></section>
@@ -634,6 +634,25 @@ figcaption{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-tra
   var yr = document.getElementById("yr"); if (yr) yr.textContent = new Date().getFullYear();
   var t = document.querySelector(".nav-toggle"), links = document.querySelector(".nav-links");
   if (t && links) t.addEventListener("click", function(){ links.classList.toggle("open"); });
+})();
+
+/* admin-managed overrides: hero banner image + takeaway CTA (published via projects.js) */
+(function(){
+  var page = location.pathname.split("/").pop();
+  var p = (window.PROJECTS || []).filter(function(x){ return x.customUrl === page; })[0];
+  if (!p) return;
+  if (p.heroImage) { var h = document.getElementById("hero-swap"); if (h) h.src = p.heroImage; }
+  var t = document.getElementById("takeaway-cta");
+  if (t && ("takeawayCtaLabel" in p)) {
+    if (p.takeawayCtaLabel && p.takeawayCtaUrl) {
+      t.innerHTML = "";
+      t.appendChild(document.createTextNode(p.takeawayCtaLabel + " "));
+      var arw = document.createElement("span"); arw.innerHTML = "&#8599;"; t.appendChild(arw);
+      t.href = p.takeawayCtaUrl;
+    } else {
+      t.style.display = "none";
+    }
+  }
 })();
 </script>
 </body>

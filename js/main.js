@@ -91,6 +91,9 @@ function escapeAttr(s) { return escapeHtml(s); }
             "<h3>" + escapeHtml(p.title) + "</h3>" +
             '<p class="psummary">' + escapeHtml(p.summary || "") + "</p>" +
             '<a class="plink" href="' + escapeAttr(csHref) + '">' + escapeHtml(p.ctaText || "View project") + ' <span class="arw">&rarr;</span></a>' +
+            (p.cardCtaLabel && p.cardCtaUrl
+              ? '<a class="plink sec" href="' + escapeAttr(p.cardCtaUrl) + '" target="_blank" rel="noopener noreferrer">' + escapeHtml(p.cardCtaLabel) + ' <span class="arw">&#8599;</span></a>'
+              : "") +
           "</div>" +
         "</article>";
     }).join("");

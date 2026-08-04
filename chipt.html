@@ -230,7 +230,7 @@ section.cs{padding:104px 0 6px}
     </div>
     <div class="hero-shot">
       <img src="images/chipt/s/home.webp" alt="Chipt home screen" loading="eager" />
-      <img class="mid" src="images/chipt/s/ob-welcome.webp" alt="Chipt welcome screen" loading="eager" />
+      <img id="hero-swap" class="mid" src="images/chipt/s/ob-welcome.webp" alt="Chipt welcome screen" loading="eager" />
       <img src="images/chipt/s/congrats.webp" alt="Chipt reward screen" loading="eager" />
     </div>
   </div>
@@ -457,7 +457,7 @@ section.cs{padding:104px 0 6px}
     <p>Chipt taught me how far a product can go when the sustainable choice is also the easiest one. The full project is on Behance, and I am happy to talk about it.</p>
     <div class="cta-row">
       <a class="btn" href="mailto:pulkitawasthi5678@gmail.com">Get in touch</a>
-      <a class="btn ghost" href="https://www.behance.net/gallery/245384457/Chipt-App" target="_blank" rel="noopener noreferrer">View on Behance &#8599;</a>
+      <a id="takeaway-cta" class="btn ghost" href="https://www.behance.net/gallery/245384457/Chipt-App" target="_blank" rel="noopener noreferrer">View on Behance &#8599;</a>
     </div>
   </div>
 </div></section>
@@ -494,6 +494,7 @@ section.cs{padding:104px 0 6px}
   </div>
 </footer>
 
+<script src="js/projects.js?v=1785822433"></script>
 <script>
 /* rail scrollspy: dots fill as you pass, label shows on the active one */
 (function(){
@@ -518,6 +519,25 @@ section.cs{padding:104px 0 6px}
   var yr = document.getElementById("yr"); if (yr) yr.textContent = new Date().getFullYear();
   var t = document.querySelector(".nav-toggle"), links = document.querySelector(".nav-links");
   if (t && links) t.addEventListener("click", function(){ links.classList.toggle("open"); });
+})();
+
+/* admin-managed overrides: hero banner image + takeaway CTA (published via projects.js) */
+(function(){
+  var page = location.pathname.split("/").pop();
+  var p = (window.PROJECTS || []).filter(function(x){ return x.customUrl === page; })[0];
+  if (!p) return;
+  if (p.heroImage) { var h = document.getElementById("hero-swap"); if (h) h.src = p.heroImage; }
+  var t = document.getElementById("takeaway-cta");
+  if (t && ("takeawayCtaLabel" in p)) {
+    if (p.takeawayCtaLabel && p.takeawayCtaUrl) {
+      t.innerHTML = "";
+      t.appendChild(document.createTextNode(p.takeawayCtaLabel + " "));
+      var arw = document.createElement("span"); arw.innerHTML = "&#8599;"; t.appendChild(arw);
+      t.href = p.takeawayCtaUrl;
+    } else {
+      t.style.display = "none";
+    }
+  }
 })();
 </script>
 </body>
