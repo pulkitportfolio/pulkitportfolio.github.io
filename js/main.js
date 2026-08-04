@@ -157,10 +157,10 @@ function toolIcon(name) {
   txt("site-hero-strong", s.heroLeadStrong);
   txt("site-hero-lead", s.heroLead);
 
-  /* ---- words of trust: one wide card, arrows switch recommendations ---- */
+  /* ---- words of trust: two cards, heading arrows, auto-advance every 5s ---- */
   (function () {
-    var slide = document.getElementById("trust-slide");
-    if (!slide) return;
+    var pair = document.getElementById("trust-pair");
+    if (!pair) return;
     var items = Array.isArray(s.testimonials) ? s.testimonials : null;
     if (items && !items.length) {
       var ts = document.getElementById("trust");
@@ -171,72 +171,87 @@ function toolIcon(name) {
       items = [
         { quote: "Recommendation text goes here. Open the admin panel, Site content tab, and replace these sample cards with real words from people you have worked with.", name: "Name Surname", role: "Role, Company" },
         { quote: "A second sample recommendation. One or two sentences work best, spoken in the person's own voice.", name: "Name Surname", role: "Role, Company" },
-        { quote: "A third sample recommendation. The arrows below switch between however many you add.", name: "Name Surname", role: "Role, Company" }
+        { quote: "A third sample recommendation. The arrows next to the heading switch between however many you add.", name: "Name Surname", role: "Role, Company" }
       ];
     }
-    var idx = 0, count = document.getElementById("trust-count");
-    var wrap = document.getElementById("trust-wrap");
-    var more = document.getElementById("trust-more");
-    var CLAMP = 178; // ~4 lines of the serif quote
-    var expanded = false;
-    function fit() {
-      // show the full text when it fits; clamp with a Read more toggle when it does not
-      if (!wrap) return;
-      var tq = wrap.querySelector(".tq");
+    var slides = pair.querySelectorAll(".tslide");
+    var CLAMP = 150; // ~4 lines of the card quote
+    var idx = 0;
+
+    function fit(slide) {
+      var wrap = slide.querySelector(".tqwrap"), tq = slide.querySelector(".tq"), more = slide.querySelector(".tmore");
       wrap.style.maxHeight = "none";
       var full = tq.scrollHeight;
-      if (full > CLAMP + 30 && !expanded) {
+      if (full > CLAMP + 26) {
         wrap.style.maxHeight = CLAMP + "px";
         wrap.classList.add("clamped");
-        if (more) { more.hidden = false; more.textContent = "Read more"; }
-      } else if (full > CLAMP + 30) {
-        wrap.style.maxHeight = full + "px";
-        wrap.classList.remove("clamped");
-        if (more) { more.hidden = false; more.textContent = "Read less"; }
+        more.hidden = false; more.textContent = "Read more";
+        slide._expanded = false;
       } else {
-        wrap.style.maxHeight = "none";
         wrap.classList.remove("clamped");
-        if (more) more.hidden = true;
+        more.hidden = true;
       }
+    }
+    function paint(slide, t) {
+      slide.querySelector(".tq").textContent = t.quote || "";
+      slide.querySelector(".tn").textContent = t.name || "";
+      slide.querySelector(".tr").textContent = t.role || "";
+      fit(slide);
     }
     function show(i, instant) {
       idx = (i + items.length) % items.length;
-      function paint() {
-        var t = items[idx];
-        slide.querySelector(".tq").textContent = t.quote || "";
-        slide.querySelector(".tn").textContent = t.name || "";
-        slide.querySelector(".tr").textContent = t.role || "";
-        if (count) count.textContent = (idx + 1) + " / " + items.length;
-        expanded = false;
-        fit();
-        slide.classList.remove("swap");
+      function paintAll() {
+        paint(slides[0], items[idx]);
+        if (items.length > 1) paint(slides[1], items[(idx + 1) % items.length]);
+        pair.classList.remove("swap");
       }
-      if (instant) { paint(); return; }
-      slide.classList.add("swap");
-      setTimeout(paint, 220);
+      if (instant) { paintAll(); return; }
+      pair.classList.add("swap");
+      setTimeout(paintAll, 220);
     }
-    if (more) more.addEventListener("click", function () {
-      // set a fixed start height so the max-height transition can animate both ways
-      var tq = wrap.querySelector(".tq");
-      wrap.style.maxHeight = wrap.offsetHeight + "px";
-      requestAnimationFrame(function () {
-        expanded = !expanded;
-        if (expanded) {
-          wrap.style.maxHeight = tq.scrollHeight + "px";
-          wrap.classList.remove("clamped");
-          more.textContent = "Read less";
-        } else {
-          wrap.style.maxHeight = CLAMP + "px";
-          wrap.classList.add("clamped");
-          more.textContent = "Read more";
-        }
+    slides = Array.prototype.slice.call(slides);
+    slides.forEach(function (slide) {
+      var more = slide.querySelector(".tmore"), wrap = slide.querySelector(".tqwrap"), tq = slide.querySelector(".tq");
+      more.addEventListener("click", function () {
+        wrap.style.maxHeight = wrap.offsetHeight + "px";
+        requestAnimationFrame(function () {
+          slide._expanded = !slide._expanded;
+          if (slide._expanded) {
+            wrap.style.maxHeight = tq.scrollHeight + "px";
+            wrap.classList.remove("clamped");
+            more.textContent = "Read less";
+          } else {
+            wrap.style.maxHeight = CLAMP + "px";
+            wrap.classList.add("clamped");
+            more.textContent = "Read more";
+          }
+        });
       });
     });
-    window.addEventListener("resize", fit);
+    if (items.length === 1) pair.classList.add("single");
+
     var prev = document.getElementById("trust-prev"), next = document.getElementById("trust-next");
-    if (prev) prev.addEventListener("click", function () { show(idx - 1); });
-    if (next) next.addEventListener("click", function () { show(idx + 1); });
+    var nav = document.querySelector("#trust .tnav");
+    if (items.length <= 2 && nav) nav.style.display = "none";
+    function step(d) { show(idx + d); restartAuto(); }
+    if (prev) prev.addEventListener("click", function () { step(-1); });
+    if (next) next.addEventListener("click", function () { step(1); });
+
+    /* auto-advance every 5s; pauses while hovering, off for reduced motion */
+    var timer = null;
+    var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    function startAuto() {
+      if (reduce || items.length <= 2) return;
+      timer = setInterval(function () {
+        var anyOpen = slides.some(function (sl) { return sl._expanded; });
+        if (!anyOpen) show(idx + 1);
+      }, 5000);
+    }
+    function restartAuto() { if (timer) clearInterval(timer); startAuto(); }
+    pair.addEventListener("mouseenter", function () { if (timer) clearInterval(timer); timer = null; });
+    pair.addEventListener("mouseleave", function () { restartAuto(); });
     show(0, true);
+    startAuto();
   })();
 
   var pill = document.getElementById("site-avail-pill");

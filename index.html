@@ -122,19 +122,21 @@
     <div class="container">
       <div class="section-head">
         <h2 class="split-head"><span class="g">Words of</span> trust.</h2>
-      </div>
-      <div class="trust-carousel">
-        <div class="tslide" id="trust-slide">
-          <div class="tqwrap" id="trust-wrap"><div class="tq">Recommendation text goes here. Open the admin panel, Site content tab, and replace these sample cards with real words from people you have worked with.</div></div>
-          <button class="tmore" id="trust-more" type="button" hidden>Read more</button>
-          <div class="twho"><div class="tn" id="ts-name">Name Surname</div><div class="tr" id="ts-role">Role, Company</div></div>
+        <div class="tnav">
+          <button class="tbtn" id="trust-prev" type="button" aria-label="Previous recommendations">&larr;</button>
+          <button class="tbtn" id="trust-next" type="button" aria-label="Next recommendations">&rarr;</button>
         </div>
-        <div class="trust-foot">
-          <span class="tcount" id="trust-count">1 / 3</span>
-          <div class="tnav">
-            <button class="tbtn" id="trust-prev" type="button" aria-label="Previous recommendation">&larr;</button>
-            <button class="tbtn" id="trust-next" type="button" aria-label="Next recommendation">&rarr;</button>
-          </div>
+      </div>
+      <div class="trust-pair" id="trust-pair">
+        <div class="tslide">
+          <div class="tqwrap"><div class="tq">Recommendation text goes here. Open the admin panel, Site content tab, and replace these sample cards with real words from people you have worked with.</div></div>
+          <button class="tmore" type="button" hidden>Read more</button>
+          <div class="twho"><div class="tn">Name Surname</div><div class="tr">Role, Company</div></div>
+        </div>
+        <div class="tslide">
+          <div class="tqwrap"><div class="tq">Recommendation text goes here. Open the admin panel, Site content tab, and replace these sample cards with real words from people you have worked with.</div></div>
+          <button class="tmore" type="button" hidden>Read more</button>
+          <div class="twho"><div class="tn">Name Surname</div><div class="tr">Role, Company</div></div>
         </div>
       </div>
     </div>
@@ -179,7 +181,7 @@
 
   <script>document.getElementById("yr").textContent = new Date().getFullYear();</script>
   <!-- The ?v= stamp is bumped automatically on each publish, so browsers cache this file until it actually changes. -->
-  <script src="js/projects.js?v=1785874764"></script>
+  <script src="js/projects.js?v=1785875379"></script>
   <script src="js/store.js"></script>
   <script src="js/main.js"></script>
 </body>
