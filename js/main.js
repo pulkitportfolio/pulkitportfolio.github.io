@@ -175,6 +175,30 @@ function toolIcon(name) {
       ];
     }
     var idx = 0, count = document.getElementById("trust-count");
+    var wrap = document.getElementById("trust-wrap");
+    var more = document.getElementById("trust-more");
+    var CLAMP = 178; // ~4 lines of the serif quote
+    var expanded = false;
+    function fit() {
+      // show the full text when it fits; clamp with a Read more toggle when it does not
+      if (!wrap) return;
+      var tq = wrap.querySelector(".tq");
+      wrap.style.maxHeight = "none";
+      var full = tq.scrollHeight;
+      if (full > CLAMP + 30 && !expanded) {
+        wrap.style.maxHeight = CLAMP + "px";
+        wrap.classList.add("clamped");
+        if (more) { more.hidden = false; more.textContent = "Read more"; }
+      } else if (full > CLAMP + 30) {
+        wrap.style.maxHeight = full + "px";
+        wrap.classList.remove("clamped");
+        if (more) { more.hidden = false; more.textContent = "Read less"; }
+      } else {
+        wrap.style.maxHeight = "none";
+        wrap.classList.remove("clamped");
+        if (more) more.hidden = true;
+      }
+    }
     function show(i, instant) {
       idx = (i + items.length) % items.length;
       function paint() {
@@ -183,12 +207,32 @@ function toolIcon(name) {
         slide.querySelector(".tn").textContent = t.name || "";
         slide.querySelector(".tr").textContent = t.role || "";
         if (count) count.textContent = (idx + 1) + " / " + items.length;
+        expanded = false;
+        fit();
         slide.classList.remove("swap");
       }
       if (instant) { paint(); return; }
       slide.classList.add("swap");
       setTimeout(paint, 220);
     }
+    if (more) more.addEventListener("click", function () {
+      // set a fixed start height so the max-height transition can animate both ways
+      var tq = wrap.querySelector(".tq");
+      wrap.style.maxHeight = wrap.offsetHeight + "px";
+      requestAnimationFrame(function () {
+        expanded = !expanded;
+        if (expanded) {
+          wrap.style.maxHeight = tq.scrollHeight + "px";
+          wrap.classList.remove("clamped");
+          more.textContent = "Read less";
+        } else {
+          wrap.style.maxHeight = CLAMP + "px";
+          wrap.classList.add("clamped");
+          more.textContent = "Read more";
+        }
+      });
+    });
+    window.addEventListener("resize", fit);
     var prev = document.getElementById("trust-prev"), next = document.getElementById("trust-next");
     if (prev) prev.addEventListener("click", function () { show(idx - 1); });
     if (next) next.addEventListener("click", function () { show(idx + 1); });
