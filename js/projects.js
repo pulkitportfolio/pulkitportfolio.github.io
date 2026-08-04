@@ -256,7 +256,7 @@ const PROJECTS = [
   },
   {
     "id": "sample",
-    "featured": false,
+    "featured": true,
     "title": "sample",
     "category": "app",
     "year": "",
