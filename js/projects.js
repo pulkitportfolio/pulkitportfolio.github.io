@@ -72,7 +72,7 @@ const SITE = {
       "Relume"
     ],
     "education": {
-      "degree": "B.F.A in Design & Applied Arts",
+      "degree": "B.V.A in Design & Applied Arts",
       "school": "University of Lucknow",
       "year": "2023"
     }
