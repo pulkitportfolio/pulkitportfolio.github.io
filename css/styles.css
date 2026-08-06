@@ -228,8 +228,18 @@ a:hover > .arw { transform: translate(2px, -2px); }
 .pcard h3 { font-size: clamp(28px, 3.4vw, 42px); font-weight: 500; letter-spacing: -.02em; }
 .pcard .psummary { color: var(--muted); font-size: 17px; line-height: 1.65; max-width: 52ch; }
 .pcard .prule { border-top: 1px solid var(--border); margin-top: 6px; }
-.pgrid-cta { display: flex; justify-content: center; margin-top: 56px; }
-.pgrid-cta .btn { padding: 16px 34px; font-size: 15px; }
+.pgrid-cta {
+  display: flex; justify-content: center; margin-top: 56px; padding: 26px 0;
+  border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+}
+.pgrid-cta a {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-family: var(--mono); font-size: 13px; letter-spacing: .18em; text-transform: uppercase;
+  color: var(--text);
+}
+.pgrid-cta a .arw { transition: transform .25s ease; }
+.pgrid-cta a:hover { color: var(--accent); }
+.pgrid-cta a:hover .arw { transform: translateX(6px); }
 .pcard .plinks { display: flex; align-items: baseline; gap: 28px; flex-wrap: wrap; }
 .pcard .plink {
   padding-top: 12px; font-family: var(--mono); font-size: 12px;
