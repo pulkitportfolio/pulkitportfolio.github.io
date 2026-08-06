@@ -348,38 +348,6 @@ const PROJECTS = [
       "images/sample-web.svg"
     ],
     "featured": true
-  },
-  {
-    "id": "sample",
-    "featured": true,
-    "title": "sample",
-    "category": "app",
-    "year": "",
-    "role": "",
-    "summary": "",
-    "liveUrl": "",
-    "customUrl": "sample-project.html",
-    "ctaText": "",
-    "heroImage": "",
-    "cardCtaLabel": "",
-    "cardCtaUrl": "",
-    "takeawayCtaLabel": "",
-    "takeawayCtaUrl": "",
-    "embed": "",
-    "embedPortrait": false,
-    "tags": [],
-    "thumbnail": "images/cards/sample.webp",
-    "cover": "",
-    "overview": "",
-    "problem": "",
-    "process": [],
-    "outcome": "",
-    "overviewHeading": "",
-    "problemHeading": "",
-    "processHeading": "",
-    "outcomeHeading": "",
-    "screensHeading": "",
-    "gallery": []
   }
 ];
 
