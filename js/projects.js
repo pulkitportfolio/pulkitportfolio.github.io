@@ -212,7 +212,8 @@ const PROJECTS = [
     "cardCtaUrl": "",
     "takeawayCtaLabel": "View the full project in Figma",
     "takeawayCtaUrl": "https://www.figma.com/design/eaKNv7fZH2IfjCgySbOokH/complete-Event-zar-project?node-id=0-1&t=tvQ3divZNx3sQduw-1",
-    "ctaText": "View Project"
+    "ctaText": "View Project",
+    "metaStrip": "Role: UX/UI Designer\nPlatforms: Mobile app, Web app, Admin panel, Business portal\nScope: 400+ screens, 45 flows\nDuration: 1 month\nTools: Figma"
   },
   {
     "id": "chipt",
@@ -250,7 +251,8 @@ const PROJECTS = [
     "cardCtaUrl": "",
     "takeawayCtaLabel": "",
     "takeawayCtaUrl": "",
-    "ctaText": "View Project"
+    "ctaText": "View Project",
+    "metaStrip": "Role: UX Research, UI Design\nType: Concept project\nDuration: 2 weeks\nYear: 2024\nTools: Figma"
   },
   {
     "id": "alberta-carriage-supply",
@@ -282,7 +284,8 @@ const PROJECTS = [
     "processHeading": "",
     "outcomeHeading": "",
     "screensHeading": "",
-    "gallery": []
+    "gallery": [],
+    "metaStrip": "Role: Product Designer\nClient: Alberta Carriage Supply, Canada\nPlatform: E-commerce website, web + mobile\nScope: UX audit, IA, full redesign\nTools: Figma"
   },
   {
     "id": "learnhub-web",
