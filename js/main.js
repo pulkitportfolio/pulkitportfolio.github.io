@@ -80,7 +80,7 @@ function escapeAttr(s) { return escapeHtml(s); }
     }
 
     grid.innerHTML = list.map(function (p) {
-      var label = p.category === "app" ? "App" : "Website";
+      var label = p.category === "app" ? "App" : p.category === "uxaudit" ? "UX audit" : "Website";
       var csHref = p.customUrl || ("case-study.html?id=" + encodeURIComponent(p.id) + previewQS);
       return '' +
         '<article class="pcard item-reveal" tabindex="0" data-href="' + escapeAttr(csHref) + '">' +
@@ -111,7 +111,12 @@ function escapeAttr(s) { return escapeHtml(s); }
     observeReveals();
   }
 
-  // filters
+  // filters: the UX audits pill only appears once a UX audit project exists
+  var uxBtn = document.querySelector('.filter[data-filter="uxaudit"]');
+  if (uxBtn) {
+    if (projects.some(function (p) { return p.category === "uxaudit"; })) uxBtn.hidden = false;
+    else uxBtn.remove();
+  }
   var filters = document.querySelectorAll(".filter");
   filters.forEach(function (f) {
     f.addEventListener("click", function () {

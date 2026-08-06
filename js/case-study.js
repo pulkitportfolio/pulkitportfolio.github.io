@@ -59,7 +59,7 @@
     }).join("") + "</div>";
   }
 
-  var label = p.category === "app" ? "App" : "Website";
+  var label = p.category === "app" ? "App" : p.category === "uxaudit" ? "UX audit" : "Website";
   var hasEmbed = !!(p.embed && String(p.embed).trim());
 
   root.innerHTML =
