@@ -622,7 +622,7 @@ figcaption{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-tra
   </div>
 </footer>
 
-<script src="js/projects.js?v=1786006371"></script>
+<script src="js/projects.js?v=1786007115"></script>
 <script>
 /* left rail scrollspy */
 (function(){
@@ -669,11 +669,13 @@ figcaption{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-tra
   if (!p) return;
   /* detail strip under the hero: full replace from p.metaStrip, or just the Role value */
   var strip = document.querySelector(".meta");
-  if (strip && typeof p.metaStrip === "string") {
+  if (strip && typeof p.metaStrip === "string" && p.metaStrip.trim()) {
     var rows = p.metaStrip.split("\n").map(function(l){ return l.trim(); }).filter(Boolean);
-    if (!rows.length) {
-      strip.style.display = "none";   /* field erased in the panel: show no strip */
-    } else {
+    if (rows.length === 1 && /^(hide|none)$/i.test(rows[0])) {
+      strip.style.display = "none";   /* the word "hide" in the panel removes the strip */
+      rows = null;
+    }
+    if (rows) {
       strip.innerHTML = "";
       rows.forEach(function(line){
         var ix = line.indexOf(":");
@@ -683,7 +685,8 @@ figcaption{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-tra
         d.appendChild(dk); d.appendChild(dv); strip.appendChild(d);
       });
     }
-  } else if (strip && p.role) {
+  }
+  if (strip && strip.children.length && p.role && (!p.metaStrip || !p.metaStrip.trim())) {
     strip.querySelectorAll(".k").forEach(function(k){
       if (k.textContent.trim().toLowerCase() === "role" && k.nextElementSibling) k.nextElementSibling.textContent = p.role;
     });
