@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Alberta Carriage Supply | Pulkit Awasthi</title>
+<meta name="description" content="Alberta Carriage Supply case study by Pulkit Awasthi. A complete e-commerce redesign for a Canadian horse-drawn equipment manufacturer, from UX audit to a shorter buying flow across web and mobile." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fragment+Mono&family=Cormorant:wght@600;700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet" />
+<link rel="icon" type="image/svg+xml" href="images/favicon.svg" />
+<link rel="stylesheet" href="css/styles.css" />
+<style>
+:root{
+  --bg:#FFFFFF; --bg-soft:#F5F2EC; --text:#1D1B16; --muted:#6E6A61; --faint:#BCB7AC;
+  --border:#E7E3DA; --radius:20px; --radius-sm:12px; --maxw:1120px;
+  --shadow:0 1px 2px rgba(0,0,0,.04), 0 12px 30px rgba(0,0,0,.06);
+  --font:"Plus Jakarta Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --mono:"Fragment Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  --serif:"Cormorant",Georgia,serif;
+  --dmsans:"DM Sans",-apple-system,sans-serif;
+  --gold:#AF8D53; --gold-deep:#8F7340; --ink:#26221B;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+.container{width:100%;max-width:var(--maxw);margin:0 auto;padding:0 24px}
+h1,h2,h3,h4{line-height:1.1;letter-spacing:-.025em;font-weight:700}
+.eyebrow{font-family:var(--mono);font-size:12px;font-weight:400;letter-spacing:.3em;text-transform:uppercase;color:var(--muted)}
+
+/* ---------- HERO BANNER ---------- */
+.hero-band{position:relative;overflow:hidden;border-bottom:1px solid var(--border);
+  background:linear-gradient(180deg,#FDFCF9 0%,#F7F2E8 72%,#F0E9DB 100%)}
+.hero-band::before{content:"";position:absolute;inset:0;pointer-events:none;
+  background-image:repeating-linear-gradient(115deg, rgba(143,115,64,.06) 0 1px, transparent 1px 16px);
+  -webkit-mask-image:linear-gradient(100deg, transparent 18%, #000 72%);
+  mask-image:linear-gradient(100deg, transparent 18%, #000 72%)}
+.hero-band::after{content:"";position:absolute;left:-12%;bottom:-55%;width:64%;aspect-ratio:1;border-radius:50%;
+  background:radial-gradient(closest-side,rgba(175,141,83,.16),transparent 72%);pointer-events:none}
+.hero-grid{position:relative;z-index:1;max-width:1440px;margin:0 auto;display:grid;grid-template-columns:1fr 1.2fr;gap:clamp(28px,4vw,64px);align-items:center;padding:clamp(52px,6vw,104px) clamp(24px,4vw,72px)}
+.banner-copy .bk{display:inline-flex;align-items:center;gap:12px;font-family:var(--mono);font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--muted)}
+.banner-copy .bk::before{content:"";width:34px;height:1px;background:var(--gold)}
+.banner-copy h1{font-size:clamp(40px,4.6vw,68px);margin:20px 0 18px;color:var(--text);letter-spacing:-.03em}
+.banner-copy h1 .serif{font-family:var(--serif);font-weight:700;font-style:normal;
+  background:linear-gradient(115deg,var(--gold) 15%,#8A6B35 70%,#5C4520 130%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.banner-copy .tagline{font-size:clamp(16px,1.6vw,19px);color:var(--muted);max-width:500px;margin-bottom:32px}
+.bchips{display:flex;gap:9px;flex-wrap:wrap}
+.bchips span{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;padding:8px 16px;border:1px solid rgba(29,27,22,.08);border-radius:100px;color:var(--text);background:rgba(255,255,255,.85);box-shadow:0 1px 2px rgba(0,0,0,.04), 0 8px 22px rgba(43,36,24,.05)}
+.bchips span::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--gold);margin-right:8px;vertical-align:1px}
+/* device stage: desktop browser + phone overlap */
+.hero-shot{position:relative;padding:10px 0 26px}
+.hero-shot .ring{position:absolute;left:56%;top:50%;transform:translate(-50%,-50%);width:104%;aspect-ratio:1;border-radius:50%;border:1.5px solid rgba(143,115,64,.16);pointer-events:none}
+.hero-shot .ring::before{content:"";position:absolute;inset:8%;border-radius:50%;border:1px solid rgba(143,115,64,.10)}
+.hero-shot .orb{position:absolute;width:14px;height:14px;border-radius:50%;background:var(--gold);top:6%;right:6%;box-shadow:0 6px 14px rgba(175,141,83,.5);z-index:3}
+.hero-shot .orb.o2{width:9px;height:9px;background:var(--ink);top:auto;bottom:8%;right:auto;left:2%;box-shadow:0 6px 14px rgba(38,34,27,.35)}
+.hero-desk{position:relative;z-index:1;margin-left:8%;border-radius:12px;overflow:hidden;border:1px solid var(--border);background:#ECE8DF;box-shadow:0 18px 32px rgba(43,36,24,.14), 0 60px 90px rgba(43,36,24,.16)}
+.hero-desk .bar{display:flex;gap:6px;padding:10px 12px;background:#EAE5DB;border-bottom:1px solid var(--border)}
+.hero-desk .bar i{width:9px;height:9px;border-radius:50%;background:#CFC8BA;display:block}
+.hero-phone{position:absolute;z-index:2;left:-2%;bottom:-4%;width:24%;min-width:120px;border-radius:20px;overflow:hidden;border:5px solid #26221B;background:#26221B;box-shadow:0 24px 50px rgba(23,19,12,.35);animation:heroFloat 7s ease-in-out infinite}
+@keyframes heroFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+@media(prefers-reduced-motion:reduce){.hero-phone{animation:none}}
+@media(max-width:900px){.hero-grid{grid-template-columns:1fr}.hero-shot .ring{width:96%}}
+
+/* meta strip */
+.meta{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:18px;margin:34px 0 0;padding:32px 0;border-bottom:1px solid var(--border)}
+.meta .k{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+.meta .v{font-weight:600;font-size:15px}
+
+/* right progress rail */
+#rail{position:fixed;right:28px;top:50%;transform:translateY(-50%);z-index:60;display:none}
+@media(min-width:1360px){#rail{display:block}}
+#rail a{display:flex;flex-direction:row-reverse;align-items:center;gap:12px;padding:6px 0;font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--text);transition:.2s}
+#rail a .rd{width:9px;height:9px;border-radius:50%;border:1.5px solid #CBC5B8;background:transparent;flex:none;transition:.25s}
+#rail a .rl{opacity:0;transform:translateX(6px);transition:.25s;pointer-events:none}
+#rail a:hover .rl{opacity:.6;transform:none}
+#rail a.done .rd{background:var(--gold);border-color:var(--gold)}
+#rail a.active .rd{background:var(--gold);border-color:var(--gold);transform:scale(1.35);box-shadow:0 0 0 4px rgba(175,141,83,.2)}
+#rail a.active .rl{opacity:1;transform:none}
+
+/* ---------- generic ---------- */
+section.cs{padding:110px 0 6px}
+.cs-block{max-width:780px}
+.cs-block h2{font-size:clamp(26px,3.4vw,36px);margin-bottom:20px}
+.cs-block h2 .g{color:var(--faint)}
+.cs-block p{color:var(--muted);font-size:16.5px;margin-bottom:16px}
+.cs-block p b, .cs-block li b{color:var(--text)}
+
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin:38px 0 6px}
+.stat{border:1px solid var(--border);border-radius:var(--radius-sm);padding:20px 18px}
+.stat .n{font-size:30px;font-weight:800;letter-spacing:-.03em}
+.stat .l{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-top:6px}
+
+/* problem cards */
+.pains{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;margin-top:36px}
+.pain{border:1px solid var(--border);border-radius:var(--radius);padding:22px;box-shadow:var(--shadow);position:relative}
+.pain .pk{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:#A0522D}
+.pain h4{font-size:17px;margin:8px 0 6px}
+.pain p{font-size:14px;color:var(--muted)}
+
+/* insight strip */
+.insight{margin-top:28px;border-radius:var(--radius);background:var(--bg-soft);padding:26px 30px;display:flex;gap:18px;align-items:flex-start}
+.insight .iq{font-size:34px;line-height:1;color:var(--gold);font-weight:800}
+.insight p{font-size:17px;color:var(--text);font-weight:600;max-width:640px}
+.insight span{display:block;font-size:13.5px;color:var(--muted);font-weight:400;margin-top:6px}
+
+/* audit findings rows */
+.dd{margin-top:36px;border-top:1px solid var(--border)}
+.dd-row{display:grid;grid-template-columns:1fr 1fr;gap:30px;padding:30px 0;border-bottom:1px solid var(--border)}
+@media(max-width:760px){.dd-row{grid-template-columns:1fr;gap:8px}}
+.dd-row .dk{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;margin-bottom:6px}
+.dd-row .demand .dk{color:#A0522D}
+.dd-row .did .dk{color:var(--gold-deep)}
+.dd-row h4{font-size:17px;margin-bottom:4px}
+.dd-row p{font-size:14.5px;color:var(--muted)}
+
+/* scrollable tall page frames */
+.browser{border:1px solid var(--border);border-radius:14px;overflow:hidden;background:var(--bg-soft);box-shadow:var(--shadow)}
+.browser .bar{display:flex;gap:6px;padding:10px 12px;background:#EDE9E0;border-bottom:1px solid var(--border);position:relative}
+.browser .bar i{width:9px;height:9px;border-radius:50%;background:#D4CEC1;display:block}
+.browser img{width:100%}
+.browser.scrolly .page{max-height:560px;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:#C9C2B2 transparent}
+.browser .bar .hint{position:absolute;right:12px;top:50%;transform:translateY(-50%);font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.desk{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:24px}
+.desk figure.wide{grid-column:1/-1}
+@media(max-width:760px){.desk{grid-template-columns:1fr}}
+.desk figcaption{font-family:var(--font);text-transform:none;letter-spacing:0;font-size:13.5px;text-align:left;padding:12px 6px 0;color:var(--muted);line-height:1.55}
+.desk figcaption b{color:var(--text);font-weight:600}
+.gal-head{display:flex;align-items:baseline;justify-content:space-between;gap:20px;margin:64px 0 6px;flex-wrap:wrap}
+.gal-head h3{font-size:21px}
+.gal-head .gk{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+
+/* phones: every card keeps the same device ratio so rows stay level */
+.phones{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:22px;margin-top:24px}
+.phone{border:1px solid var(--border);border-radius:24px;overflow:hidden;background:var(--bg-soft);box-shadow:var(--shadow);aspect-ratio:402/874}
+.phone img{width:100%;height:100%;object-fit:cover;object-position:top}
+.phone.scrolly{overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:#C9C2B2 transparent}
+.phone.scrolly img{height:auto;object-fit:unset}
+figcaption{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);padding:9px 4px 0;text-align:center}
+
+/* IA entry points */
+.ia{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;margin-top:36px}
+.ia .lane{border:1px solid var(--border);border-radius:var(--radius);padding:22px;box-shadow:var(--shadow)}
+.ia .lane.hot{background:var(--ink);color:#fff;border-color:var(--ink)}
+.ia .lane.hot p{color:rgba(255,255,255,.68)}
+.ia .lane.hot .lk{color:var(--gold)}
+.ia .lk{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-deep)}
+.ia h4{font-size:17px;margin:8px 0 6px}
+.ia p{font-size:14px;color:var(--muted)}
+
+/* flow: before vs after */
+.flowlab{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;padding:7px 15px;border-radius:100px;margin:44px 0 16px}
+.flow-old .flowlab{background:#F6E9E1;color:#A0522D}
+.flow-new .flowlab{background:#F3ECDD;color:var(--gold-deep)}
+.jflow{display:grid;grid-template-columns:repeat(5,1fr);gap:20px}
+.jstep{border:1px solid var(--border);border-radius:12px;padding:18px 16px;background:var(--bg);position:relative}
+.jstep::before{content:"";position:absolute;left:-21px;width:21px;top:30px;border-top:2px dashed rgba(143,115,64,.35)}
+.flow-old .jstep::before{border-top-color:rgba(160,82,45,.35)}
+.jstep::after{content:"";position:absolute;left:-13px;top:26.5px;width:7px;height:7px;border-top:2px solid rgba(143,115,64,.7);border-right:2px solid rgba(143,115,64,.7);transform:rotate(45deg)}
+.flow-old .jstep::after{border-color:rgba(160,82,45,.6)}
+.jstep:first-child::before,.jstep:first-child::after{display:none}
+@media(max-width:980px){
+  .jflow{grid-template-columns:repeat(3,1fr)}
+  .jstep:nth-child(3n+1)::before,.jstep:nth-child(3n+1)::after{display:none}
+}
+@media(max-width:560px){
+  .jflow{grid-template-columns:1fr 1fr}
+  .jstep::before,.jstep::after{display:none}
+  .jstep:nth-child(2n)::before,.jstep:nth-child(2n)::after{display:block}
+}
+.jstep .jn{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:11px;margin-bottom:12px}
+.flow-old .jn{background:#EAD9CE;color:#7A3C1E}
+.flow-new .jn{background:var(--gold);color:#241C0D}
+.jstep h4{font-size:14.5px;margin-bottom:5px}
+.jstep p{font-size:12.5px;color:var(--muted);line-height:1.55}
+.jstep .bad{display:inline-block;margin-top:8px;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#A0522D}
+
+/* design language: type specimens + palette */
+.dl{display:grid;grid-template-columns:1.15fr .85fr;gap:24px;margin-top:36px}
+@media(max-width:880px){.dl{grid-template-columns:1fr}}
+.dl-card{border:1px solid var(--border);border-radius:var(--radius);padding:28px 28px 22px;box-shadow:var(--shadow);background:var(--bg)}
+.dl-card .dlk{font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.spec{padding:24px 0;border-bottom:1px solid var(--border)}
+.spec:last-of-type{border-bottom:0;padding-bottom:8px}
+.spec .aa{font-size:clamp(30px,3.4vw,42px);line-height:1.12;color:var(--text)}
+.spec .frow{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-top:14px}
+.spec .fname{font-size:17px;font-weight:700}
+.spec .fmeta{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.06em}
+.spec .fuse{font-size:13.5px;color:var(--muted);margin-top:6px;max-width:520px}
+.spec .glyphs{font-size:15px;color:var(--faint);margin-top:10px;letter-spacing:.04em;word-break:break-all}
+/* palette */
+.pal-bar{display:flex;height:16px;border-radius:100px;overflow:hidden;margin:20px 0 4px;border:1px solid var(--border)}
+.pal-note{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.pal-row{display:flex;align-items:center;gap:14px;padding:13px 0;border-bottom:1px solid var(--border)}
+.pal-row:last-child{border-bottom:0}
+.pal-row .dot{width:40px;height:40px;border-radius:12px;border:1px solid rgba(0,0,0,.07);flex:none}
+.pal-row b{font-size:14px;display:block;line-height:1.3}
+.pal-row .use{font-size:12.5px;color:var(--muted);line-height:1.4}
+.pal-row .hex{margin-left:auto;font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.06em;white-space:nowrap}
+
+/* impact */
+.impact{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;margin-top:36px}
+.imp{border:1px solid var(--border);border-radius:var(--radius);padding:24px;background:var(--bg-soft)}
+.imp .ik{width:34px;height:34px;border-radius:50%;background:var(--gold);color:#241C0D;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:16px;margin-bottom:14px}
+.imp h4{font-size:17px;margin-bottom:6px}
+.imp p{font-size:14px;color:var(--muted)}
+
+/* learnings */
+.skillchips{display:flex;gap:8px;flex-wrap:wrap;margin-top:22px}
+.skillchips span{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;padding:8px 15px;border:1px solid var(--border);border-radius:100px;color:var(--muted)}
+
+/* thanks */
+.thanks{margin:70px 0 64px}
+.thanks .band{border-radius:var(--radius);background:linear-gradient(135deg,#26221B 0%,#3A3226 62%,#57452A 100%);color:#fff;padding:clamp(48px,7vw,90px) clamp(24px,6vw,80px);text-align:center;position:relative;overflow:hidden}
+.thanks .band .glow{position:absolute;width:560px;height:560px;border-radius:50%;background:radial-gradient(closest-side,rgba(175,141,83,.3),transparent);bottom:-260px;left:-160px;pointer-events:none}
+.thanks .tk-eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.65)}
+.thanks h2{font-size:clamp(40px,6vw,72px);margin:16px 0 14px}
+.thanks h2 span{color:var(--gold)}
+.thanks p{color:rgba(255,255,255,.75);max-width:560px;margin:0 auto 30px;font-size:16.5px}
+.thanks .cta-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.thanks .btn{display:inline-flex;align-items:center;gap:8px;padding:14px 30px;border-radius:100px;font-weight:600;font-size:15px;background:#fff;color:#26221B;transition:.25s;border:1px solid transparent}
+.thanks .btn:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(0,0,0,.3)}
+.thanks .btn.ghost{background:transparent;color:#fff;border-color:rgba(255,255,255,.45)}
+.thanks .btn.ghost:hover{border-color:#fff;box-shadow:none}
+</style>
+</head>
+<body>
+
+  <header class="nav">
+    <div class="container nav-inner">
+      <a class="logo" href="index.html">PULKIT<span>.</span></a>
+      <button class="nav-toggle" aria-label="Menu">&#9776;</button>
+      <nav class="nav-links">
+        <a href="work.html" class="active">Work</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+        <a class="btn btn-primary" href="Pulkit_Awasthi_CV.pdf" download>Download CV</a>
+      </nav>
+    </div>
+  </header>
+
+<!-- right section rail -->
+<nav id="rail" aria-label="Sections">
+  <a href="#top"><span class="rd"></span><span class="rl">Intro</span></a>
+  <a href="#about"><span class="rd"></span><span class="rl">The client</span></a>
+  <a href="#problem"><span class="rd"></span><span class="rl">The problem</span></a>
+  <a href="#audit"><span class="rd"></span><span class="rl">The audit</span></a>
+  <a href="#ia"><span class="rd"></span><span class="rl">Navigation</span></a>
+  <a href="#flow"><span class="rd"></span><span class="rl">Buying flow</span></a>
+  <a href="#web"><span class="rd"></span><span class="rl">Web design</span></a>
+  <a href="#mobile"><span class="rd"></span><span class="rl">Mobile design</span></a>
+  <a href="#system"><span class="rd"></span><span class="rl">Design language</span></a>
+  <a href="#impact"><span class="rd"></span><span class="rl">Impact</span></a>
+  <a href="#learnings"><span class="rd"></span><span class="rl">Learnings</span></a>
+  <a href="#thanks"><span class="rd"></span><span class="rl">Thanks</span></a>
+</nav>
+
+<!-- HERO BANNER -->
+<section class="hero-band" id="top">
+  <div class="hero-grid">
+    <div class="banner-copy">
+      <div class="bk">UX/UI case study &middot; E-commerce redesign</div>
+      <h1>Alberta <span class="serif">Carriage Supply</span></h1>
+      <p class="tagline">A Canadian maker of horse-drawn vehicles had a website people kept leaving. I redesigned the whole store, web and mobile, so finding the right gear and buying it takes minutes, not patience.</p>
+      <div class="bchips"><span>Website redesign</span><span>UX audit</span><span>Web + mobile</span><span>E-commerce</span></div>
+    </div>
+    <div class="hero-shot">
+      <div class="ring"></div>
+      <span class="orb"></span><span class="orb o2"></span>
+      <div class="hero-desk"><div class="bar"><i></i><i></i><i></i></div><img id="hero-swap" src="images/acs/hero-web.webp" alt="Alberta Carriage Supply redesigned home page" /></div>
+      <div class="hero-phone"><img src="images/acs/hero-mobile.webp" alt="Alberta Carriage Supply on mobile" /></div>
+    </div>
+  </div>
+</section>
+<section style="padding:0"><div class="container">
+  <div class="meta">
+    <div><div class="k">Role</div><div class="v">UX/UI Designer</div></div>
+    <div><div class="k">Client</div><div class="v">Alberta Carriage Supply, Canada</div></div>
+    <div><div class="k">Platform</div><div class="v">E-commerce website, web + mobile</div></div>
+    <div><div class="k">Scope</div><div class="v">UX audit, IA, full redesign</div></div>
+    <div><div class="k">Tools</div><div class="v">Figma</div></div>
+  </div>
+</div></section>
+
+<!-- ABOUT -->
+<section class="cs" id="about"><div class="container">
+  <div class="cs-block">
+    <div class="eyebrow" style="margin-bottom:14px">01 &middot; The client</div>
+    <h2>Horse-drawn equipment, <span class="g">built since 2003</span></h2>
+    <p>Alberta Carriage Supply manufactures horse-drawn vehicles in its own shop in Alberta, Canada. Forecarts, working sleds, pleasure carts and people-moving wagons, plus the harness and hardware to drive them, for every horse from Draft down to Mini. Alongside the store they run restoration, wheel repair, custom builds and maintenance services.</p>
+    <p>Their products are serious purchases. A harness costs hundreds of dollars, a cart runs into thousands, and buyers know exactly what horse they are buying for. The website is where that buying decision happens, and the website was the problem.</p>
+    <div class="stats">
+      <div class="stat"><div class="n">2</div><div class="l">Versions, web + mobile</div></div>
+      <div class="stat"><div class="n">40+</div><div class="l">Screens and states</div></div>
+      <div class="stat"><div class="n">7</div><div class="l">Ways into the catalogue</div></div>
+      <div class="stat"><div class="n">1</div><div class="l">Page to check out</div></div>
+    </div>
+  </div>
+</div></section>
+
+<!-- PROBLEM -->
+<section class="cs" id="problem"><div class="container">
+  <div class="cs-block" style="max-width:100%">
+    <div class="eyebrow" style="margin-bottom:14px">02 &middot; The problem</div>
+    <h2>People came for a harness <span class="g">and left at the home page</span></h2>
+    <p style="max-width:780px">The existing site had the products and the reputation, but not the flow. Visitors landed, could not tell where to start, and returned from the home page without ever seeing a product. The ones who pushed through faced a buying flow with too many detours to survive.</p>
+    <div class="pains">
+      <div class="pain"><div class="pk">Finding</div><h4>Products were hard to find</h4><p>No clear entry into the catalogue. Category cards duplicated the top navigation, filters were redundant or broken, and there were no breadcrumbs to keep track of where you were.</p></div>
+      <div class="pain"><div class="pk">First impression</div><h4>The landing felt abrupt</h4><p>No hero, no statement of what the brand does. A promotional ticker with text cut off at both ends and a cluttered header full of abbreviations did the greeting instead.</p></div>
+      <div class="pain"><div class="pk">Buying</div><h4>The purchase flow was complex</h4><p>Inconsistent card CTAs, a cart-only path to checkout and a price slider that did not work. Every extra step gave buyers one more chance to leave, and they took it.</p></div>
+    </div>
+    <div class="insight"><div class="iq">&ldquo;</div><p>The catalogue was never the problem. The path to it was.
+      <span>Traffic was arriving with buying intent and bouncing before the first product. That is a navigation and flow failure, not a demand failure.</span></p></div>
+  </div>
+</div></section>
+
+<!-- AUDIT -->
+<section class="cs" id="audit"><div class="container">
+  <div class="cs-block" style="max-width:100%">
+    <div class="eyebrow" style="margin-bottom:14px">03 &middot; The audit</div>
+    <h2>First, prove where it hurts</h2>
+    <p style="max-width:780px">Before redesigning anything I audited the live site screen by screen: homepage, navigation, category pages, product pages, checkout and mobile. Every finding was annotated on the actual UI and paired with a respectful, actionable recommendation, so the client could see exactly what was costing them buyers and why each change was worth making.</p>
+
+    <div class="desk">
+      <figure><div class="browser scrolly"><div class="bar"><i></i><i></i><i></i><span class="hint">Scroll</span></div><div class="page"><img src="images/acs/audit-2.webp" alt="Audit of the homepage" loading="lazy"></div></div><figcaption><b>Homepage findings.</b> Cluttered header, a broken promotional ticker, no hero and category cards that repeat the navigation.</figcaption></figure>
+      <figure><div class="browser scrolly"><div class="bar"><i></i><i></i><i></i><span class="hint">Scroll</span></div><div class="page"><img src="images/acs/audit-3.webp" alt="Audit of the category page" loading="lazy"></div></div><figcaption><b>Category page findings.</b> Redundant filters, a stuck price slider, unclear sort labels and no breadcrumbs.</figcaption></figure>
+    </div>
+    <div class="desk">
+      <figure><div class="browser scrolly"><div class="bar"><i></i><i></i><i></i><span class="hint">Scroll</span></div><div class="page"><img src="images/acs/audit-4.webp" alt="Audit of product cards and buying page" loading="lazy"></div></div><figcaption><b>Product and buying page findings.</b> Inconsistent card CTAs, no stock feedback, no direct path to checkout.</figcaption></figure>
+      <figure><div class="browser scrolly"><div class="bar"><i></i><i></i><i></i><span class="hint">Scroll</span></div><div class="page"><img src="images/acs/audit-8.webp" alt="Audit recommendations" loading="lazy"></div></div><figcaption><b>Recommendations.</b> Consistent hierarchy, plain language, breathing space, aligned text and simpler patterns.</figcaption></figure>
+    </div>
+
+    <div class="dd">
+      <div class="dd-row">
+        <div class="demand"><div class="dk">The audit found</div><h4>Visitors had no starting point</h4><p>The landing offered a wall of equal choices and no guidance, so people left before choosing.</p></div>
+        <div class="did"><div class="dk">The redesign answers</div><p>A proper hero that states what the brand does, followed by one question: What are you looking for? Four visual categories take buyers straight into the catalogue.</p></div>
+      </div>
+      <div class="dd-row">
+        <div class="demand"><div class="dk">The audit found</div><h4>Filtering did not match how buyers think</h4><p>Horse people shop by their horse and their use, not by product taxonomy. The old filters were generic, duplicated and partly broken.</p></div>
+        <div class="did"><div class="dk">The redesign answers</div><p>Categories, subcategories and filters rebuilt around horse size (Mini, Pony, Horse, Draft) and purpose (training, farm, competition, occasions), so narrowing down feels natural.</p></div>
+      </div>
+      <div class="dd-row">
+        <div class="demand"><div class="dk">The audit found</div><h4>Checkout demanded too much patience</h4><p>Cart-only checkout, inconsistent CTAs and no feedback along the way meant buyers dropped off mid flow.</p></div>
+        <div class="did"><div class="dk">The redesign answers</div><p>Buy Now goes straight from product to a single-page checkout with saved addresses and cards, a ship or pick-up choice, and a pay button that stays disabled until everything needed is filled.</p></div>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<!-- IA / NAVIGATION -->
+<section class="cs" id="ia"><div class="container">
+  <div class="cs-block" style="max-width:100%">
+    <div class="eyebrow" style="margin-bottom:14px">04 &middot; Navigation</div>
+    <h2>Rebuilt around how <span class="g">horse people actually shop</span></h2>
+    <p style="max-width:780px">The old navigation listed what the company makes. The new navigation starts from what the buyer knows: their goal, their horse and what they use it for. Seven entry points lead into the same well-organised catalogue, and a search bar scoped by category catches everyone else. Wherever you land, breadcrumbs and subcategories keep you oriented.</p>
+    <div class="ia">
+      <div class="lane hot"><div class="lk">By buyer logic</div><h4>Shop by Goal</h4><p>Starter harness, custom wheels, winter sleigh bells. Named after the job to be done, not the SKU.</p></div>
+      <div class="lane hot"><div class="lk">By buyer logic</div><h4>Shop by Horse Size</h4><p>Miniature, Pony, Horse, Draft. The first question any harness buyer answers anyway.</p></div>
+      <div class="lane hot"><div class="lk">By buyer logic</div><h4>Shop by Purpose</h4><p>Pleasure driving, farm work, shows and parades, winter driving, training young horses.</p></div>
+      <div class="lane"><div class="lk">By catalogue</div><h4>Vehicles &amp; Carts</h4><p>Two-wheel carts, four-wheel vehicles and specialty builds.</p></div>
+      <div class="lane"><div class="lk">By catalogue</div><h4>Harness &amp; Horse Gear</h4><p>Complete sets by size, parts and upgrades, collars, reins and comfort accessories.</p></div>
+      <div class="lane"><div class="lk">By catalogue</div><h4>Parts &amp; Hardware</h4><p>Wheels, tires, shafts, poles, brakes, seats, fasteners and finishes.</p></div>
+      <div class="lane"><div class="lk">By confidence</div><h4>Learning &amp; Guides</h4><p>A gear quiz, fitting guides and size charts, so first-time buyers can trust their choice before paying.</p></div>
+    </div>
+  </div>
+</div></section>
+
+<!-- FLOW -->
+<section class="cs" id="flow"><div class="container">
+  <div class="cs-block" style="max-width:100%">
+    <div class="eyebrow" style="margin-bottom:14px">05 &middot; The buying flow</div>
+    <h2>From landing to paid, <span class="g">with the detours removed</span></h2>
+    <p style="max-width:780px">This is the heart of the redesign. Every step that made buyers think twice was either removed, merged or given a clear next action. The whole journey now reads as one straight line.</p>
+
+    <div class="flow-old">
+      <span class="flowlab">Before &middot; the old journey</span>
+      <div class="jflow">
+        <div class="jstep"><div class="jn">1</div><h4>Land</h4><p>No hero, cluttered header, a broken promo ticker.</p><span class="bad">Bounce point</span></div>
+        <div class="jstep"><div class="jn">2</div><h4>Guess</h4><p>Category cards that repeat the nav. Pick one and hope.</p><span class="bad">Confusion</span></div>
+        <div class="jstep"><div class="jn">3</div><h4>Wrestle filters</h4><p>Redundant sidebar, stuck price slider, no breadcrumbs.</p><span class="bad">Drop-off</span></div>
+        <div class="jstep"><div class="jn">4</div><h4>Decode cards</h4><p>Quick Shop here, View there. No stock feedback.</p><span class="bad">Hesitation</span></div>
+        <div class="jstep"><div class="jn">5</div><h4>Cart, then checkout</h4><p>No direct purchase path. More steps, more exits.</p><span class="bad">Abandonment</span></div>
+      </div>
+    </div>
+
+    <div class="flow-new">
+      <span class="flowlab">After &middot; the redesigned journey</span>
+      <div class="jflow">
+        <div class="jstep"><div class="jn">1</div><h4>Land</h4><p>Hero states the brand. One question: what are you looking for?</p></div>
+        <div class="jstep"><div class="jn">2</div><h4>Choose your way in</h4><p>Category, goal, horse size, purpose or scoped search.</p></div>
+        <div class="jstep"><div class="jn">3</div><h4>Narrow down</h4><p>Subcategories and filters that match how buyers think.</p></div>
+        <div class="jstep"><div class="jn">4</div><h4>Decide on one page</h4><p>Specs, shipping, stock, reviews and Buy Now together.</p></div>
+        <div class="jstep"><div class="jn">5</div><h4>Pay on one page</h4><p>Ship or pick up, saved addresses and cards, done.</p></div>
+      </div>
+    </div>
+
+    <p style="max-width:780px;margin-top:30px">The checkout carries the small decisions too. Choosing <b>pick up from store</b> removes shipping charges instantly. The <b>pay button stays disabled</b> until every required detail is filled, so nobody hits an error after committing. Addresses and cards are saved once and reused forever.</p>
+  </div>
+</div></section>
+
+<!-- WEB -->
+<section class="cs" id="web"><div class="container">
+  <div class="cs-block">
+    <div class="eyebrow" style="margin-bottom:14px">06 &middot; Web design</div>
+    <h2>The store, redesigned <span class="g">end to end</span></h2>
+    <p>Every page of the site was redesigned, not patched. Warm neutrals, a serif voice for the brand and generous photography of the horses and the workshop, over a disciplined e-commerce layout underneath.</p>
+  </div>
+
+  <div class="gal-head"><h3>Finding products</h3><div class="gk">Web</div></div>
+  <div class="desk">
+    <figure class="wide"><div class="browser scrolly"><div class="bar"><i></i><i></i><i></i><span class="hint">Scroll</span></div><div class="page"><img src="images/acs/w-home.webp" alt="Redesigned home page" loading="lazy"></div></div><figcaption><b>Home.</b> A hero that says what the brand is, category tiles that answer "what are you looking for", services, new arrivals and trust signals in one calm scroll.</figcaption></figure>
+    <figure><div class="browser scrolly"><div class="bar"><i></i><i></i><i></i><span class="hint">Scroll</span></div><div class="page"><img src="images/acs/w-category.webp" alt="Category landing page" loading="lazy"></div></div><figcaption><b>Category landing.</b> Clicking a category opens a curated landing with subcategories, not a raw product dump.</figcaption></figure>
+    <figure><div class="browser scrolly"><div class="bar"><i></i><i></i><i></i><span class="hint">Scroll</span></div><div class="page"><img src="images/acs/w-shop.webp" alt="Shop page with filters" loading="lazy"></div></div><figcaption><b>Shop page.</b> Breadcrumbs, working price range, availability, horse size and purpose filters, applied filters shown as removable chips.</figcaption></figure>
+    <figure class="wide"><div class="browser"><div class="bar"><i></i><i></i><i></i></div><img src="images/acs/w-search.webp" alt="Search experience" loading="lazy"></div><figcaption><b>Search.</b> One search bar scoped by category, with suggestions, so buyers who know what they want skip the browsing entirely.</figcaption></figure>
+  </div>
+
+  <div class="gal-head"><h3>Deciding and buying</h3><div class="gk">Web</div></div>
+  <div class="desk">
+    <figure class="wide"><div class="browser scrolly"><div class="bar"><i></i><i></i><i></i><span class="hint">Scroll</span></div><div class="page"><img src="images/acs/w-pdp.webp" alt="Product detail page" loading="lazy"></div></div><figcaption><b>Product page.</b> Price, availability, variants, shipping expectations, a full specification table and reviews on one page, with Add to Cart and Buy Now side by side.</figcaption></figure>
+    <figure><div class="browser"><div class="bar"><i></i><i></i><i></i></div><img src="images/acs/w-ship.webp" alt="Checkout with shipping" loading="lazy"></div><figcaption><b>Checkout, shipping.</b> Address, payment and order summary on a single page. Saved addresses and cards make repeat orders near instant.</figcaption></figure>
+    <figure><div class="browser"><div class="bar"><i></i><i></i><i></i></div><img src="images/acs/w-pickup.webp" alt="Checkout with store pickup" loading="lazy"></div><figcaption><b>Checkout, pick up.</b> Choosing pick up from the store drops the shipping charge on the spot. The rural buyer's favourite option, treated as a first-class path.</figcaption></figure>
+    <figure><div class="browser"><div class="bar"><i></i><i></i><i></i></div><img src="images/acs/w-add-card.webp" alt="Add new card" loading="lazy"></div><figcaption><b>Add a card.</b> The pay button stays disabled until every detail is filled, so errors surface before payment, not after.</figcaption></figure>
+    <figure><div class="browser"><div class="bar"><i></i><i></i><i></i></div><img src="images/acs/w-success.webp" alt="Order success" loading="lazy"></div><figcaption><b>Order placed.</b> A clear confirmation with what happens next, ending the flow with certainty instead of a spinner.</figcaption></figure>
+    <figure><div class="browser"><div class="bar"><i></i><i></i><i></i></div><img src="images/acs/w-cart.webp" alt="Cart items" loading="lazy"></div><figcaption><b>Cart.</b> For buyers collecting more than one item, the classic path stays, simplified to price, quantity and the next step.</figcaption></figure>
+    <figure><div class="browser"><div class="bar"><i></i><i></i><i></i></div><img src="images/acs/w-wishlist.webp" alt="Wishlist" loading="lazy"></div><figcaption><b>Wishlist.</b> Big-ticket purchases take thinking time. The wishlist keeps shortlisted gear one click from checkout when the decision lands.</figcaption></figure>
+  </div>
+</div></section>
+
+<!-- MOBILE -->
+<section class="cs" id="mobile"><div class="container">
+  <div class="cs-block">
+    <div class="eyebrow" style="margin-bottom:14px">07 &middot; Mobile design</div>
+    <h2>The same store, <span class="g">one thumb wide</span></h2>
+    <p>Every page and state was designed for mobile as well, not shrunk to fit. The mega navigation becomes an accordion menu, filters slide in from the edge, and the checkout keeps its one-page promise on a small screen.</p>
+  </div>
+
+  <div class="gal-head"><h3>Browse and narrow down</h3><div class="gk">Mobile</div></div>
+  <div class="phones">
+    <figure><div class="phone scrolly"><img src="images/acs/m-home.webp" alt="Mobile home" loading="lazy"></div><figcaption>Home &middot; scroll</figcaption></figure>
+    <figure><div class="phone"><img src="images/acs/m-menu-category.webp" alt="Mobile menu with categories" loading="lazy"></div><figcaption>Menu, category open</figcaption></figure>
+    <figure><div class="phone scrolly"><img src="images/acs/m-shop.webp" alt="Mobile shop page" loading="lazy"></div><figcaption>Shop page &middot; scroll</figcaption></figure>
+    <figure><div class="phone"><img src="images/acs/m-filter.webp" alt="Mobile filter slider" loading="lazy"></div><figcaption>Filters slide-in</figcaption></figure>
+  </div>
+
+  <div class="gal-head"><h3>Product to payment</h3><div class="gk">Mobile</div></div>
+  <div class="phones">
+    <figure><div class="phone"><img src="images/acs/m-pdp-short.webp" alt="Mobile product page" loading="lazy"></div><figcaption>Product page</figcaption></figure>
+    <figure><div class="phone"><img src="images/acs/m-ship.webp" alt="Mobile checkout shipping" loading="lazy"></div><figcaption>Checkout, ship</figcaption></figure>
+    <figure><div class="phone"><img src="images/acs/m-pickup.webp" alt="Mobile checkout pickup" loading="lazy"></div><figcaption>Checkout, pick up</figcaption></figure>
+    <figure><div class="phone"><img src="images/acs/m-payment.webp" alt="Mobile payment method" loading="lazy"></div><figcaption>Payment method</figcaption></figure>
+  </div>
+
+  <div class="phones">
+    <figure><div class="phone"><img src="images/acs/m-search.webp" alt="Mobile search" loading="lazy"></div><figcaption>Search</figcaption></figure>
+    <figure><div class="phone"><img src="images/acs/m-cart.webp" alt="Mobile cart" loading="lazy"></div><figcaption>Cart</figcaption></figure>
+    <figure><div class="phone"><img src="images/acs/m-wishlist.webp" alt="Mobile wishlist" loading="lazy"></div><figcaption>Wishlist</figcaption></figure>
+    <figure><div class="phone"><img src="images/acs/m-success.webp" alt="Mobile order success" loading="lazy"></div><figcaption>Order placed</figcaption></figure>
+  </div>
+</div></section>
+
+<!-- DESIGN LANGUAGE -->
+<section class="cs" id="system"><div class="container">
+  <div class="cs-block" style="max-width:100%">
+    <div class="eyebrow" style="margin-bottom:14px">08 &middot; Design language</div>
+    <h2>Craftsmanship you can feel <span class="g">in the pixels</span></h2>
+    <p style="max-width:780px">This is a century-old craft sold by people who build wheels by hand, and the interface needed to carry that. Several serif and sans pairings were explored in the design file before the final choice. The pairing that won gives the brand a voice with heritage and keeps product data crisp at small sizes. Warm where the brand speaks, disciplined where the buying happens.</p>
+    <div class="dl">
+      <div class="dl-card">
+        <div class="dlk">Typography &middot; the pair that won</div>
+        <div class="spec">
+          <div class="aa" style="font-family:var(--serif);font-weight:700">Everything Your Horse Needs, In One Place</div>
+          <div class="frow"><span class="fname" style="font-family:var(--serif)">Cormorant</span><span class="fmeta">Serif &middot; SemiBold, Bold</span></div>
+          <p class="fuse">The brand voice. Hero statements, page headings and section titles. Chosen because its engraved, old-style letterforms sit naturally beside the wheel-and-horse logo and a century of craft.</p>
+          <div class="glyphs" style="font-family:var(--serif)">AaBbCcDdEeFfGg 0123456789 $&amp;?</div>
+        </div>
+        <div class="spec">
+          <div class="aa" style="font-family:var(--dmsans);font-weight:500">Premium quality farm harness, fully adjustable. $1,699</div>
+          <div class="frow"><span class="fname" style="font-family:var(--dmsans)">DM Sans</span><span class="fmeta">Sans &middot; Regular, Medium, Bold</span></div>
+          <p class="fuse">The working voice. Navigation, product names, prices, specifications, forms and buttons. Chosen for its open, geometric letterforms that stay legible at spec-table and price-tag sizes.</p>
+          <div class="glyphs" style="font-family:var(--dmsans)">AaBbCcDdEeFfGg 0123456789 $&amp;?</div>
+        </div>
+      </div>
+      <div class="dl-card">
+        <div class="dlk">Colour &middot; leather, brass and daylight</div>
+        <div class="pal-bar">
+          <span style="flex:56;background:#FFFFFF"></span>
+          <span style="flex:22;background:#F2F2F2"></span>
+          <span style="flex:12;background:#222222"></span>
+          <span style="flex:10;background:#AF8D53"></span>
+        </div>
+        <div class="pal-note">How the palette is spent across a page</div>
+        <div class="pal-row"><span class="dot" style="background:#AF8D53"></span><div><b>Harness gold</b><span class="use">Every action: CTAs, links, active states. One colour means "tap here" everywhere.</span></div><span class="hex">#AF8D53</span></div>
+        <div class="pal-row"><span class="dot" style="background:#8F7340"></span><div><b>Deep gold</b><span class="use">Hover and pressed states of every gold action.</span></div><span class="hex">#8F7340</span></div>
+        <div class="pal-row"><span class="dot" style="background:#222222"></span><div><b>Workshop ink</b><span class="use">Headings, body text and prices, kept dark for easy reading.</span></div><span class="hex">#222222</span></div>
+        <div class="pal-row"><span class="dot" style="background:#F2F2F2;border-color:var(--border)"></span><div><b>Soft grey</b><span class="use">Product image canvases and quiet section fills.</span></div><span class="hex">#F2F2F2</span></div>
+        <div class="pal-row"><span class="dot" style="background:#FFFFFF;border-color:var(--border)"></span><div><b>White</b><span class="use">The default page. Products and photography do the decorating.</span></div><span class="hex">#FFFFFF</span></div>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<!-- IMPACT -->
+<section class="cs" id="impact"><div class="container">
+  <div class="cs-block" style="max-width:100%">
+    <div class="eyebrow" style="margin-bottom:14px">09 &middot; Impact</div>
+    <h2>What changed <span class="g">after the redesign</span></h2>
+    <p style="max-width:780px">The redesign shipped as the client's new storefront, and the difference showed where it matters for a store this specialised.</p>
+    <div class="impact">
+      <div class="imp"><div class="ik">&uarr;</div><h4>More visitors stay and shop</h4><p>The bounce-from-home problem faded. With a clear starting point, people who arrive now actually reach the catalogue.</p></div>
+      <div class="imp"><div class="ik">&uarr;</div><h4>Sales went up</h4><p>More of the traffic that was always arriving now completes the journey, and the client saw it in their sales after relaunch.</p></div>
+      <div class="imp"><div class="ik">&darr;</div><h4>Fewer mid-flow exits</h4><p>The shortened, one-page buying flow removed the steps where buyers used to abandon their carts.</p></div>
+      <div class="imp"><div class="ik">&#10003;</div><h4>Every product is findable</h4><p>Categories, subcategories and buyer-logic filters mean the right harness for a Mini or a Draft is a few taps away.</p></div>
+    </div>
+  </div>
+</div></section>
+
+<!-- LEARNINGS -->
+<section class="cs" id="learnings"><div class="container">
+  <div class="cs-block">
+    <div class="eyebrow" style="margin-bottom:14px">10 &middot; Learnings</div>
+    <h2>What this project proves about how I work</h2>
+    <p><b>I diagnose before I design.</b> The screen-by-screen audit meant every redesign decision answered a documented problem, and the client could follow the reasoning from finding to fix.</p>
+    <p><b>I design for the buyer's head, not the org chart.</b> Shop by goal, horse size and purpose exist because that is how a horse person thinks. Navigation that mirrors the customer beats navigation that mirrors the catalogue.</p>
+    <p><b>I treat the flow as the product.</b> Individual screens were never the problem here. Removing detours between landing and payment is what turned visitors into buyers.</p>
+    <p><b>I finish the whole job.</b> Web and mobile, every state from empty search to disabled pay buttons, so development had no gaps to improvise around.</p>
+    <div class="skillchips">
+      <span>UX audit</span><span>Information architecture</span><span>E-commerce UX</span>
+      <span>Conversion flows</span><span>Responsive design</span><span>Visual design</span>
+    </div>
+  </div>
+</div></section>
+
+<!-- THANK YOU -->
+<section class="thanks" id="thanks"><div class="container">
+  <div class="band">
+    <div class="glow"></div>
+    <div class="tk-eyebrow">The end</div>
+    <h2>Thank <span>you</span> for viewing</h2>
+    <p>Alberta Carriage Supply taught me how much revenue hides inside a confusing flow. If you would like to talk about this project, or about a store that people leave too early, I am happy to chat. The full design file is open to explore in Figma.</p>
+    <div class="cta-row">
+      <a class="btn" href="mailto:pulkitawasthi5678@gmail.com">Get in touch</a>
+      <a id="takeaway-cta" class="btn ghost" href="https://www.figma.com/design/5JrbzjOzXYYQjWBPgvtK87/Alberta-carriage-supply?node-id=931-4372" target="_blank" rel="noopener noreferrer">View the full project in Figma &#8599;</a>
+    </div>
+  </div>
+</div></section>
+
+<footer class="footer">
+  <div class="container">
+    <h2 class="foot-big"><span class="w">Let's create</span><span class="g">incredible work together.</span></h2>
+    <div class="foot-cols">
+      <div class="fc">
+        <div class="flabel">Email</div>
+        <a class="fmail" href="mailto:pulkitawasthi5678@gmail.com">pulkitawasthi5678@gmail.com</a>
+        <a class="fphone" href="tel:+918707003804">+91 87070 03804</a>
+      </div>
+      <div class="fc">
+        <div class="flabel">Social</div>
+        <div class="socials">
+          <a href="https://www.linkedin.com/in/paux-ui" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z"/></svg>
+          </a>
+          <a href="https://wa.me/918707003804" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.96-.94 1.16-.17.2-.35.22-.64.08-.3-.15-1.26-.47-2.4-1.48-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.6.13-.14.3-.35.44-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.5 0 1.47 1.07 2.9 1.22 3.1.15.2 2.1 3.2 5.08 4.49.71.3 1.27.49 1.7.63.72.23 1.37.2 1.88.12.57-.09 1.76-.72 2.01-1.42.25-.7.25-1.3.17-1.42-.07-.12-.27-.2-.57-.35zM12.05 21.79h-.01a9.8 9.8 0 0 1-5-1.37l-.36-.21-3.72.97.99-3.62-.23-.37a9.77 9.77 0 0 1-1.5-5.21c0-5.4 4.4-9.79 9.81-9.79a9.73 9.73 0 0 1 6.93 2.87 9.73 9.73 0 0 1 2.87 6.94c0 5.4-4.4 9.79-9.78 9.79zm8.33-18.11A11.7 11.7 0 0 0 12.05.25C5.56.25.28 5.53.28 12.02c0 2.07.54 4.1 1.57 5.89L.18 23.75l5.98-1.57a11.76 11.76 0 0 0 5.88 1.5h.01c6.49 0 11.77-5.28 11.77-11.77 0-3.14-1.22-6.1-3.44-8.23z"/></svg>
+          </a>
+          <a href="mailto:pulkitawasthi5678@gmail.com" aria-label="Email">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="5" width="19" height="14" rx="2.5"/><path d="m3 7 9 6.5L21 7"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="foot-rule"></div>
+    <div class="foot-small">
+      <div>&copy; <span id="yr"></span> Pulkit Awasthi. Designed and built by me, pixel by pixel.</div>
+      <div>Made with Figma, coffee and stubbornness</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* right rail scrollspy */
+(function(){
+  var links = Array.prototype.slice.call(document.querySelectorAll("#rail a"));
+  var ids = links.map(function(a){ return a.getAttribute("href").slice(1); });
+  var sections = ids.map(function(id){ return document.getElementById(id); }).filter(Boolean);
+  function spy(){
+    var pos = window.scrollY + window.innerHeight * 0.35, current = ids[0];
+    sections.forEach(function(sec){ if (sec.offsetTop <= pos) current = sec.id; });
+    var idx = ids.indexOf(current);
+    links.forEach(function(a, i){
+      a.classList.toggle("active", i === idx);
+      a.classList.toggle("done", i < idx);
+    });
+  }
+  window.addEventListener("scroll", spy, {passive:true});
+  window.addEventListener("resize", spy);
+  spy();
+})();
+
+/* site nav bits */
+(function(){
+  var yr = document.getElementById("yr"); if (yr) yr.textContent = new Date().getFullYear();
+  var t = document.querySelector(".nav-toggle"), links = document.querySelector(".nav-links");
+  if (t && links) t.addEventListener("click", function(){ links.classList.toggle("open"); });
+})();
+
+/* admin-managed overrides: hero image + takeaway CTA (published via projects.js) */
+(function(){
+  var page = location.pathname.split("/").pop();
+  var p = (window.PROJECTS || []).filter(function(x){ return x.customUrl === page; })[0];
+  if (!p) return;
+  if (p.heroImage) { var h = document.getElementById("hero-swap"); if (h) h.src = p.heroImage; }
+  var t = document.getElementById("takeaway-cta");
+  if (t && ("takeawayCtaLabel" in p)) {
+    if (p.takeawayCtaLabel && p.takeawayCtaUrl) {
+      t.innerHTML = "";
+      t.appendChild(document.createTextNode(p.takeawayCtaLabel + " "));
+      var arw = document.createElement("span"); arw.innerHTML = "&#8599;"; t.appendChild(arw);
+      t.href = p.takeawayCtaUrl;
+    } else {
+      t.style.display = "none";
+    }
+  }
+})();
+</script>
+</body>
+</html>
