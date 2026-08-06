@@ -319,35 +319,6 @@ const PROJECTS = [
     "screensHeading": "",
     "gallery": [],
     "metaStrip": "Role: UI Design\nClient: Mampster, Toronto, Canada\nPlatform: Product showcase website\nScope: UI fix, full redesign, prototype\nTools: Figma"
-  },
-  {
-    "id": "learnhub-web",
-    "title": "LearnHub EdTech Web Platform",
-    "category": "website",
-    "year": "2024",
-    "role": "Product Designer",
-    "summary": "A responsive learning dashboard that keeps students on track across courses.",
-    "tags": [
-      "Web",
-      "EdTech",
-      "Design System"
-    ],
-    "thumbnail": "images/sample-web.svg",
-    "cover": "images/sample-web.svg",
-    "overview": "LearnHub is a web platform for online learners. I designed the student dashboard, course pages, and a scalable component library.",
-    "problem": "Students dropped off because progress was scattered across pages and next steps were unclear. We needed a single, motivating home base.",
-    "process": [
-      "Audited the existing product and identified 12 usability issues.",
-      "Reorganised information architecture around 'continue learning'.",
-      "Designed responsive layouts for desktop, tablet and mobile.",
-      "Delivered a documented design system for engineering handoff."
-    ],
-    "outcome": "Course-completion intent rose in testing and design-to-dev handoff cycles shortened by roughly 30%.",
-    "gallery": [
-      "images/sample-web.svg",
-      "images/sample-web.svg"
-    ],
-    "featured": true
   }
 ];
 
