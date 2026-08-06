@@ -292,7 +292,7 @@ const PROJECTS = [
     "featured": true,
     "title": "Mampster",
     "category": "website",
-    "year": "2025",
+    "year": "",
     "role": "UX/UI Designer",
     "summary": "A product-first website redesign for a Toronto Indian street food brand, with an interactive hero where clicking a bottle swaps in the real gol gappa pani flavour.",
     "liveUrl": "",
