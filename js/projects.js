@@ -216,7 +216,7 @@ const PROJECTS = [
   },
   {
     "id": "alberta-carriage-supply",
-    "featured": false,
+    "featured": true,
     "title": "Alberta Carriage Supply",
     "category": "website",
     "year": "2026",
