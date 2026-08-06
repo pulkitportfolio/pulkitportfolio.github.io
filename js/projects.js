@@ -264,7 +264,7 @@ const PROJECTS = [
     "customUrl": "acs.html",
     "ctaText": "View Case Study",
     "heroImage": "",
-    "cardCtaLabel": "View live site",
+    "cardCtaLabel": "View Live Site",
     "cardCtaUrl": "https://albertacarriagesupply.net/",
     "takeawayCtaLabel": "View Live Site",
     "takeawayCtaUrl": "https://albertacarriagesupply.net/",
