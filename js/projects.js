@@ -212,14 +212,13 @@ const PROJECTS = [
     "cardCtaUrl": "",
     "takeawayCtaLabel": "View the full project in Figma",
     "takeawayCtaUrl": "https://www.figma.com/design/eaKNv7fZH2IfjCgySbOokH/complete-Event-zar-project?node-id=0-1&t=tvQ3divZNx3sQduw-1",
-    "ctaText": "View Project",
-    "metaStrip": "Role: UX/UI Designer\nPlatforms: Mobile app, Web app, Admin panel, Business portal\nScope: 400+ screens, 45 flows\nDuration: 1 month\nTools: Figma"
+    "ctaText": "View Project"
   },
   {
     "id": "chipt",
     "title": "Chipt",
     "category": "app",
-    "year": "2024",
+    "year": "",
     "role": "Product Designer",
     "summary": "An NFC-powered reusable cup ecosystem that rewards coffee lovers for making sustainable choices.",
     "liveUrl": "https://www.behance.net/gallery/245384457/Chipt-App",
@@ -252,7 +251,7 @@ const PROJECTS = [
     "takeawayCtaLabel": "",
     "takeawayCtaUrl": "",
     "ctaText": "View Project",
-    "metaStrip": "Role: UX Research, UI Design\nType: Concept project\nDuration: 2 weeks\nYear: 2024\nTools: Figma"
+    "metaStrip": ""
   },
   {
     "id": "alberta-carriage-supply",
@@ -284,8 +283,7 @@ const PROJECTS = [
     "processHeading": "",
     "outcomeHeading": "",
     "screensHeading": "",
-    "gallery": [],
-    "metaStrip": "Role: Product Designer\nClient: Alberta Carriage Supply, Canada\nPlatform: E-commerce website, web + mobile\nScope: UX audit, IA, full redesign\nTools: Figma"
+    "gallery": []
   },
   {
     "id": "learnhub-web",

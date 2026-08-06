@@ -642,15 +642,20 @@ figcaption{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-tra
   if (!p) return;
   /* detail strip under the hero: full replace from p.metaStrip, or just the Role value */
   var strip = document.querySelector(".meta");
-  if (strip && p.metaStrip && p.metaStrip.trim()) {
-    strip.innerHTML = "";
-    p.metaStrip.split("\n").map(function(l){ return l.trim(); }).filter(Boolean).forEach(function(line){
-      var ix = line.indexOf(":");
-      var d = document.createElement("div");
-      var dk = document.createElement("div"); dk.className = "k"; dk.textContent = ix > -1 ? line.slice(0, ix).trim() : "";
-      var dv = document.createElement("div"); dv.className = "v"; dv.textContent = ix > -1 ? line.slice(ix + 1).trim() : line;
-      d.appendChild(dk); d.appendChild(dv); strip.appendChild(d);
-    });
+  if (strip && typeof p.metaStrip === "string") {
+    var rows = p.metaStrip.split("\n").map(function(l){ return l.trim(); }).filter(Boolean);
+    if (!rows.length) {
+      strip.style.display = "none";   /* field erased in the panel: show no strip */
+    } else {
+      strip.innerHTML = "";
+      rows.forEach(function(line){
+        var ix = line.indexOf(":");
+        var d = document.createElement("div");
+        var dk = document.createElement("div"); dk.className = "k"; dk.textContent = ix > -1 ? line.slice(0, ix).trim() : "";
+        var dv = document.createElement("div"); dv.className = "v"; dv.textContent = ix > -1 ? line.slice(ix + 1).trim() : line;
+        d.appendChild(dk); d.appendChild(dv); strip.appendChild(d);
+      });
+    }
   } else if (strip && p.role) {
     strip.querySelectorAll(".k").forEach(function(k){
       if (k.textContent.trim().toLowerCase() === "role" && k.nextElementSibling) k.nextElementSibling.textContent = p.role;
