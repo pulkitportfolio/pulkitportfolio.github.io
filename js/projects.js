@@ -232,8 +232,8 @@ const PROJECTS = [
       "Information architecture",
       "Web + mobile"
     ],
-    "thumbnail": "images/acs/thumb-home.webp",
-    "cover": "images/acs/thumb-home.webp",
+    "thumbnail": "images/acs/thumb-mock.webp",
+    "cover": "images/acs/thumb-mock.webp",
     "overview": "Alberta Carriage Supply manufactures horse-drawn vehicles and harness in Alberta, Canada. Their old website buried the products: visitors bounced from the home page, filters were broken or redundant, and the buying flow had too many detours. I audited the live site screen by screen, rebuilt the navigation around how horse people shop, shortened the flow from landing to payment, and redesigned every page for web and mobile.",
     "problem": "",
     "process": [],
