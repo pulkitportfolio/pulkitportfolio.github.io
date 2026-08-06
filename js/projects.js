@@ -258,7 +258,7 @@ const PROJECTS = [
     "title": "Alberta Carriage Supply",
     "category": "website",
     "year": "2026",
-    "role": "Product designer",
+    "role": "Product Designer",
     "summary": "A complete redesign of a Canadian horse-drawn equipment store, turning a confusing website into a clean buying flow across web and mobile.",
     "liveUrl": "https://albertacarriagesupply.net/",
     "customUrl": "acs.html",
