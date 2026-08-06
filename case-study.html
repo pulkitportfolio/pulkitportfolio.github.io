@@ -29,6 +29,16 @@
 
   <main id="cs-root"></main>
 
+  <!-- NEXT PROJECT -->
+  <section class="next-cs" style="border-top:1px solid var(--border)">
+    <div class="container">
+      <a id="next-cs" href="work.html" style="display:block;padding:72px 0 84px">
+        <div style="font-family:var(--mono);font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--muted);margin-bottom:16px">Next project</div>
+        <h2 style="font-size:clamp(40px,7vw,88px);letter-spacing:-.035em;line-height:1.05;display:flex;align-items:center;gap:24px;flex-wrap:wrap"><span id="next-cs-title">All projects</span> <span style="color:var(--accent)">&rarr;</span></h2>
+      </a>
+    </div>
+  </section>
+
   <!-- FOOTER -->
   <footer class="footer">
     <div class="container">
@@ -68,9 +78,18 @@
 
   <script>document.getElementById("yr").textContent = new Date().getFullYear();</script>
   <!-- The ?v= stamp is bumped automatically on each publish, so browsers cache this file until it actually changes. -->
-  <script src="js/projects.js?v=1786000280"></script>
+  <script src="js/projects.js?v=1786000485"></script>
   <script src="js/store.js"></script>
   <script src="js/case-study.js"></script>
   <script src="js/main.js"></script>
+  <script>
+  /* next project: cycles through the hand-built case studies */
+  (function(){
+    var list = (window.PROJECTS || []).filter(function(p){ return p.customUrl && p.customUrl !== "sample-project.html" && p.title; });
+    if (!list.length) return;
+    var a = document.getElementById("next-cs"), t = document.getElementById("next-cs-title");
+    if (a && t) { a.href = list[0].customUrl; t.textContent = list[0].title; }
+  })();
+  </script>
 </body>
 </html>

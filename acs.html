@@ -210,6 +210,14 @@ figcaption{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-tra
 .skillchips{display:flex;gap:8px;flex-wrap:wrap;margin-top:22px}
 .skillchips span{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;padding:8px 15px;border:1px solid var(--border);border-radius:100px;color:var(--muted)}
 
+/* next project */
+.next-cs{border-top:1px solid var(--border)}
+.next-cs a{display:block;padding:72px 0 84px}
+.next-cs .nk{font-family:var(--mono);font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--muted);margin-bottom:16px}
+.next-cs h2{font-size:clamp(40px,7vw,88px);letter-spacing:-.035em;line-height:1.05;display:flex;align-items:center;gap:24px;flex-wrap:wrap}
+.next-cs h2 .arw{color:var(--gold);transition:transform .25s ease}
+.next-cs a:hover h2 .arw{transform:translateX(16px)}
+
 /* thanks */
 .thanks{margin:70px 0 64px}
 .thanks .band{border-radius:var(--radius);background:linear-gradient(135deg,#26221B 0%,#3A3226 62%,#57452A 100%);color:#fff;padding:clamp(48px,7vw,90px) clamp(24px,6vw,80px);text-align:center;position:relative;overflow:hidden}
@@ -545,6 +553,16 @@ figcaption{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-tra
   </div>
 </div></section>
 
+<!-- NEXT PROJECT -->
+<section class="next-cs">
+  <div class="container">
+    <a id="next-cs" href="eventzar.html">
+      <div class="nk">Next project</div>
+      <h2><span class="t" id="next-cs-title">EventsZAR</span> <span class="arw">&rarr;</span></h2>
+    </a>
+  </div>
+</section>
+
 <footer class="footer">
   <div class="container">
     <h2 class="foot-big"><span class="w">Let's create</span><span class="g">incredible work together.</span></h2>
@@ -577,7 +595,7 @@ figcaption{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-tra
   </div>
 </footer>
 
-<script src="js/projects.js?v=1785998713"></script>
+<script src="js/projects.js?v=1786000485"></script>
 <script>
 /* right rail scrollspy */
 (function(){
@@ -603,6 +621,18 @@ figcaption{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-tra
   var yr = document.getElementById("yr"); if (yr) yr.textContent = new Date().getFullYear();
   var t = document.querySelector(".nav-toggle"), links = document.querySelector(".nav-links");
   if (t && links) t.addEventListener("click", function(){ links.classList.toggle("open"); });
+})();
+
+/* next project: computed from PROJECTS so admin reordering stays correct */
+(function(){
+  var page = location.pathname.split("/").pop() || "index.html";
+  var list = (window.PROJECTS || []).filter(function(p){ return p.customUrl && p.customUrl !== "sample-project.html" && p.title; });
+  if (!list.length) return;
+  var i = -1;
+  list.forEach(function(p, k){ if (p.customUrl === page) i = k; });
+  var next = list[(i + 1) % list.length];
+  var a = document.getElementById("next-cs"), t = document.getElementById("next-cs-title");
+  if (a && t && next) { a.href = next.customUrl; t.textContent = next.title; }
 })();
 
 /* admin-managed overrides: hero image + takeaway CTA (published via projects.js) */

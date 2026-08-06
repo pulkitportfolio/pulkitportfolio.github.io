@@ -169,6 +169,14 @@ section.cs{padding:104px 0 6px}
 .shots img{height:clamp(320px,30vw,430px);width:auto;margin:0 auto;filter:drop-shadow(0 20px 26px rgba(60,32,14,.16))}
 .shots figcaption{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);padding-top:12px}
 
+/* next project */
+.next-cs{border-top:1px solid var(--border)}
+.next-cs a{display:block;padding:72px 0 84px}
+.next-cs .nk{font-family:var(--mono);font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--muted);margin-bottom:16px}
+.next-cs h2{font-size:clamp(40px,7vw,88px);letter-spacing:-.035em;line-height:1.05;display:flex;align-items:center;gap:24px;flex-wrap:wrap}
+.next-cs h2 .arw{color:var(--acc);transition:transform .25s ease}
+.next-cs a:hover h2 .arw{transform:translateX(16px)}
+
 /* thanks */
 .thanks{margin:70px 0 64px}
 .thanks .band{border-radius:var(--radius);background:linear-gradient(135deg,#8A4A24 0%,var(--acc-deep) 45%,var(--acc) 100%);color:#fff;padding:clamp(48px,7vw,90px) clamp(24px,6vw,80px);text-align:center;position:relative;overflow:hidden}
@@ -462,6 +470,16 @@ section.cs{padding:104px 0 6px}
   </div>
 </div></section>
 
+<!-- NEXT PROJECT -->
+<section class="next-cs">
+  <div class="container">
+    <a id="next-cs" href="acs.html">
+      <div class="nk">Next project</div>
+      <h2><span class="t" id="next-cs-title">Alberta Carriage Supply</span> <span class="arw">&rarr;</span></h2>
+    </a>
+  </div>
+</section>
+
 <footer class="footer">
   <div class="container">
     <h2 class="foot-big"><span class="w">Let's create</span><span class="g">incredible work together.</span></h2>
@@ -494,7 +512,7 @@ section.cs{padding:104px 0 6px}
   </div>
 </footer>
 
-<script src="js/projects.js?v=1786000280"></script>
+<script src="js/projects.js?v=1786000485"></script>
 <script>
 /* rail scrollspy: dots fill as you pass, label shows on the active one */
 (function(){
@@ -519,6 +537,18 @@ section.cs{padding:104px 0 6px}
   var yr = document.getElementById("yr"); if (yr) yr.textContent = new Date().getFullYear();
   var t = document.querySelector(".nav-toggle"), links = document.querySelector(".nav-links");
   if (t && links) t.addEventListener("click", function(){ links.classList.toggle("open"); });
+})();
+
+/* next project: computed from PROJECTS so admin reordering stays correct */
+(function(){
+  var page = location.pathname.split("/").pop() || "index.html";
+  var list = (window.PROJECTS || []).filter(function(p){ return p.customUrl && p.customUrl !== "sample-project.html" && p.title; });
+  if (!list.length) return;
+  var i = -1;
+  list.forEach(function(p, k){ if (p.customUrl === page) i = k; });
+  var next = list[(i + 1) % list.length];
+  var a = document.getElementById("next-cs"), t = document.getElementById("next-cs-title");
+  if (a && t && next) { a.href = next.customUrl; t.textContent = next.title; }
 })();
 
 /* admin-managed overrides: hero banner image + takeaway CTA (published via projects.js) */
