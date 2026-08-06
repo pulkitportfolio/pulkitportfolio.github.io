@@ -213,7 +213,7 @@ const PROJECTS = [
     "takeawayCtaLabel": "View the full project in Figma",
     "takeawayCtaUrl": "https://www.figma.com/design/eaKNv7fZH2IfjCgySbOokH/complete-Event-zar-project?node-id=0-1&t=tvQ3divZNx3sQduw-1",
     "ctaText": "View Project",
-    "metaStrip": "Role: UX/UI Designer\nPlatforms: Mobile app, Web app, Admin panel, Business portal\nScope: 400+ screens, 45 flows\nDuration: 1 month\nTools: Figma"
+    "metaStrip": "Role: Product Designer\nPlatforms: Mobile app, Web app, Admin panel, Business portal\nScope: 400+ screens, 45 flows\nDuration: 1 month\nTools: Figma"
   },
   {
     "id": "chipt",
