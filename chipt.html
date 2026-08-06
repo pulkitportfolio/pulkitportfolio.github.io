@@ -556,6 +556,22 @@ section.cs{padding:104px 0 6px}
   var page = location.pathname.split("/").pop();
   var p = (window.PROJECTS || []).filter(function(x){ return x.customUrl === page; })[0];
   if (!p) return;
+  /* detail strip under the hero: full replace from p.metaStrip, or just the Role value */
+  var strip = document.querySelector(".meta");
+  if (strip && p.metaStrip && p.metaStrip.trim()) {
+    strip.innerHTML = "";
+    p.metaStrip.split("\n").map(function(l){ return l.trim(); }).filter(Boolean).forEach(function(line){
+      var ix = line.indexOf(":");
+      var d = document.createElement("div");
+      var dk = document.createElement("div"); dk.className = "k"; dk.textContent = ix > -1 ? line.slice(0, ix).trim() : "";
+      var dv = document.createElement("div"); dv.className = "v"; dv.textContent = ix > -1 ? line.slice(ix + 1).trim() : line;
+      d.appendChild(dk); d.appendChild(dv); strip.appendChild(d);
+    });
+  } else if (strip && p.role) {
+    strip.querySelectorAll(".k").forEach(function(k){
+      if (k.textContent.trim().toLowerCase() === "role" && k.nextElementSibling) k.nextElementSibling.textContent = p.role;
+    });
+  }
   if (p.heroImage) { var h = document.getElementById("hero-swap"); if (h) h.src = p.heroImage; }
   var t = document.getElementById("takeaway-cta");
   if (t && ("takeawayCtaLabel" in p)) {

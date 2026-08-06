@@ -223,7 +223,6 @@ a:hover > .arw { transform: translate(2px, -2px); }
 .pcard .pbody { display: flex; flex-direction: column; gap: 14px; }
 .pcard .plabels { display: flex; justify-content: space-between; gap: 16px; font-family: var(--mono); font-size: 12px; letter-spacing: .18em; text-transform: uppercase; }
 .pcard .plabels .pl-a { color: var(--accent); }
-.pcard .plabels .pl-r { color: var(--muted); }
 .pcard .plabels .pl-b { color: var(--faint); }
 .pcard .pkicker { font-family: var(--mono); font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: var(--accent); }
 .pcard h3 { font-size: clamp(28px, 3.4vw, 42px); font-weight: 500; letter-spacing: -.02em; }

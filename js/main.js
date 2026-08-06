@@ -85,9 +85,7 @@ function escapeAttr(s) { return escapeHtml(s); }
       return '' +
         '<article class="pcard item-reveal" tabindex="0" data-href="' + escapeAttr(csHref) + '">' +
           '<div class="pbody">' +
-            '<div class="plabels"><span class="pl-a">' + escapeHtml(label) + '</span>' +
-              (p.role ? '<span class="pl-r">' + escapeHtml(p.role) + '</span>' : "") +
-              '<span class="pl-b">' + escapeHtml(p.year || "") + "</span></div>" +
+            '<div class="plabels"><span class="pl-a">' + escapeHtml(label) + '</span><span class="pl-b">' + escapeHtml(p.year || "") + "</span></div>" +
             "<h3>" + escapeHtml(p.title) + "</h3>" +
             '<p class="psummary">' + escapeHtml(p.summary || "") + "</p>" +
             '<div class="prule"></div>' +
