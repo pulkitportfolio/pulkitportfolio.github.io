@@ -69,7 +69,10 @@ const SITE = {
       "Figma",
       "Adobe XD",
       "Claude Code",
-      "Relume"
+      "Relume",
+      "Gemini",
+      "ChatGpt",
+      "Wispr Flow"
     ],
     "education": {
       "degree": "B.V.A in Design & Applied Arts",
