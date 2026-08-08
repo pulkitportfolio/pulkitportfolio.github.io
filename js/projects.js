@@ -141,7 +141,7 @@ const SITE = {
   "heroLead": "Creating intuitive digital products that solve complex problems with simple, user-centered design.",
   "approach": {
     "kicker": "How I treat a project",
-    "text": "Every project I take on, I treat as my own business. When it is a service, I work like an owner, looking for how it can stand out and grow faster. When it is a product, I flip to being its simplest user, someone with no idea of anything, and if that person can still use it with ease, the design has done its job."
+    "text": "I treat every project like my own business. When building a service, I look for ways to make it stand out and scale quickly. When developing a product, I test it as a complete beginner; if it’s intuitive for them, it’s a success."
   },
   "aboutPage": {
     "heading": "Hi, I am Pulkit.",
