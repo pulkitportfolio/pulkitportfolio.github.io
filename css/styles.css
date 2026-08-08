@@ -168,8 +168,13 @@ a:hover > .arw { transform: translate(2px, -2px); }
   display: inline-flex; align-items: center; justify-content: center; font-size: 15px;
   transition: var(--transition);
 }
+.hero-actions .btn .cta-icon {
+  display: inline-flex; align-items: center; justify-content: center;
+  transition: var(--transition);
+}
 .hero-actions .btn:hover { background: var(--text); color: var(--bg); transform: none; box-shadow: none; }
 .hero-actions .btn:hover .cta-arw { background: var(--bg); color: var(--text); transform: translate(3px, -3px); }
+.hero-actions .btn:hover .cta-icon { transform: scale(1.1); }
 .hero-meta { margin-top: 26px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
 .pbadge {
   display: inline-flex; align-items: center; gap: 8px;
