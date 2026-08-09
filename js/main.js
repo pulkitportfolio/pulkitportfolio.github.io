@@ -190,6 +190,14 @@ function toolIcon(name) {
     }).join(" ");
   }
 
+  /* ---- selected projects heading (first word grey, the rest black) ---- */
+  var ph = document.getElementById("site-projects-heading");
+  if (ph && s.projectsHeading) {
+    var pw = s.projectsHeading.trim().split(/\s+/);
+    var pwFirst = pw.shift();
+    ph.innerHTML = '<span class="g">' + esc(pwFirst) + "</span>" + (pw.length ? " " + esc(pw.join(" ")) : "");
+  }
+
   /* ---- experience: left column ---- */
   var about = s.about || {};
   txt("site-about-desc", about.description);

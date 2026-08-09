@@ -174,7 +174,8 @@ const SITE = {
       "name": "Karamveer Singh",
       "role": "CEO Techdock Labs"
     }
-  ]
+  ],
+  "projectsHeading": "Recent projects"
 };
 
 const PROJECTS = [
