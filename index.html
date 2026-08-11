@@ -91,8 +91,10 @@
   </section>
 
   <!-- SELECTED PROJECTS -->
-  <section class="section reveal" id="work">
-    <div class="container">
+  <!-- the reveal sits on .container, not the section: this section has to stay
+       opaque to cover the pinned hero, and .reveal starts at opacity 0 -->
+  <section class="section" id="work">
+    <div class="container reveal">
       <div class="section-head">
         <h2 id="site-projects-heading"><span class="g">Selected</span> projects</h2>
         <a class="head-link" href="work.html">View all projects <span class="arw" aria-hidden="true">&rarr;</span></a>
@@ -162,7 +164,7 @@
 
   <script>document.getElementById("yr").textContent = new Date().getFullYear();</script>
   <!-- The ?v= stamp is bumped automatically on each publish, so browsers cache this file until it actually changes. -->
-  <script src="js/projects.js?v=1786478806"></script>
+  <script src="js/projects.js?v=1786481057"></script>
   <script src="js/store.js"></script>
   <script src="js/main.js"></script>
 </body>
