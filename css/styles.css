@@ -101,7 +101,9 @@ a:hover > .arw { transform: translate(2px, -2px); }
    ========================================================= */
 .hero {
   position: sticky; top: var(--nav-h); overflow: hidden; text-align: center;
-  min-height: calc(100svh - var(--nav-h));
+  /* the nav is --nav-h plus its 1px bottom border: match it exactly, or the hero
+     is a hair taller than its sticky slot and creeps before it pins */
+  min-height: calc(100svh - var(--nav-h) - 1px);
   display: flex; flex-direction: column; justify-content: center;
   padding: 24px 0 40px; z-index: 0;
 }
@@ -157,8 +159,10 @@ a:hover > .arw { transform: translate(2px, -2px); }
 }
 .hero-role .ln-a { color: var(--text); }
 .hero-role .ln-b { color: var(--text); }
-.hero-lead { max-width: 58ch; margin: 0 auto; font-size: 18px; line-height: 1.65; color: var(--muted); font-weight: 400; }
-.hero-lead b { color: var(--text); font-weight: 700; }
+/* wide enough to hold the second line of the lead on one line at desktop widths */
+.hero-lead { max-width: 900px; margin: 0 auto; font-size: 18px; line-height: 1.65; color: var(--muted); font-weight: 400; }
+/* the bold opening phrase owns its own line, the rest of the lead follows underneath */
+.hero-lead b { display: block; color: var(--text); font-weight: 700; }
 .hero-actions { display: flex; align-items: center; justify-content: center; gap: 14px; margin-top: 36px; flex-wrap: wrap; }
 /* ghost CTA: outlined at rest, fills on hover */
 .hero-actions .btn { font-size: 16px; padding: 12px 12px 12px 28px; gap: 12px;
@@ -168,13 +172,16 @@ a:hover > .arw { transform: translate(2px, -2px); }
   display: inline-flex; align-items: center; justify-content: center; font-size: 15px;
   transition: var(--transition);
 }
+/* LinkedIn mark rides in a filled circle, same treatment as the arrow CTA */
 .hero-actions .btn .cta-icon {
-  display: inline-flex; align-items: center; justify-content: center;
+  width: 32px; height: 32px; border-radius: 50%; background: var(--text); color: var(--bg);
+  display: inline-flex; align-items: center; justify-content: center; flex: none;
   transition: var(--transition);
 }
+.hero-actions .btn .cta-icon svg { width: 16px; height: 16px; display: block; }
 .hero-actions .btn:hover { background: var(--text); color: var(--bg); transform: none; box-shadow: none; }
 .hero-actions .btn:hover .cta-arw { background: var(--bg); color: var(--text); transform: translate(3px, -3px); }
-.hero-actions .btn:hover .cta-icon { transform: scale(1.1); }
+.hero-actions .btn:hover .cta-icon { background: var(--bg); color: var(--text); }
 .hero-meta { margin-top: 26px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
 .pbadge {
   display: inline-flex; align-items: center; gap: 8px;
@@ -186,7 +193,9 @@ a:hover > .arw { transform: translate(2px, -2px); }
 /* =========================================================
    Approach — statement with grey → dark word reveal
    ========================================================= */
-.approach { padding: clamp(70px, 12vh, 150px) 0; }
+/* same vertical rhythm as .section, so the gap into Selected projects matches
+   the gap from projects into Experience */
+.approach { padding: clamp(56px, 9vh, 110px) 0; }
 .approach .statement {
   font-size: clamp(26px, 3.6vw, 46px); font-weight: 600; line-height: 1.32;
   letter-spacing: -.02em; max-width: 100%; margin-top: 26px;
@@ -627,7 +636,7 @@ a:hover > .arw { transform: translate(2px, -2px); }
   .hero h1 { margin: 20px 0 22px; }
   .hero-actions { margin-top: 26px; }
   .hero-meta { margin-top: 18px; }
-  .approach { padding: 54px 0; }
+  .approach { padding: 44px 0; }
   .approach .statement { margin-top: 18px; }
   .section { padding: 44px 0; }
   .section-head { margin-bottom: 24px; }
