@@ -333,7 +333,7 @@ const PROJECTS = [
   },
   {
     "id": "mampster",
-    "featured": false,
+    "featured": true,
     "title": "Mampster",
     "category": "website",
     "year": "",
