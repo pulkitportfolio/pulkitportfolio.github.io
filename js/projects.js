@@ -305,8 +305,8 @@ const PROJECTS = [
     "heroImage": "",
     "cardCtaLabel": "",
     "cardCtaUrl": "",
-    "takeawayCtaLabel": "View the full project in Figma",
-    "takeawayCtaUrl": "https://www.figma.com/design/MTMgYKbHjrgHLy1uBuFgfo/Tempelate-design-system?node-id=346-150749",
+    "takeawayCtaLabel": "",
+    "takeawayCtaUrl": "",
     "embed": "",
     "embedPortrait": false,
     "tags": [
