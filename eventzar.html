@@ -78,11 +78,11 @@ h1,h2,h3,h4{line-height:1.1;letter-spacing:-.025em;font-weight:700}
 #rail a.active .rl{opacity:1;transform:none}
 
 /* ---------- generic ---------- */
-section.cs{padding:110px 0 6px}
-.cs-block{max-width:780px}
+section.cs{padding:90px 0 6px}
+.cs-block{max-width:100%}
 .cs-block h2{font-size:clamp(26px,3.4vw,36px);margin-bottom:20px}
 .cs-block h2 .g{color:var(--faint)}
-.cs-block p{color:var(--muted);font-size:16.5px;margin-bottom:16px}
+.cs-block p{color:var(--muted);font-size:18px;margin-bottom:16px}
 .cs-block p b, .cs-block li b{color:var(--text)}
 .split{display:block}
 .split .sticky-k{display:none}
@@ -291,7 +291,7 @@ figcaption{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-tra
 
 <!-- GLANCE: second fold showcase -->
 <section class="cs" id="glance" style="padding-top:64px"><div class="container">
-  <div class="cs-block" style="max-width:780px">
+  <div class="cs-block">
     <div class="eyebrow" style="margin-bottom:14px">The product at a glance</div>
     <h2>Three feeds. One bottom bar. <span class="g">Everything an event needs.</span></h2>
     <p>Private for your own circle, Public for discovery, Business for brands. Tickets, shop and cart live one tap away. These six screens are the spine of the whole product.</p>
@@ -328,7 +328,7 @@ figcaption{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-tra
   <div class="sticky-k"><div class="eyebrow">02 &middot; The ask</div></div>
   <div class="cs-block" style="max-width:100%">
     <h2>What the project demanded, <span class="g">and what I did about it</span></h2>
-    <p style="max-width:780px">This was not a one feature app. It asked for a social network, an e-commerce store, a ticketing system and an advertising platform living together without confusing anyone. Here is how each demand translated into design work.</p>
+    <p>This was not a one feature app. It asked for a social network, an e-commerce store, a ticketing system and an advertising platform living together without confusing anyone. Here is how each demand translated into design work.</p>
     <div class="dd">
       <div class="dd-row">
         <div class="demand"><div class="dk">The project demanded</div><h4>Serve two very different users in one app</h4><p>A person attending an event and a business hosting it need completely different things from the same screens.</p></div>
@@ -355,7 +355,7 @@ figcaption{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-tra
   <div class="sticky-k"><div class="eyebrow">03 &middot; Research</div></div>
   <div class="cs-block" style="max-width:100%">
     <h2>Meet users where they already are</h2>
-    <p style="max-width:780px">Before drawing a single screen, I spent time understanding how people actually behave inside the three app categories EventsZAR combines. How they scroll a feed, how they trust a checkout, how they hold a ticket at a venue gate. The goal was simple: a first time user should never feel like they are learning a new app.</p>
+    <p>Before drawing a single screen, I spent time understanding how people actually behave inside the three app categories EventsZAR combines. How they scroll a feed, how they trust a checkout, how they hold a ticket at a venue gate. The goal was simple: a first time user should never feel like they are learning a new app.</p>
     <div class="pats">
       <div class="pat"><div class="pk">From social media</div><h4>Feed, likes, comments, timelines</h4><p>People scroll, react and share without thinking. <span class="arrow">&rarr;</span> The home feed, event timelines and post interactions follow the exact grammar of social apps, so joining an event conversation feels like second nature.</p></div>
       <div class="pat"><div class="pk">From e-commerce</div><h4>Cart, wishlist, tracking, returns</h4><p>Buyers trust a checkout that behaves like the stores they know. <span class="arrow">&rarr;</span> The merchandise store keeps the familiar cart, coupons, order tracking, returns and refunds journey, nothing clever, nothing surprising.</p></div>
@@ -371,13 +371,13 @@ figcaption{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-tra
   <div class="sticky-k"><div class="eyebrow">04 &middot; Business users</div></div>
   <div class="cs-block" style="max-width:100%">
     <h2>Understanding the people who pay</h2>
-    <p style="max-width:780px">Business users fund the platform, so I could not design for them from guesswork. I worked through their world scenario by scenario: who they are, what a good week looks like for them, and what they would need from the app at each step. Each scenario was walked through the product end to end, and the flows were reworked over multiple attempts until they held up.</p>
+    <p>Business users fund the platform, so I could not design for them from guesswork. I worked through their world scenario by scenario: who they are, what a good week looks like for them, and what they would need from the app at each step. Each scenario was walked through the product end to end, and the flows were reworked over multiple attempts until they held up.</p>
     <div class="scen">
       <div class="sc"><div class="sn">1</div><div class="sk">Scenario</div><h4>The event organiser</h4><p>Runs a public tournament. Needs to create the event, sell tiered tickets, keep the event timeline alive and scan tickets at the gate.</p><div class="needs">Create event &middot; Ticket types &middot; Timeline &middot; QR scanning</div></div>
       <div class="sc"><div class="sn">2</div><div class="sk">Scenario</div><h4>The brand</h4><p>Sells merchandise around events and wants reach. Needs a storefront, event exclusive products and ads targeted by area, radius or a specific event.</p><div class="needs">Storefront &middot; Exclusive merchandise &middot; Ad builder &middot; Targeting</div></div>
       <div class="sc"><div class="sn">3</div><div class="sk">Scenario</div><h4>The community business</h4><p>Hosts private events for members. Posts privately by adding selected members, or by creating member categories and posting to a category. Runs polls and surveys to hear from the audience.</p><div class="needs">Private posts &middot; Member categories &middot; Polls and surveys</div></div>
     </div>
-    <p style="max-width:780px;margin-top:26px">These scenarios shaped real decisions. The <b>advertisement builder</b> became a guided step by step flow with creative sizes, live previews and three targeting modes, because an organiser is not a media buyer. The <b>business profile</b> became a storefront with followers and a portfolio, because reach matters to them as much as sales. And the whole toolkit sits behind <b>tiered subscriptions</b>, so casual users are never charged for tools they do not need.</p>
+    <p style="margin-top:26px">These scenarios shaped real decisions. The <b>advertisement builder</b> became a guided step by step flow with creative sizes, live previews and three targeting modes, because an organiser is not a media buyer. The <b>business profile</b> became a storefront with followers and a portfolio, because reach matters to them as much as sales. And the whole toolkit sits behind <b>tiered subscriptions</b>, so casual users are never charged for tools they do not need.</p>
   </div>
 </div></div></section>
 
@@ -398,7 +398,7 @@ figcaption{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-tra
   <div class="sticky-k"><div class="eyebrow">06 &middot; Core concept</div></div>
   <div class="cs-block" style="max-width:100%">
     <h2>Three feeds, one clear mental model</h2>
-    <p style="max-width:780px">All of that research landed in one structural decision: a single home with three switchable feeds. It separates personal life, public discovery and commerce without hiding any of them. Booked tickets, shop and cart stay one tap away in the bottom navigation.</p>
+    <p>All of that research landed in one structural decision: a single home with three switchable feeds. It separates personal life, public discovery and commerce without hiding any of them. Booked tickets, shop and cart stay one tap away in the bottom navigation.</p>
     <div class="feeds">
       <div class="feed"><div class="fk">Feed 01</div><h3>Private</h3><p>A personal space for posts and events shared with your own circle, organised into member categories like Family or Goa Trip. Business users use the same mechanic to post privately to selected members or a whole category.</p></div>
       <div class="feed f-public"><div class="fk">Feed 02</div><h3>Public</h3><p>The discovery feed. Community events and posts with category filters. Business advertisements appear here as native, clearly marked cards.</p></div>
@@ -412,7 +412,7 @@ figcaption{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-tra
   <div class="sticky-k"><div class="eyebrow">07 &middot; User journeys</div></div>
   <div class="cs-block" style="max-width:100%">
     <h2>Two journeys, <span class="g">mapped before any UI</span></h2>
-    <p style="max-width:780px">Before judging any screen, it helps to see the paths they serve. Both journeys were mapped end to end first, so every screen that follows had a defined job in a bigger story.</p>
+    <p>Before judging any screen, it helps to see the paths they serve. Both journeys were mapped end to end first, so every screen that follows had a defined job in a bigger story.</p>
 
     <div class="jgroup jour-normal">
       <span class="jtag">Normal user &middot; Attend, connect, shop</span>
@@ -538,7 +538,7 @@ figcaption{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-tra
   <div class="sticky-k"><div class="eyebrow">12 &middot; Design system</div></div>
   <div class="cs-block" style="max-width:100%">
     <h2>One system behind three products</h2>
-    <p style="max-width:780px">Everything runs on a shared design system: colour and effect tokens, typography, buttons, badges, dropdowns, loaders and table patterns as reusable component sets with variants. That is what makes 400+ screens across four platforms feel like one product, and what made developer handoff predictable.</p>
+    <p>Everything runs on a shared design system: colour and effect tokens, typography, buttons, badges, dropdowns, loaders and table patterns as reusable component sets with variants. That is what makes 400+ screens across four platforms feel like one product, and what made developer handoff predictable.</p>
     <div class="tokens">
       <div class="tok"><div class="sw" style="background:#3F0D36"></div><div class="tk"><b>Plum</b><span>Primary brand</span></div></div>
       <div class="tok"><div class="sw" style="background:#F7941D"></div><div class="tk"><b>Orange</b><span>Action and accent</span></div></div>
@@ -625,7 +625,7 @@ figcaption{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-tra
   </div>
 </footer>
 
-<script src="js/projects.js?v=1786481057"></script>
+<script src="js/projects.js?v=1786528731"></script>
 <script>
 /* left rail scrollspy */
 (function(){

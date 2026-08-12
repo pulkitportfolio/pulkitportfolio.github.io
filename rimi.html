@@ -73,11 +73,11 @@ h1,h2,h3,h4{line-height:1.1;letter-spacing:-.025em;font-weight:700}
 #rail a.active .rl{opacity:1;transform:none}
 
 /* ---------- generic ---------- */
-section.cs{padding:110px 0 6px}
-.cs-block{max-width:780px}
+section.cs{padding:90px 0 6px}
+.cs-block{max-width:100%}
 .cs-block h2{font-size:clamp(26px,3.4vw,36px);margin-bottom:20px}
 .cs-block h2 .g{color:var(--faint)}
-.cs-block p{color:var(--muted);font-size:16.5px;margin-bottom:16px}
+.cs-block p{color:var(--muted);font-size:18px;margin-bottom:16px}
 .cs-block p b, .cs-block li b{color:var(--text)}
 .split{display:block}
 .split .sticky-k{display:none}
@@ -313,7 +313,7 @@ section.cs{padding:110px 0 6px}
   <div class="sticky-k"><div class="eyebrow">02 &middot; Problem</div></div>
   <div class="cs-block" style="max-width:100%">
     <h2>Two problems that <span class="g">looked unrelated</span></h2>
-    <p style="max-width:780px">On paper this was two briefs. A CRM brief and a training brief. Spending time with how the business actually runs made it clear they were the same brief seen from two ends: RIMI's revenue depends on agents, and nothing was holding either side of that relationship together.</p>
+    <p>On paper this was two briefs. A CRM brief and a training brief. Spending time with how the business actually runs made it clear they were the same brief seen from two ends: RIMI's revenue depends on agents, and nothing was holding either side of that relationship together.</p>
     <div class="pats">
       <div class="pat"><div class="pk">Selling</div><h4>A quote was a dead end</h4><p>Pricing happened in one place, the application in another, the policy document somewhere else. Every handover was a chance to re-key the same date of birth and get it wrong.</p></div>
       <div class="pat"><div class="pk">Selling</div><h4>Groups broke the flow</h4><p>Student insurance is not sold one at a time. A college sends sixty names. Sixty identical applications, typed by hand, is not a workflow, it is a data entry job.</p></div>
@@ -335,7 +335,7 @@ section.cs{padding:110px 0 6px}
   <div class="sticky-k"><div class="eyebrow">03 &middot; The ask</div></div>
   <div class="cs-block" style="max-width:100%">
     <h2>What the project demanded, <span class="g">and what I did about it</span></h2>
-    <p style="max-width:780px">Insurance software has a reputation for being ugly and unusable, and it is usually earned honestly: the domain is genuinely complicated. The work was to absorb that complexity into the structure instead of pushing it onto the person filling the form.</p>
+    <p>Insurance software has a reputation for being ugly and unusable, and it is usually earned honestly: the domain is genuinely complicated. The work was to absorb that complexity into the structure instead of pushing it onto the person filling the form.</p>
     <div class="dd">
       <div class="dd-row">
         <div class="demand"><div class="dk">The project demanded</div><h4>A quote that becomes a policy without being retyped</h4><p>Quoting and applying were separate acts with separate forms, holding most of the same information.</p></div>
@@ -366,7 +366,7 @@ section.cs{padding:110px 0 6px}
   <div class="sticky-k"><div class="eyebrow">04 &middot; Who uses it</div></div>
   <div class="cs-block" style="max-width:100%">
     <h2>Three people, three doors</h2>
-    <p style="max-width:780px">Everything in the system exists to serve one of three people. Each one gets their own sign-in and their own product, sharing components but never sharing a screen. Nobody has to walk past a menu item they will never be allowed to click.</p>
+    <p>Everything in the system exists to serve one of three people. Each one gets their own sign-in and their own product, sharing components but never sharing a screen. Nobody has to walk past a menu item they will never be allowed to click.</p>
     <div class="scen">
       <div class="sc">
         <div class="sn">1</div>
@@ -513,8 +513,8 @@ section.cs{padding:110px 0 6px}
   <div class="sticky-k"><div class="eyebrow">08 &middot; Checkpoints</div></div>
   <div class="cs-block" style="max-width:100%">
     <h2>The idea the whole platform <span class="g">is built around</span></h2>
-    <p style="max-width:780px">Every video course has the same weakness. Completion is measured in time elapsed, and time elapses whether or not anyone is watching. RIMI was issuing certificates on that basis, to people who would go out and sell medical insurance to travellers.</p>
-    <p style="max-width:780px">So the test stops being something at the end. When a training manager writes a test, they give it a <b>start time in minutes</b>. At that moment the video stops and the test takes over the player. Score 16 out of 20 and the video continues. Score less and it rewinds. You do not fail the course, you rewatch the ten minutes you did not absorb and try the checkpoint again.</p>
+    <p>Every video course has the same weakness. Completion is measured in time elapsed, and time elapses whether or not anyone is watching. RIMI was issuing certificates on that basis, to people who would go out and sell medical insurance to travellers.</p>
+    <p>So the test stops being something at the end. When a training manager writes a test, they give it a <b>start time in minutes</b>. At that moment the video stops and the test takes over the player. Score 16 out of 20 and the video continues. Score less and it rewinds. You do not fail the course, you rewatch the ten minutes you did not absorb and try the checkpoint again.</p>
 
     <div class="tl">
       <div class="eyebrow" style="margin-bottom:6px">One course video, three checkpoints</div>
@@ -589,8 +589,8 @@ section.cs{padding:110px 0 6px}
   <div class="sticky-k"><div class="eyebrow">10 &middot; Design system</div></div>
   <div class="cs-block" style="max-width:100%">
     <h2>One system, three products</h2>
-    <p style="max-width:780px">All three products are built from the same component library: form fields with labels, radio and checkbox groups, date and time pickers, data filters, profile and language menus, tables, pagination and buttons, each as a component set with variants. That is what lets a CRM, an admin panel and a learner portal read as one company rather than three vendors.</p>
-    <p style="max-width:780px">Three rules did most of the work. Grey cards hold input, white surfaces hold results. One indigo means action, and nothing else is allowed to be indigo. Every destructive act confirms, every long form states its limits before you hit them.</p>
+    <p>All three products are built from the same component library: form fields with labels, radio and checkbox groups, date and time pickers, data filters, profile and language menus, tables, pagination and buttons, each as a component set with variants. That is what lets a CRM, an admin panel and a learner portal read as one company rather than three vendors.</p>
+    <p>Three rules did most of the work. Grey cards hold input, white surfaces hold results. One indigo means action, and nothing else is allowed to be indigo. Every destructive act confirms, every long form states its limits before you hit them.</p>
     <div class="tokens">
       <div class="tok"><div class="sw" style="background:#2B00B7"></div><div class="tk"><b>Indigo</b><span>Primary action</span></div></div>
       <div class="tok"><div class="sw" style="background:#EDF1FF"></div><div class="tk"><b>Indigo tint</b><span>Selected and active</span></div></div>
@@ -677,7 +677,7 @@ section.cs{padding:110px 0 6px}
   </div>
 </footer>
 
-<script src="js/projects.js?v=1786481057"></script>
+<script src="js/projects.js?v=1786528731"></script>
 <script>
 /* rail scrollspy */
 (function(){
