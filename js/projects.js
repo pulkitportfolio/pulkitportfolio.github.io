@@ -366,7 +366,7 @@ const PROJECTS = [
   },
   {
     "id": "alco",
-    "featured": false,
+    "featured": true,
     "title": "ALCO Energy Solutions",
     "category": "website",
     "year": "",
